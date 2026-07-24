@@ -152,6 +152,15 @@
     .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in { opacity: 1; transform: none; }
   }
+
+  /* Mobile gutters — keep last so these win the cascade */
+  @media (max-width: 700px) {
+    .wrap { padding-left: 28px; padding-right: 28px; }
+    .strip { padding-left: 8px; }
+    .machine { padding: 16px 18px; }
+    .teaser { padding: 26px 24px; }
+    .final { border-radius: 0; margin-left: -28px; margin-right: -28px; padding-left: 28px; padding-right: 28px; }
+  }
 </style>
 </head>
 <body>
