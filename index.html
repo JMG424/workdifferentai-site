@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light only" />
+<meta name="theme-color" content="#FAF7F2" />
+<title>Deal Machines — Own the machine, not the hustle | WorkDifferentAI</title>
+<meta name="description" content="A machine that watches your local market around the clock — underpriced cars, businesses, equipment, estates — and texts you the deal with the numbers already run. Built for your city. Installed on hardware you own." />
+<meta property="og:title" content="Deal Machines — Own the machine, not the hustle" />
+<meta property="og:description" content="A machine that watches your local market around the clock and texts you mispriced assets with the numbers already run. Built for your city. Yours forever." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔶</text></svg>" />
+<style>
+  @font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(fonts/fraunces.woff2) format('woff2'); }
+  @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 100 800; font-display: swap; src: url(fonts/jetbrains-mono.woff2) format('woff2'); }
+  :root {
+    color-scheme: light only;
+    --ink: #141210;
+    --paper: #FAF7F2;
+    --orange: #E63600;
+    --muted: #45403A;
+    --line: #E4DED4;
+    --card: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--paper); scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'JetBrains Mono', monospace; line-height: 1.6; -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 660px; margin: 0 auto; padding: 0 20px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.5px; color: var(--orange); font-weight: 600; }
+  h1, h2, h3 { font-family: 'Fraunces', serif; text-wrap: balance; }
+
+  /* Hero */
+  .hero { padding: 60px 0 44px; }
+  .hero h1 { font-size: clamp(36px, 7.5vw, 56px); font-weight: 900; line-height: 1.02; margin: 14px 0 18px; }
+  .hero h1 em { font-style: normal; color: var(--orange); }
+  .hero p { font-size: 14px; color: var(--muted); max-width: 540px; }
+  .cta { display: inline-block; background: var(--orange); color: #fff; border: 0; font-family: inherit; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; padding: 14px 26px; border-radius: 30px; cursor: pointer; }
+  .cta:hover { background: #D93400; }
+  .hero .cta { margin-top: 26px; }
+  .sub-cta { display: block; margin-top: 12px; font-size: 12px; color: var(--muted); }
+
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 12px 0; overflow: hidden; white-space: nowrap; font-size: 11px; letter-spacing: 1px; color: var(--muted); }
+  .strip span { color: var(--orange); font-weight: 600; }
+
+  section { padding: 46px 0; }
+  .label { font-size: 11px; letter-spacing: 2.5px; color: var(--orange); font-weight: 600; margin-bottom: 10px; }
+  h2 { font-size: clamp(26px, 5vw, 34px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+  .lede { font-size: 14px; color: var(--muted); max-width: 540px; }
+
+  .prob { border-left: 3px solid var(--orange); padding-left: 18px; margin-top: 22px; }
+  .prob p { font-size: 14px; margin-bottom: 12px; }
+  .prob p:last-child { margin-bottom: 0; }
+  .prob b { color: var(--ink); }
+
+  /* Sample alert */
+  .alert-demo { margin-top: 26px; }
+  .phone { background: var(--ink); border-radius: 18px; padding: 18px 16px 16px; max-width: 420px; }
+  .phone .ph-head { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: 1.5px; color: #8A8377; margin-bottom: 12px; }
+  .phone .ph-head b { color: #FF6A3C; font-weight: 600; }
+  .bubble { background: #262320; color: #F2EEE8; border-radius: 12px; padding: 13px 14px; font-size: 12.5px; line-height: 1.65; }
+  .bubble .hl { color: #FF6A3C; font-weight: 600; }
+  .bubble .dim { color: #A39C90; }
+  .alert-cap { font-size: 11px; color: var(--muted); margin-top: 10px; max-width: 420px; }
+
+  /* Edge cards */
+  .machines { display: grid; gap: 10px; margin-top: 24px; }
+  .machine { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; gap: 14px; align-items: baseline; }
+  .machine .num { font-size: 11px; color: #8A8377; min-width: 22px; }
+  .machine .name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; }
+  .machine .what { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+  /* Teaser */
+  .teaser { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px 22px; margin-top: 24px; }
+  .trow { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid #F1ECE4; }
+  .trow:first-child { border-top: 0; }
+  .trow .tn { font-family: 'Fraunces', serif; font-weight: 600; font-size: 14px; }
+  .trow .ts { font-weight: 600; font-size: 16px; color: var(--orange); font-variant-numeric: tabular-nums; }
+  .teaser .more { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .teaser .cta { margin-top: 18px; }
+
+  /* Own it */
+  .own { display: grid; gap: 10px; margin-top: 24px; }
+  .own-item { display: flex; gap: 12px; align-items: baseline; border-top: 1px solid var(--line); padding: 13px 0 0; }
+  .own-item:first-child { border-top: 0; padding-top: 0; }
+  .own-item .tick { color: var(--orange); font-weight: 600; }
+  .own-item p { font-size: 13.5px; color: var(--muted); }
+  .own-item p b { color: var(--ink); }
+
+  /* Steps */
+  .steps { margin-top: 24px; }
+  .step { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .step .s-num { font-family: 'Fraunces', serif; font-weight: 800; font-size: 22px; color: var(--orange); min-width: 34px; }
+  .step b { font-size: 14px; display: block; margin-bottom: 3px; }
+  .step p { font-size: 13px; color: var(--muted); }
+
+  /* Who */
+  .who p { font-size: 14px; color: var(--muted); margin-top: 12px; max-width: 560px; }
+  .who p b { color: var(--ink); font-weight: 600; }
+
+  .qa { border-top: 1px solid var(--line); padding: 16px 0; }
+  .qa b { font-size: 14px; display: block; margin-bottom: 5px; }
+  .qa p { font-size: 13px; color: var(--muted); }
+
+  .final { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 40px 28px; margin: 20px 0 60px; text-align: center; }
+  .final h2 { color: #fff; }
+  .final p { color: #D8D2C8; font-size: 13px; max-width: 440px; margin: 10px auto 0; }
+  .final .eyebrow { color: #FF6A3C; }
+  .final .cta { margin-top: 22px; }
+  .fineprint { font-size: 11px; color: #6B655C; text-align: center; padding-bottom: 40px; line-height: 1.7; }
+  .fineprint a { color: #6B655C; }
+
+  /* Opt-in modal */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(20,18,16,0.55); z-index: 50; padding: 20px; }
+  .overlay.open { display: flex; align-items: center; justify-content: center; }
+  .panel { background: var(--card); border-radius: 14px; max-width: 460px; width: 100%; padding: 28px 24px; position: relative; max-height: 90vh; overflow-y: auto; }
+  .panel .x { position: absolute; top: 12px; right: 16px; background: none; border: 0; font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1; padding: 4px; font-family: inherit; }
+  .panel h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .panel .p-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .optin-form { display: flex; flex-direction: column; gap: 10px; margin: 6px 0 4px; }
+  .optin-form input { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font-family: inherit; font-size: 15px; color: var(--ink); padding: 12px 14px; width: 100%; }
+  .optin-form input:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+  .optin-form .err { color: var(--orange); font-size: 12px; min-height: 15px; line-height: 1.3; }
+  .optin-form button.cta { margin-top: 2px; width: 100%; text-align: center; }
+  .optin-form button.cta[disabled] { opacity: 0.6; cursor: wait; }
+  .privacy { font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+  .board-step { display: none; }
+  .board-step.show { display: block; }
+  #board-step-2 .cta { width: 100%; text-align: center; margin-top: 10px; }
+  .check { display: inline-block; background: #1E7B34; color: #fff; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; font-size: 13px; margin-right: 6px; vertical-align: middle; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap hero">
+  <div class="eyebrow">WORKDIFFERENTAI · DEAL MACHINES</div>
+  <h1>Own the <em>machine</em>,<br/>not the hustle.</h1>
+  <p>In your market, right now, assets are changing hands for less than they're worth — trucks, equipment, whole businesses. The buyers who win them aren't smarter. They see them first. A Deal Machine is a private scout that watches your local market around the clock and texts you the moment something's mispriced, with the numbers already run. Built for your city. Installed on hardware you own. Working while you run everything else.</p>
+  <button class="cta" onclick="openBoard()">See where the money moves →</button>
+  <span class="sub-cta">Built and installed in South Florida by WorkDifferentAI</span>
+</div>
+
+<div class="strip">
+  <span>WHERE VALUE HIDES:</span> CARS · BUSINESSES FOR SALE · ESTATE SALES · GOV SURPLUS · EQUIPMENT · STORAGE UNITS · DOMAINS · BOATS · FORECLOSURES · PALLETS
+</div>
+
+<div class="wrap">
+<section class="reveal">
+  <div class="label">THE WINDOW</div>
+  <h2>The best deals are gone in hours.</h2>
+  <div class="prob">
+    <p>Every day, mispriced assets hit the public market — listings, auctions, county filings. The spread between asking price and real value is there in plain sight. For a few hours.</p>
+    <p>The people who consistently capture that spread aren't refreshing pages at midnight. They have <b>systems watching for them</b> — and by the time everyone else sees the listing, they've already called.</p>
+    <p>You've watched it happen. The one priced wrong that vanished the same morning. This is how you stop being the second call.</p>
+  </div>
+
+  <div class="alert-demo">
+    <div class="phone">
+      <div class="ph-head"><b>DEAL MACHINE</b><span>TODAY · 6:42 AM</span></div>
+      <div class="bubble">
+        <span class="hl">2018 F-250 Lariat 4x4</span> — listed <span class="hl">38 min ago</span> at $31,500.
+        Comparable sold: <span class="hl">$38,900–41,200</span>. Est. spread after fees: <span class="hl">$6,800+</span>.<br/>
+        <span class="dim">Clean title · 61k mi · seller: "moving, need it gone" · 11 mi away</span>
+      </div>
+      <div class="ph-head" style="margin: 12px 0 0"><span>SAMPLE ALERT — WHAT LANDS ON YOUR PHONE</span></div>
+    </div>
+    <div class="alert-cap">What it's worth, what the spread is, why the seller's motivated — before you've had coffee. You make one decision: go or pass. It keeps hunting either way.</div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="label">YOUR UNFAIR ADVANTAGE</div>
+  <h2>It hunts while you sleep.</h2>
+  <div class="machines">
+    <div class="machine"><div class="num">01</div><div><div class="name">Watches your market</div><div class="what">Scans the listings, auctions and public records in your area every 15 minutes, around the clock. It doesn't get bored and it doesn't take weekends.</div></div></div>
+    <div class="machine"><div class="num">02</div><div><div class="name">Runs the numbers</div><div class="what">Every find is checked against real sold prices — not asking prices, not gut feel. You see the spread, calculated, before you spend a minute on it.</div></div></div>
+    <div class="machine"><div class="num">03</div><div><div class="name">Texts you the deal</div><div class="what">One message: what it is, what it's worth, why it's mispriced. You decide in seconds. Pass, and the next one's already being hunted.</div></div></div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="label">WHERE THE MONEY IS</div>
+  <h2>25 kinds of opportunity, ranked.</h2>
+  <p class="lede">We scored 25 ways a machine can put deals in front of you — on how easy each is to start, how much profit is on the table, and how often deals actually show up. The top of the board:</p>
+  <div class="teaser">
+    <div class="trow"><div class="tn">Car Flip Scanner</div><div class="ts">79</div></div>
+    <div class="trow"><div class="tn">Business-for-Sale Screener</div><div class="ts">78</div></div>
+    <div class="trow"><div class="tn">Equipment Liquidation Sniper</div><div class="ts">76</div></div>
+    <div class="trow"><div class="tn">Estate Sale Early-Bird</div><div class="ts">75</div></div>
+    <div class="more">…plus 21 more — boats, storage units, foreclosures, domains, gov surplus and beyond.</div>
+    <button class="cta" onclick="openBoard()">Unlock the full board →</button>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="label">WHAT YOU ACTUALLY OWN</div>
+  <h2>An asset, not a subscription.</h2>
+  <div class="own">
+    <div class="own-item"><span class="tick">→</span><p><b>It runs on your hardware.</b> A dedicated machine in your office or home — not our cloud, not our platform. If we disappeared tomorrow, yours keeps hunting.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>It's tuned to you.</b> Your zip codes, your price range, your profit threshold. It answers to one person, so you're never racing a thousand subscribers to the same alert.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>It compounds.</b> Every week it runs, it learns your market's rhythm — what sells, what sits, what a real discount looks like where you live.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>It doesn't need you.</b> No dashboard to babysit, no daily routine. It works your market while you work your day, and speaks up only when there's money on the table.</p></div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="label">HOW IT COMES TOGETHER</div>
+  <h2>From a call to first alerts, fast.</h2>
+  <div class="steps">
+    <div class="step"><div class="s-num">1</div><div><b>Pick your hunt</b><p>A 20-minute conversation. We match your capital, time and market to the opportunity that fits — and tell you honestly if none does.</p></div></div>
+    <div class="step"><div class="s-num">2</div><div><b>We build it</b><p>Your machine is configured for your zip codes, price ranges and profit thresholds, and tested against your live market.</p></div></div>
+    <div class="step"><div class="s-num">3</div><div><b>Install &amp; handover</b><p>Set up on your hardware, connected to your phone, with a walkthrough of every alert. In-person install available in South Florida.</p></div></div>
+    <div class="step"><div class="s-num">4</div><div><b>First deals land</b><p>Most machines surface their first live opportunity within days of switch-on. Then it's a rhythm: alert, decision, next.</p></div></div>
+  </div>
+</section>
+
+<section class="who reveal">
+  <div class="label">WHO THIS IS FOR</div>
+  <h2>You know margin when you see it.</h2>
+  <p>Maybe you've built something already and want the next stream to run on rails instead of your hours. Maybe you've got capital parked and an eye that catches a wrong price from across the room. Either way, you've opened the listings more than once and thought: <b>somebody's making real money on these.</b></p>
+  <p><b>Somebody is. The difference is infrastructure.</b> Not a course, not a guru, not a group chat where every tip is already stale. A machine that answers only to you, hunting one kind of deal in one market, relentlessly — so when the good one drops, you're not finding out on somebody else's timeline.</p>
+</section>
+
+<section class="reveal">
+  <div class="label">STRAIGHT ANSWERS</div>
+  <h2>What people ask.</h2>
+  <div class="qa"><b>Do I need to be technical?</b><p>No. If you can read a text message, you can run a Deal Machine. We build, install and tune it — that's the whole point of having us do it.</p></div>
+  <div class="qa"><b>How much of my time does it take?</b><p>Minutes a day, on your phone. The machine does the watching and the math; you do the judging. Most owners treat alerts like messages from a sharp scout — glance, decide, move on.</p></div>
+  <div class="qa"><b>Why not just use a $7/month deal app?</b><p>Cheap apps blast identical alerts to thousands of subscribers — you're racing the whole list to the same door. Your machine is tuned to your criteria and your market, and it works for exactly one person.</p></div>
+  <div class="qa"><b>What does it cost?</b><p>It depends on the market and the opportunity you want hunted, so we'd rather talk it through than slap one number on every situation. Start with the board, then book a short call — we'll lay out the build and the cost plainly, no pressure.</p></div>
+  <div class="qa"><b>Are results guaranteed?</b><p>No — and be suspicious of anyone who says otherwise. We guarantee a working machine that finds and scores real opportunities in your market. The money is made by acting on them, and that part is yours.</p></div>
+</section>
+
+<div class="final reveal">
+  <div class="eyebrow">START WITH THE BOARD</div>
+  <h2 style="margin-top:10px">Stop hunting. Start owning.</h2>
+  <p>See all 25 opportunities scored for where the money is. If one of them fits your market and your capital, we'll talk about building it for you.</p>
+  <button class="cta" onclick="openBoard()">See the opportunity board →</button>
+</div>
+
+<p class="fineprint">WorkDifferentAI · Alacrity One LLC · Boca Raton, FL · <a href="mailto:jason@meta57.xyz">jason@meta57.xyz</a><br/>Sample alert shown is illustrative. Earnings language is based on market research and is not a promise of results — deal outcomes depend on your capital, effort and local market. Machines are installed on customer-owned hardware; customers are responsible for complying with local licensing laws (e.g. vehicle dealer limits).</p>
+</div>
+
+<div class="overlay" id="board-overlay" onclick="if(event.target===this)closeBoard()">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="board-title">
+    <button class="x" onclick="closeBoard()" aria-label="Close">✕</button>
+    <div class="board-step show" id="board-step-1">
+      <h3 id="board-title">Unlock your market's opportunity board</h3>
+      <div class="p-sub">All 25 deal categories — ranked and scored by ease, profit and how often deals show up. Tell us where to send it, and we'll flag new opportunities as we add them.</div>
+      <form class="optin-form" id="optin-form" novalidate>
+        <input type="text" id="optin-name" placeholder="First name" autocomplete="given-name" />
+        <input type="email" id="optin-email" placeholder="you@email.com" autocomplete="email" inputmode="email" />
+        <div class="err" id="optin-err"></div>
+        <button type="submit" class="cta" id="optin-btn">Show me the board →</button>
+      </form>
+      <div class="privacy">One email to unlock. We'll send the board plus the occasional new-opportunity alert — no spam, unsubscribe anytime.</div>
+    </div>
+    <div class="board-step" id="board-step-2">
+      <h3><span class="check">✓</span>You're in.</h3>
+      <div class="p-sub">Your opportunity board is ready. Check your inbox too — that's where new opportunities will land.</div>
+      <a class="cta" id="board-link" href="board.html">Open the opportunity board →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+var LEAD_ENDPOINT = 'https://formspree.io/f/mgognyge';
+
+function openBoard() {
+  document.getElementById('board-step-1').classList.add('show');
+  document.getElementById('board-step-2').classList.remove('show');
+  document.getElementById('optin-err').textContent = '';
+  document.getElementById('board-overlay').classList.add('open');
+  setTimeout(function(){ var e = document.getElementById('optin-email'); if (e) e.focus(); }, 60);
+}
+function closeBoard() { document.getElementById('board-overlay').classList.remove('open'); }
+
+document.getElementById('optin-form').addEventListener('submit', function(ev) {
+  ev.preventDefault();
+  var email = document.getElementById('optin-email').value.trim();
+  var name = document.getElementById('optin-name').value.trim();
+  var err = document.getElementById('optin-err');
+  var btn = document.getElementById('optin-btn');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    err.textContent = 'Enter a valid email so we can send you the board.';
+    return;
+  }
+  err.textContent = '';
+  btn.disabled = true; btn.textContent = 'Unlocking…';
+  function reveal() {
+    btn.disabled = false; btn.textContent = 'Show me the board →';
+    document.getElementById('board-step-1').classList.remove('show');
+    document.getElementById('board-step-2').classList.add('show');
+  }
+  var fd = new FormData();
+  fd.append('email', email);
+  if (name) fd.append('name', name);
+  fd.append('_subject', 'New Deal Machines board opt-in');
+  fd.append('source', 'workdifferentai-site');
+  fetch(LEAD_ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+    .then(function(){ reveal(); })
+    .catch(function(){ reveal(); }); // never strand the visitor — board opens either way
+});
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeBoard(); });
+
+/* Section reveals (respects prefers-reduced-motion via CSS) */
+(function(){
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light only" />
+<meta name="theme-color" content="#FAF7F2" />
+<title>The Opportunity Board — 25 ways the money moves | WorkDifferentAI</title>
+<meta name="description" content="25 kinds of deals a machine can hunt for you — scored on ease, profit and deal frequency. Pick one, and we build it for your market." />
+<meta property="og:title" content="The Opportunity Board — 25 ways the money moves" />
+<meta property="og:description" content="25 kinds of deals a machine can hunt for you — scored on ease, profit and deal frequency." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>" />
+<style>
+  @font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(fonts/fraunces.woff2) format('woff2'); }
+  @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 100 800; font-display: swap; src: url(fonts/jetbrains-mono.woff2) format('woff2'); }
+  :root {
+    color-scheme: light only;
+    --ink: #141210;
+    --paper: #FAF7F2;
+    --orange: #E63600;
+    --muted: #45403A;
+    --line: #E4DED4;
+    --card: #FFFFFF;
+    --seg: #EDE7DD;
+    --grey: #B7B0A4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { background: var(--paper); color: var(--ink); font-family: 'JetBrains Mono', monospace; line-height: 1.6; -webkit-text-size-adjust: 100%; padding-bottom: 68px; }
+  .wrap { max-width: 660px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: 'Fraunces', serif; text-wrap: balance; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.5px; color: var(--orange); font-weight: 600; }
+
+  .backbar { padding: 16px 0 0; }
+  .backbar a { font-size: 11px; letter-spacing: 1px; color: var(--muted); text-decoration: none; font-weight: 600; }
+  .backbar a:hover { color: var(--ink); }
+
+  header { padding: 28px 0 20px; }
+  header h1 { font-size: clamp(30px, 6.5vw, 46px); font-weight: 900; line-height: 1.03; margin: 12px 0 12px; }
+  header .sub { font-size: 13px; color: var(--muted); max-width: 520px; }
+  header .sub b { color: var(--ink); font-weight: 600; }
+
+  .toppick { border: 2px solid var(--orange); border-radius: 12px; padding: 16px 18px; margin: 22px 0 8px; background: var(--card); }
+  .toppick .tp-label { font-size: 10px; letter-spacing: 2px; color: var(--orange); font-weight: 600; }
+  .toppick .tp-name { font-family: 'Fraunces', serif; font-weight: 800; font-size: 20px; margin: 4px 0 4px; }
+  .toppick .tp-demo { font-size: 12px; color: var(--muted); }
+  .toppick .tp-demo b { color: var(--ink); font-weight: 600; }
+
+  .sortbar { display: flex; flex-wrap: wrap; gap: 8px; padding: 20px 0 6px; position: sticky; top: 0; background: linear-gradient(var(--paper) 78%, rgba(250,247,242,0)); z-index: 5; }
+  .sortbar .lbl { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); align-self: center; margin-right: 2px; }
+  .pill { font-family: inherit; font-size: 11px; letter-spacing: 0.5px; border: 1px solid var(--ink); background: transparent; color: var(--ink); border-radius: 20px; padding: 7px 13px; cursor: pointer; font-weight: 600; }
+  .pill.active { background: var(--ink); color: var(--paper); }
+
+  .list { display: grid; gap: 10px; padding: 8px 0 24px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .card-head { display: grid; grid-template-columns: 1fr auto; gap: 12px 14px; padding: 15px 16px; cursor: pointer; align-items: start; }
+  .card-head:hover { background: #FDFBF7; }
+  .rank { font-size: 11px; color: var(--grey); }
+  .cname { font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px; line-height: 1.2; margin-top: 2px; }
+  .score { text-align: right; }
+  .score .num { font-weight: 600; font-size: 26px; color: var(--orange); line-height: 1; font-variant-numeric: tabular-nums; }
+  .score .cap { font-size: 9px; letter-spacing: 1.5px; color: var(--muted); margin-top: 3px; }
+  .meters { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 2px; }
+  .meter .mlabel { font-size: 9px; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .meter .mlabel span { color: var(--ink); font-weight: 600; }
+  .segs { display: flex; gap: 2px; }
+  .seg { height: 6px; flex: 1; border-radius: 1px; background: var(--seg); }
+  .seg.on-e { background: var(--ink); }
+  .seg.on-p { background: var(--orange); }
+  .seg.on-f { background: var(--grey); }
+
+  .detail { max-height: 0; overflow: hidden; transition: max-height .28s ease; border-top: 1px solid transparent; }
+  .card.open .detail { max-height: 420px; border-top: 1px solid var(--line); }
+  .detail-in { padding: 14px 16px 16px; }
+  .detail-in .desc { font-size: 13px; color: var(--ink); }
+  .kv { margin-top: 12px; }
+  .kv .k { font-size: 10px; letter-spacing: 1.5px; color: var(--orange); font-weight: 600; }
+  .kv .v { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .card-cta { margin-top: 16px; }
+  .mini-cta { display: inline-block; font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.3px; background: var(--ink); color: var(--paper); border: 0; border-radius: 22px; padding: 10px 18px; cursor: pointer; }
+  .mini-cta:hover { background: #000; }
+
+  .band { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 30px 24px; margin: 16px 0 40px; text-align: center; }
+  .band .eyebrow { color: #FF6A3C; }
+  .band h2 { color: #fff; font-size: clamp(22px, 5vw, 30px); font-weight: 800; margin: 8px 0 6px; line-height: 1.12; }
+  .band p { color: #D8D2C8; font-size: 13px; max-width: 440px; margin: 0 auto 4px; }
+  .band .cta { display: inline-block; margin-top: 18px; background: var(--orange); color: #fff; border: 0; font-family: inherit; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; padding: 14px 26px; border-radius: 30px; cursor: pointer; }
+  .band .cta:hover { background: #D93400; }
+
+  .fineprint { font-size: 11px; color: #8A8377; text-align: center; padding-bottom: 40px; line-height: 1.7; }
+  .fineprint a { color: #8A8377; }
+
+  .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: rgba(20,18,16,0.96); backdrop-filter: blur(6px); padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); display: flex; gap: 12px; align-items: center; justify-content: center; }
+  .sticky-cta span { color: #D8D2C8; font-size: 12px; }
+  .sticky-cta button { background: var(--orange); color: #fff; border: 0; font-family: inherit; font-weight: 600; font-size: 12px; padding: 11px 20px; border-radius: 24px; cursor: pointer; white-space: nowrap; }
+  .sticky-cta button:hover { background: #D93400; }
+  @media (max-width: 460px) { .sticky-cta span { display: none; } }
+
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(20,18,16,0.55); z-index: 50; padding: 20px; }
+  .overlay.open { display: flex; align-items: center; justify-content: center; }
+  .panel { background: var(--card); border-radius: 14px; max-width: 460px; width: 100%; padding: 26px 24px; position: relative; max-height: 90vh; overflow-y: auto; }
+  .panel .x { position: absolute; top: 12px; right: 16px; background: none; border: 0; font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1; padding: 4px; font-family: inherit; }
+  .panel h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .panel .p-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .panel .cta-mail { display: block; text-align: center; background: var(--orange); color: #fff; text-decoration: none; font-weight: 600; font-size: 13px; padding: 13px 0; border-radius: 26px; }
+  .panel .cta-mail:hover { background: #D93400; }
+  .divider { display: flex; align-items: center; gap: 10px; margin: 16px 0 12px; color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .row { display: flex; gap: 8px; align-items: stretch; margin-bottom: 12px; }
+  .row .box { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 14px; font-weight: 600; background: var(--paper); user-select: all; overflow-x: auto; white-space: nowrap; display: flex; align-items: center; }
+  .copy-btn { background: var(--ink); color: #fff; border: 0; border-radius: 8px; font-family: inherit; font-weight: 600; font-size: 12px; padding: 0 15px; cursor: pointer; white-space: nowrap; }
+  .copy-btn.copied { background: #1E7B34; }
+  .panel textarea { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font-family: inherit; font-size: 12px; color: var(--ink); padding: 10px 12px; min-height: 118px; resize: vertical; line-height: 1.5; }
+  .panel .t-copy { margin-top: 8px; width: 100%; padding: 10px 0; font-size: 12px; }
+  .panel .hint { font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="backbar"><a href="index.html">← DEAL MACHINES</a></div>
+  <header>
+    <div class="eyebrow">WORKDIFFERENTAI · OPPORTUNITY BOARD</div>
+    <h1>25 ways the money moves.</h1>
+    <div class="sub">Each of these is a machine we build, install and hand over — <b>you own it, it hunts your market</b>. Scored on how <b>easy</b> it is to start, how much <b>profit</b> is on the table, and how <b>often</b> deals show up. Tap any card for what it puts in front of you.</div>
+  </header>
+
+  <div class="toppick" id="toppick">
+    <div class="tp-label">TOP OPPORTUNITY RIGHT NOW</div>
+    <div class="tp-name" id="tp-name">—</div>
+    <div class="tp-demo" id="tp-demo"></div>
+  </div>
+
+  <div class="sortbar">
+    <span class="lbl">SORT</span>
+    <button class="pill active" data-sort="score" onclick="setSort('score', this)">Best opportunity</button>
+    <button class="pill" data-sort="ease" onclick="setSort('ease', this)">Easiest</button>
+    <button class="pill" data-sort="profit" onclick="setSort('profit', this)">Most $</button>
+    <button class="pill" data-sort="freq" onclick="setSort('freq', this)">Most frequent</button>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="band">
+    <div class="eyebrow">BUILT FOR YOUR MARKET</div>
+    <h2>Pick one. We build it to hunt for you.</h2>
+    <p>Tell us your city and the opportunity you want working. We'll lay out the build, the timeline and the cost plainly — and tell you honestly if your market can't support it.</p>
+    <button class="cta" onclick="openContact()">Talk to us about a build →</button>
+  </div>
+
+  <p class="fineprint">WorkDifferentAI · Alacrity One LLC · Boca Raton, FL · <a href="mailto:jason@meta57.xyz">jason@meta57.xyz</a><br/>Scores are a research tool, not a promise of results. What any opportunity earns depends on your capital, effort and local market.</p>
+</div>
+
+<div class="sticky-cta">
+  <span>Want one of these hunting your market?</span>
+  <button onclick="openContact()">Talk to us →</button>
+</div>
+
+<div class="overlay" id="contact-overlay" onclick="if(event.target===this)closeContact()">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="c-title">
+    <button class="x" onclick="closeContact()" aria-label="Close">✕</button>
+    <h3 id="c-title">Talk to us about a build</h3>
+    <div class="p-sub" id="c-sub">One email starts it. We'll get straight into your market, the opportunity you want, and what a build takes.</div>
+    <a class="cta-mail" id="c-mailto" href="#">Open in your email app →</a>
+    <div class="divider">OR COPY IT YOURSELF</div>
+    <div class="row">
+      <div class="box" id="c-email">jason@meta57.xyz</div>
+      <button class="copy-btn" onclick="copyText('jason@meta57.xyz', this, 'Copy')">Copy</button>
+    </div>
+    <textarea id="c-template" readonly></textarea>
+    <button class="copy-btn t-copy" onclick="copyText(document.getElementById('c-template').value, this, 'Copy message')">Copy message</button>
+    <div class="hint">We reply within one business day — with real talk about whether your market can support the machine you want.</div>
+  </div>
+</div>
+
+<script>
+var CONTACT_EMAIL = 'jason@meta57.xyz';
+
+var MACHINES = [
+  {n:"Car Flip Scanner", e:8,p:7,f:9, best:"Side-hustle investors with a few thousand to move", shows:"A live feed of 5 underpriced cars near you with the estimated spread on each.", desc:"Scans Marketplace + Craigslist for cars priced under KBB/Manheim comps. Flags motivated sellers, title status and days listed."},
+  {n:"BizBuySell Deal Screener", e:7,p:9,f:7, best:"People shopping the 'business for sale' listings", shows:"A one-page deal memo auto-generated from a live listing.", desc:"Scores businesses for sale by SDE multiple, seller-financing terms and industry risk. Surfaces mispriced listings daily."},
+  {n:"Equipment Liquidation Sniper", e:8,p:7,f:8, best:"Flippers and restaurant/gym suppliers", shows:"Auction lot price vs. Marketplace sold comps, side by side, with profit per item.", desc:"Watches BidSpotter, GovDeals and bankruptcy sales for restaurant, gym and medical gear at 20–30 cents on the dollar vs. sold comps."},
+  {n:"Gov Surplus Sniper", e:8,p:7,f:8, best:"Flippers with a truck and a garage", shows:"An alert feed of closing-soon lots ranked by projected margin.", desc:"Monitors GovDeals and GSA Auctions for vehicles, electronics and tools closing below resale value."},
+  {n:"Estate Sale Early-Bird", e:8,p:6,f:9, best:"Resellers and antique dealers", shows:"Upload 3 estate-sale listings and the agent highlights the 4 items worth grabbing.", desc:"Reads EstateSales.net photos with vision AI to spot undervalued items — watches, tools, art — before the sale opens."},
+  {n:"Expired Domain Harvester", e:9,p:5,f:9, best:"SEO-minded operators and local competitors", shows:"Today's list of 10 expiring domains with authority scores and lease-back targets.", desc:"Scans expiring domains with live backlinks and traffic, cross-referenced against recently closed local businesses on Google Maps."},
+  {n:"Website/SaaS Acquisition Screener", e:7,p:8,f:7, best:"Digital investors", shows:"A red-flag report on a live Flippa listing: verified numbers vs. claimed.", desc:"Watches Flippa and Acquire.com, flags listings where the revenue multiple is below category norm and checks traffic claims."},
+  {n:"Boat & Jet Ski Flip Scanner", e:8,p:7,f:7, best:"Marine flippers and dock owners", shows:"A map of 5 underpriced boats near you with spread estimates.", desc:"Finds underpriced watercraft on Marketplace vs. NADA values and flags end-of-season motivated sellers."},
+  {n:"eBay Mislisting Sniper", e:9,p:4,f:10, best:"Entry-level flippers", shows:"A live list of 10 auctions ending today with wrong titles and no bids.", desc:"Catches misspelled, badly photographed or wrongly categorized listings ending soon with low bids."},
+  {n:"FSBO-to-Investor Matcher", e:6,p:9,f:6, best:"Real-estate investors (subscription model)", shows:"A daily deal sheet: 3 properties with cap rate, repair estimate and exit options.", desc:"Scrapes for-sale-by-owner and pre-foreclosure filings, scores them against rental comps for cap rate."},
+  {n:"Storage Unit Auction Scout", e:8,p:6,f:8, best:"Auction hunters", shows:"Vision AI reads 3 unit photos and prices the visible contents.", desc:"Scores StorageTreasures lots by photo analysis, unit size and zip-code income data to predict the 3–5x lots."},
+  {n:"Mobile Home / RV Flip Scout", e:7,p:7,f:7, best:"Cash flippers and park owners", shows:"The top 5 units this week with lot rent and resale comps.", desc:"Tracks underpriced mobile homes and RVs, flags park-approved units and title-in-hand sellers."},
+  {n:"Sports Card Grading Arbitrage", e:7,p:6,f:8, best:"Card investors", shows:"A photo in, a grade estimate and projected graded value out.", desc:"Finds raw cards priced below graded comps, estimates grade from photos and calculates submission ROI."},
+  {n:"Pallet & Returns Scorer", e:7,p:6,f:8, best:"Resellers and bin-store owners", shows:"Upload a manifest CSV, get a projected recovery rate and profit.", desc:"Scores liquidation pallets (B-Stock, Liquidation.com) by manifest analysis vs. eBay sold prices."},
+  {n:"Foreclosure Auction Analyzer", e:5,p:9,f:6, best:"Real-estate investors with cash", shows:"A pre-auction report on one real property near you.", desc:"Pulls county foreclosure calendars and auto-runs a title snapshot, lien check and rental comps before auction day."},
+  {n:"Collectible Watch Arbitrage", e:7,p:6,f:7, best:"Watch dealers", shows:"A live spread finder across 3 references you pick.", desc:"Monitors Chrono24, eBay and forums for watches priced under market and verifies against sold data."},
+  {n:"Tax Deed Auction Scout", e:5,p:9,f:5, best:"Land investors", shows:"The next auction's list filtered from 200 parcels down to the 8 worth bidding.", desc:"Monitors county tax-deed sales, filters out worthless parcels and scores buildable lots and occupied homes."},
+  {n:"Domain + Business Name Broker", e:8,p:5,f:7, best:"Domain investors", shows:"This week's new LLCs whose exact-match .com is still unowned.", desc:"Watches trademark filings and new LLC registrations, flags when the matching .com is available to acquire and flip."},
+  {n:"Airbnb Arbitrage Market Finder", e:6,p:7,f:6, best:"Rental-arbitrage operators", shows:"5 units where projected short-term revenue doubles the lease.", desc:"Cross-references rental listings against short-term-rental revenue data to flag units where the income is 2x+ the lease."},
+  {n:"Heavy Equipment Cross-Border Arb", e:4,p:9,f:5, best:"Exporters and equipment dealers", shows:"One machine: US auction price vs. resale abroad plus the shipping math.", desc:"Buys US auction equipment (Ritchie Bros.) and matches it to overseas buyer demand. Big spreads, big logistics."},
+  {n:"Laundromat Deal Analyzer", e:6,p:8,f:4, best:"Passive-income buyers", shows:"A water bill in, a real revenue estimate out — vs. the seller's claims.", desc:"Screens laundromat listings and models cash flow from water bills (the honest number) to flag mispriced stores."},
+  {n:"Vending Route Finder", e:7,p:6,f:5, best:"First-time business buyers", shows:"A route listing analyzed: per-machine revenue vs. the asking price.", desc:"Finds vending routes for sale and scores locations by foot-traffic data. Values routes on real numbers."},
+  {n:"Liquor License Arbitrage Tracker", e:5,p:9,f:3, best:"Restaurant groups and license brokers", shows:"A current spread table across 3 county license markets.", desc:"Tracks county quota-license markets, delinquent licenses and broker spreads. Six-figure gaps exist."},
+  {n:"Billboard & Land Lease Finder", e:5,p:8,f:3, best:"Landowners and media companies", shows:"A map of 3 qualifying parcels on a high-traffic road with lease-revenue estimates.", desc:"Finds parcels on high-traffic roads without billboards, checks zoning and matches them to outdoor-ad companies."},
+  {n:"Restaurant Space Matcher", e:4,p:8,f:4, best:"Franchisees and landlords (finder's fees)", shows:"3 available second-gen spaces matched to 3 franchise requirements.", desc:"Matches closed restaurant spaces (second-gen, hood in place) to franchise buyers searching for sites."}
+];
+
+function scoreOf(m) { return Math.round((m.e*0.3 + m.p*0.4 + m.f*0.3) * 10); }
+var curSort = 'score';
+var SORT_KEY = { ease: 'e', profit: 'p', freq: 'f' };
+function sortedMachines() {
+  var arr = MACHINES.slice();
+  arr.sort(function(a, b) {
+    if (curSort === 'score') return scoreOf(b) - scoreOf(a);
+    var k = SORT_KEY[curSort];
+    return (b[k] - a[k]) || (scoreOf(b) - scoreOf(a));
+  });
+  return arr;
+}
+function segs(v, cls) {
+  var h = '';
+  for (var i = 1; i <= 10; i++) h += '<div class="seg' + (i <= v ? ' ' + cls : '') + '"></div>';
+  return h;
+}
+function meter(label, v, cls) {
+  return '<div class="meter"><div class="mlabel">' + label + '<span>' + v + '</span></div><div class="segs">' + segs(v, cls) + '</div></div>';
+}
+function capLabel() { return curSort === 'ease' ? 'easiest' : curSort === 'profit' ? 'most $' : 'most frequent'; }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function render() {
+  var arr = sortedMachines();
+  var top = arr.slice().sort(function(a,b){return scoreOf(b)-scoreOf(a);})[0];
+  document.getElementById('tp-name').textContent = top.n + '  ·  ' + scoreOf(top);
+  document.getElementById('tp-demo').innerHTML = '<b>What it shows you:</b> ' + esc(top.shows);
+  var html = '';
+  arr.forEach(function(m, i) {
+    html += '<div class="card" data-name="' + esc(m.n) + '">'
+      + '<div class="card-head" onclick="toggleCard(this)">'
+      + '<div><div class="rank">#' + (i+1) + (curSort==='score' ? '' : ' · ' + capLabel()) + '</div><div class="cname">' + esc(m.n) + '</div></div>'
+      + '<div class="score"><div class="num">' + scoreOf(m) + '</div><div class="cap">SCORE</div></div>'
+      + '<div class="meters">' + meter('EASE', m.e, 'on-e') + meter('PROFIT', m.p, 'on-p') + meter('FREQ', m.f, 'on-f') + '</div>'
+      + '</div>'
+      + '<div class="detail"><div class="detail-in">'
+        + '<div class="desc">' + esc(m.desc) + '</div>'
+        + '<div class="kv"><div class="k">BEST FOR →</div><div class="v">' + esc(m.best) + '</div></div>'
+        + '<div class="kv"><div class="k">WHAT IT SHOWS YOU →</div><div class="v">' + esc(m.shows) + '</div></div>'
+        + '<div class="card-cta"><button class="mini-cta" onclick="event.stopPropagation();openContact(\'' + esc(m.n).replace(/'/g, "\\'") + '\')">Build this for my market →</button></div>'
+      + '</div></div>'
+      + '</div>';
+  });
+  document.getElementById('list').innerHTML = html;
+}
+function setSort(s, btn) {
+  curSort = s;
+  document.querySelectorAll('.pill').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  render();
+}
+function toggleCard(head) { head.parentNode.classList.toggle('open'); }
+
+function buildMessage(machine) {
+  return 'Hi Jason,\n\nI want a Deal Machine built to hunt my market.\n\n'
+    + 'The opportunity I want: ' + (machine || '') + '\n'
+    + 'My city / market: \n'
+    + 'A bit about me: \n\n'
+    + "What's the build and what does it take?\n\nThanks!";
+}
+function openContact(machine) {
+  var sub = machine
+    ? 'You want the ' + machine + ' built for your market. One email starts it — the message is ready, just add your city.'
+    : "One email starts it. We'll get straight into your market, the opportunity you want, and what a build takes.";
+  document.getElementById('c-sub').textContent = sub;
+  var body = buildMessage(machine);
+  document.getElementById('c-template').value = body;
+  var subject = machine ? ('Deal Machine build — ' + machine) : 'Deal Machine build — my market';
+  document.getElementById('c-mailto').href = 'mailto:' + CONTACT_EMAIL
+    + '?subject=' + encodeURIComponent(subject)
+    + '&body=' + encodeURIComponent(body);
+  document.getElementById('contact-overlay').classList.add('open');
+}
+function closeContact() { document.getElementById('contact-overlay').classList.remove('open'); }
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeContact(); });
+
+function copyText(text, btn, label) {
+  function done(ok) {
+    btn.textContent = ok ? 'Copied ✓' : 'Select & copy';
+    btn.classList.toggle('copied', ok);
+    setTimeout(function(){ btn.textContent = label; btn.classList.remove('copied'); }, 1800);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ fallbackCopy(text, done); });
+  } else { fallbackCopy(text, done); }
+}
+function fallbackCopy(text, done) {
+  var ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select(); var ok=false;
+  try { ok = document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta); done(ok);
+}
+
+render();
+</script>
+</body>
+</html>
