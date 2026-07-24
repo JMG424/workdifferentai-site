@@ -37,8 +37,16 @@
   .hero p { font-size: 14px; color: var(--muted); max-width: 540px; }
   .cta { display: inline-block; background: var(--orange); color: #fff; border: 0; font-family: inherit; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; padding: 14px 26px; border-radius: 30px; cursor: pointer; }
   .cta:hover { background: #D93400; }
-  .hero .cta { margin-top: 26px; }
+  .cta.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink); padding: 12px 24px; }
+  .cta.ghost:hover { background: var(--ink); color: var(--paper); }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 26px; }
   .sub-cta { display: block; margin-top: 12px; font-size: 12px; color: var(--muted); }
+
+  /* Film modal */
+  .film-panel { position: relative; width: 100%; max-width: 880px; }
+  .film-panel video { display: block; width: 100%; border-radius: 14px; background: #000; }
+  .film-panel .film-x { position: absolute; top: -40px; right: 0; background: none; border: 0; color: #F2EEE8; font-size: 22px; cursor: pointer; font-family: inherit; padding: 6px; line-height: 1; }
+  .film-panel .film-x:hover { color: #fff; }
 
   .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 12px 0; overflow: hidden; white-space: nowrap; font-size: 11px; letter-spacing: 1px; color: var(--muted); }
   .strip span { color: var(--orange); font-weight: 600; }
@@ -141,7 +149,10 @@
   <div class="eyebrow">WORKDIFFERENTAI · DEAL MACHINES</div>
   <h1>Own the <em>machine</em>,<br/>not the hustle.</h1>
   <p>In your market, right now, assets are changing hands for less than they're worth — trucks, equipment, whole businesses. The buyers who win them aren't smarter. They see them first. A Deal Machine is a private scout that watches your local market around the clock and texts you the moment something's mispriced, with the numbers already run. Built for your city. Installed on hardware you own. Working while you run everything else.</p>
-  <button class="cta" onclick="openBoard()">See where the money moves →</button>
+  <div class="hero-ctas">
+    <button class="cta" onclick="openBoard()">See where the money moves →</button>
+    <button class="cta ghost" onclick="openFilm()">▶&#xFE0E; Watch the film · 3 min</button>
+  </div>
   <span class="sub-cta">Built and installed in South Florida by WorkDifferentAI</span>
 </div>
 
@@ -246,6 +257,16 @@
 <p class="fineprint">WorkDifferentAI · Alacrity One LLC · Boca Raton, FL · <a href="mailto:jason@meta57.xyz">jason@meta57.xyz</a><br/>Sample alert shown is illustrative. Earnings language is based on market research and is not a promise of results — deal outcomes depend on your capital, effort and local market. Machines are installed on customer-owned hardware; customers are responsible for complying with local licensing laws (e.g. vehicle dealer limits).</p>
 </div>
 
+<div class="overlay" id="film-overlay" onclick="if(event.target===this)closeFilm()">
+  <div class="film-panel">
+    <button class="film-x" onclick="closeFilm()" aria-label="Close">✕</button>
+    <video id="film-video" controls playsinline preload="metadata" poster="media/poster.jpg">
+      <source src="media/explainer.mp4" type="video/mp4" />
+      Your browser can't play this video. <a href="media/explainer.mp4">Download it instead.</a>
+    </video>
+  </div>
+</div>
+
 <div class="overlay" id="board-overlay" onclick="if(event.target===this)closeBoard()">
   <div class="panel" role="dialog" aria-modal="true" aria-labelledby="board-title">
     <button class="x" onclick="closeBoard()" aria-label="Close">✕</button>
@@ -306,7 +327,17 @@ document.getElementById('optin-form').addEventListener('submit', function(ev) {
     .then(function(){ reveal(); })
     .catch(function(){ reveal(); }); // never strand the visitor — board opens either way
 });
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeBoard(); });
+function openFilm() {
+  document.getElementById('film-overlay').classList.add('open');
+  var v = document.getElementById('film-video');
+  var p = v.play();
+  if (p && p.catch) p.catch(function(){}); // if autoplay is refused, controls are right there
+}
+function closeFilm() {
+  document.getElementById('film-overlay').classList.remove('open');
+  document.getElementById('film-video').pause();
+}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { closeBoard(); closeFilm(); } });
 
 /* Section reveals (respects prefers-reduced-motion via CSS) */
 (function(){
