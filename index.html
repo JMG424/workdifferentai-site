@@ -41,6 +41,15 @@
   .cta.ghost:hover { background: var(--ink); color: var(--paper); }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 26px; }
   .sub-cta { display: block; margin-top: 12px; font-size: 12px; color: var(--muted); }
+  .hero .clarifier { font-size: 16.5px; line-height: 1.55; color: var(--ink); max-width: 560px; }
+  .hero .alert-demo { margin-top: 24px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .h-seq { opacity: 0; transform: translateY(12px); animation: rise .5s ease forwards; animation-delay: var(--d, 0s); }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+    .hero .bubble { opacity: 0; transform: scale(.94); transform-origin: 20% 100%; animation: pop .5s cubic-bezier(.3,1.4,.55,1) forwards; animation-delay: 1.15s; }
+    @keyframes pop { to { opacity: 1; transform: scale(1); } }
+  }
 
   /* Film modal */
   .film-panel { position: relative; width: 100%; max-width: 880px; }
@@ -106,12 +115,10 @@
   .own-item p { font-size: 13.5px; color: var(--muted); }
   .own-item p b { color: var(--ink); }
 
-  /* Steps */
-  .steps { margin-top: 24px; }
-  .step { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
-  .step .s-num { font-family: 'Fraunces', serif; font-weight: 800; font-size: 22px; color: var(--orange); min-width: 34px; }
-  .step b { font-size: 14px; display: block; margin-bottom: 3px; }
-  .step p { font-size: 13px; color: var(--muted); }
+  /* Timeline line */
+  .timeline { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 16px; font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .timeline b { color: var(--ink); font-weight: 600; }
+  .timeline .ta { color: var(--orange); font-weight: 600; }
 
   /* Who */
   .who p { font-size: 14px; color: var(--muted); margin-top: 12px; max-width: 560px; }
@@ -166,31 +173,11 @@
 <body>
 
 <div class="wrap hero">
-  <div class="eyebrow">WORKDIFFERENTAI · DEAL MACHINES</div>
-  <h1>Own the <em>machine</em>,<br/>not the hustle.</h1>
-  <p>In your market, right now, assets are changing hands for less than they're worth — trucks, equipment, whole businesses. The buyers who win them aren't smarter. They see them first. A Deal Machine is a private scout that watches your local market around the clock and texts you the moment something's mispriced, with the numbers already run. Built for your city. Installed on hardware you own. Working while you run everything else.</p>
-  <div class="hero-ctas">
-    <button class="cta" onclick="openBoard()">See where the money moves →</button>
-    <button class="cta ghost" onclick="openFilm()">▶&#xFE0E; Watch the film · 3 min</button>
-  </div>
-  <span class="sub-cta">Built and installed in South Florida by WorkDifferentAI</span>
-</div>
+  <div class="eyebrow h-seq" style="--d:.05s">WORKDIFFERENTAI · DEAL MACHINES</div>
+  <h1 class="h-seq" style="--d:.15s">Own the <em>machine</em>,<br/>not the hustle.</h1>
+  <p class="clarifier h-seq" style="--d:.35s">A private AI scout that watches your city for underpriced cars, equipment and whole businesses — and texts you before anyone else has moved.</p>
 
-<div class="strip">
-  <div class="marquee"><span>WHERE VALUE HIDES:</span> CARS · BUSINESSES FOR SALE · ESTATE SALES · GOV SURPLUS · EQUIPMENT · STORAGE UNITS · DOMAINS · BOATS · FORECLOSURES · PALLETS &nbsp;·&nbsp; <span>WHERE VALUE HIDES:</span> CARS · BUSINESSES FOR SALE · ESTATE SALES · GOV SURPLUS · EQUIPMENT · STORAGE UNITS · DOMAINS · BOATS · FORECLOSURES · PALLETS &nbsp;·&nbsp;</div>
-</div>
-
-<div class="wrap">
-<section class="reveal">
-  <div class="label">THE WINDOW</div>
-  <h2>The best deals are gone in hours.</h2>
-  <div class="prob">
-    <p>Every day, mispriced assets hit the public market — listings, auctions, county filings. The spread between asking price and real value is there in plain sight. For a few hours.</p>
-    <p>The people who consistently capture that spread aren't refreshing pages at midnight. They have <b>systems watching for them</b> — and by the time everyone else sees the listing, they've already called.</p>
-    <p>You've watched it happen. The one priced wrong that vanished the same morning. This is how you stop being the second call.</p>
-  </div>
-
-  <div class="alert-demo">
+  <div class="alert-demo h-seq" style="--d:.55s">
     <div class="phone">
       <div class="ph-head"><b>DEAL MACHINE</b><span>TODAY · 6:42 AM</span></div>
       <div class="bubble">
@@ -200,24 +187,38 @@
       </div>
       <div class="ph-head" style="margin: 12px 0 0"><span>SAMPLE ALERT — WHAT LANDS ON YOUR PHONE</span></div>
     </div>
-    <div class="alert-cap">What it's worth, what the spread is, why the seller's motivated — before you've had coffee. You make one decision: go or pass. It keeps hunting either way.</div>
+    <div class="alert-cap">This is the whole product: deals found, priced and delivered while you live your life. You make one decision — go or pass.</div>
   </div>
-</section>
 
+  <div class="hero-ctas h-seq" style="--d:.75s">
+    <button class="cta" onclick="openBoard()">See where the money moves →</button>
+    <button class="cta ghost" onclick="openFilm()">▶&#xFE0E; Watch the film · 3 min</button>
+  </div>
+  <span class="sub-cta h-seq" style="--d:.85s">A limited number of machines are built each month · Built and installed in South Florida by WorkDifferentAI</span>
+</div>
+
+<div class="strip">
+  <div class="marquee"><span>WHERE VALUE HIDES:</span> CARS · BUSINESSES FOR SALE · ESTATE SALES · GOV SURPLUS · EQUIPMENT · STORAGE UNITS · DOMAINS · BOATS · FORECLOSURES · PALLETS &nbsp;·&nbsp; <span>WHERE VALUE HIDES:</span> CARS · BUSINESSES FOR SALE · ESTATE SALES · GOV SURPLUS · EQUIPMENT · STORAGE UNITS · DOMAINS · BOATS · FORECLOSURES · PALLETS &nbsp;·&nbsp;</div>
+</div>
+
+<div class="wrap">
 <section class="reveal">
-  <div class="label">YOUR UNFAIR ADVANTAGE</div>
-  <h2>It hunts while you sleep.</h2>
+  <div class="label">HOW YOU BECOME FIRST</div>
+  <h2>The best deals are gone in hours.</h2>
+  <div class="prob">
+    <p>Every day, assets sell below their value in plain sight — for a few hours. The people who win them aren't smarter or richer. They simply <b>see them first</b>.</p>
+  </div>
   <div class="machines">
-    <div class="machine"><div class="num">01</div><div><div class="name">Watches your market</div><div class="what">Scans the listings, auctions and public records in your area every 15 minutes, around the clock. It doesn't get bored and it doesn't take weekends.</div></div></div>
-    <div class="machine"><div class="num">02</div><div><div class="name">Runs the numbers</div><div class="what">Every find is checked against real sold prices — not asking prices, not gut feel. You see the spread, calculated, before you spend a minute on it.</div></div></div>
-    <div class="machine"><div class="num">03</div><div><div class="name">Texts you the deal</div><div class="what">One message: what it is, what it's worth, why it's mispriced. You decide in seconds. Pass, and the next one's already being hunted.</div></div></div>
+    <div class="machine"><div class="num">01</div><div><div class="name">Watches your market</div><div class="what">Every listing, auction and public record in your area, scanned every 15 minutes, around the clock.</div></div></div>
+    <div class="machine"><div class="num">02</div><div><div class="name">Runs the numbers</div><div class="what">Each find checked against real sold prices. You see the spread, calculated, before you spend a minute on it.</div></div></div>
+    <div class="machine"><div class="num">03</div><div><div class="name">Texts you the deal</div><div class="what">One message: what it is, what it's worth, why it's mispriced. You decide in seconds. It keeps hunting.</div></div></div>
   </div>
 </section>
 
 <section class="reveal">
-  <div class="label">WHERE THE MONEY IS</div>
-  <h2>25 kinds of opportunity, ranked.</h2>
-  <p class="lede">We scored 25 ways a machine can put deals in front of you — on how easy each is to start, how much profit is on the table, and how often deals actually show up. The top of the board:</p>
+  <div class="label">THE MAP</div>
+  <h2>25 hunting grounds, ranked by where the money is.</h2>
+  <p class="lede">We scored every market a machine can hunt — on ease, profit, and how often deals show up. Most people never see this layer of the local economy. This is the map of it.</p>
   <div class="teaser">
     <div class="trow"><div class="tn">Car Flip Scanner</div><div class="ts">79</div></div>
     <div class="trow"><div class="tn">Business-for-Sale Screener</div><div class="ts">78</div></div>
@@ -232,29 +233,18 @@
   <div class="label">WHAT YOU ACTUALLY OWN</div>
   <h2>An asset, not a subscription.</h2>
   <div class="own">
-    <div class="own-item"><span class="tick">→</span><p><b>It runs on your hardware.</b> A dedicated machine in your office or home — not our cloud, not our platform. If we disappeared tomorrow, yours keeps hunting.</p></div>
-    <div class="own-item"><span class="tick">→</span><p><b>It's tuned to you.</b> Your zip codes, your price range, your profit threshold. It answers to one person, so you're never racing a thousand subscribers to the same alert.</p></div>
-    <div class="own-item"><span class="tick">→</span><p><b>It compounds.</b> Every week it runs, it learns your market's rhythm — what sells, what sits, what a real discount looks like where you live.</p></div>
-    <div class="own-item"><span class="tick">→</span><p><b>It doesn't need you.</b> No dashboard to babysit, no daily routine. It works your market while you work your day, and speaks up only when there's money on the table.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>Yours forever.</b> It runs on hardware you own — not our cloud, not our platform. If we disappeared tomorrow, yours keeps hunting.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>Answers to one person.</b> Cheap deal apps blast the same alert to thousands of subscribers — you'd be racing the whole list. Your machine is tuned to your zip codes and your thresholds, and works for exactly one owner: you.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>Runs without your hours.</b> No dashboard to babysit, no daily routine. It works your market while you work your day, and speaks up only when there's money on the table.</p></div>
   </div>
-</section>
-
-<section class="reveal">
-  <div class="label">HOW IT COMES TOGETHER</div>
-  <h2>From a call to first alerts, fast.</h2>
-  <div class="steps">
-    <div class="step"><div class="s-num">1</div><div><b>Pick your hunt</b><p>A 20-minute conversation. We match your capital, time and market to the opportunity that fits — and tell you honestly if none does.</p></div></div>
-    <div class="step"><div class="s-num">2</div><div><b>We build it</b><p>Your machine is configured for your zip codes, price ranges and profit thresholds, and tested against your live market.</p></div></div>
-    <div class="step"><div class="s-num">3</div><div><b>Install &amp; handover</b><p>Set up on your hardware, connected to your phone, with a walkthrough of every alert. In-person install available in South Florida.</p></div></div>
-    <div class="step"><div class="s-num">4</div><div><b>First deals land</b><p>Most machines surface their first live opportunity within days of switch-on. Then it's a rhythm: alert, decision, next.</p></div></div>
-  </div>
+  <p class="timeline">Getting one is simple: <b>a 20-minute call</b> <span class="ta">→</span> <b>built for your zip codes</b> <span class="ta">→</span> <b>installed on your hardware</b> <span class="ta">→</span> <b>first alerts within days</b>. In-person install available in South Florida.</p>
 </section>
 
 <section class="who reveal">
   <div class="label">WHO THIS IS FOR</div>
   <h2>You know margin when you see it.</h2>
-  <p>Maybe you've built something already and want the next stream to run on rails instead of your hours. Maybe you've got capital parked and an eye that catches a wrong price from across the room. Either way, you've opened the listings more than once and thought: <b>somebody's making real money on these.</b></p>
-  <p><b>Somebody is. The difference is infrastructure.</b> Not a course, not a guru, not a group chat where every tip is already stale. A machine that answers only to you, hunting one kind of deal in one market, relentlessly — so when the good one drops, you're not finding out on somebody else's timeline.</p>
+  <p>You've opened the listings more than once and thought: <b>somebody's making real money on these.</b> Somebody is — and the difference isn't talent, it's infrastructure.</p>
+  <p>Not a course, not a guru, not a group chat where every tip is already stale. <b>A machine that answers only to you</b>, hunting one kind of deal in your market, relentlessly — so when the good one drops, you're not finding out on somebody else's timeline.</p>
 </section>
 
 <section class="reveal">
@@ -262,15 +252,14 @@
   <h2>What people ask.</h2>
   <div class="qa"><b>Do I need to be technical?</b><p>No. If you can read a text message, you can run a Deal Machine. We build, install and tune it — that's the whole point of having us do it.</p></div>
   <div class="qa"><b>How much of my time does it take?</b><p>Minutes a day, on your phone. The machine does the watching and the math; you do the judging. Most owners treat alerts like messages from a sharp scout — glance, decide, move on.</p></div>
-  <div class="qa"><b>Why not just use a $7/month deal app?</b><p>Cheap apps blast identical alerts to thousands of subscribers — you're racing the whole list to the same door. Your machine is tuned to your criteria and your market, and it works for exactly one person.</p></div>
   <div class="qa"><b>What does it cost?</b><p>It depends on the market and the opportunity you want hunted, so we'd rather talk it through than slap one number on every situation. Start with the board, then book a short call — we'll lay out the build and the cost plainly, no pressure.</p></div>
   <div class="qa"><b>Are results guaranteed?</b><p>No — and be suspicious of anyone who says otherwise. We guarantee a working machine that finds and scores real opportunities in your market. The money is made by acting on them, and that part is yours.</p></div>
 </section>
 
 <div class="final reveal">
-  <div class="eyebrow">START WITH THE BOARD</div>
+  <div class="eyebrow">LIMITED BUILDS EACH MONTH</div>
   <h2 style="margin-top:10px">Stop hunting. Start owning.</h2>
-  <p>See all 25 opportunities scored for where the money is. If one of them fits your market and your capital, we'll talk about building it for you.</p>
+  <p>See all 25 opportunities scored for where the money is. If one of them fits your market and your capital, we'll talk about building it for you — we take on a limited number of builds each month.</p>
   <button class="cta" onclick="openBoard()">See the opportunity board →</button>
 </div>
 
