@@ -51,11 +51,11 @@
     @keyframes pop { to { opacity: 1; transform: scale(1); } }
   }
 
-  /* Film modal */
-  .film-panel { position: relative; width: 100%; max-width: 880px; }
-  .film-panel video { display: block; width: 100%; border-radius: 14px; background: #000; }
-  .film-panel .film-x { position: absolute; top: -48px; right: 0; background: none; border: 0; color: #F2EEE8; font-size: 22px; cursor: pointer; font-family: inherit; padding: 12px; line-height: 1; }
-  .film-panel .film-x:hover { color: #fff; }
+  /* Hero video */
+  .hero-video { margin-top: 26px; max-width: 580px; }
+  .hero-video video { display: block; width: 100%; border-radius: 14px; background: #000; border: 1px solid var(--line); }
+  .video-cap { font-size: 11px; letter-spacing: 0.5px; color: var(--muted); margin-top: 10px; }
+  .video-cap span { color: var(--orange); font-weight: 600; letter-spacing: 1.5px; }
 
   @media (max-width: 520px) {
     .hero-ctas { flex-direction: column; align-items: stretch; }
@@ -120,10 +120,6 @@
   .timeline b { color: var(--ink); font-weight: 600; }
   .timeline .ta { color: var(--orange); font-weight: 600; }
 
-  /* Who */
-  .who p { font-size: 14px; color: var(--muted); margin-top: 12px; max-width: 560px; }
-  .who p b { color: var(--ink); font-weight: 600; }
-
   .qa { border-top: 1px solid var(--line); padding: 16px 0; }
   .qa b { font-size: 14px; display: block; margin-bottom: 5px; }
   .qa p { font-size: 13px; color: var(--muted); }
@@ -175,24 +171,18 @@
 <div class="wrap hero">
   <div class="eyebrow h-seq" style="--d:.05s">WORKDIFFERENTAI · DEAL MACHINES</div>
   <h1 class="h-seq" style="--d:.15s">Own the <em>machine</em>,<br/>not the hustle.</h1>
-  <p class="clarifier h-seq" style="--d:.35s">A private AI scout that watches your city for underpriced cars, equipment and whole businesses — and texts you before anyone else has moved.</p>
+  <p class="clarifier h-seq" style="--d:.35s">A machine that watches your city for underpriced cars, equipment and whole businesses — and texts you before anyone else has moved. You put money to work on the deals. It finds them.</p>
 
-  <div class="alert-demo h-seq" style="--d:.55s">
-    <div class="phone">
-      <div class="ph-head"><b>DEAL MACHINE</b><span>TODAY · 6:42 AM</span></div>
-      <div class="bubble">
-        <span class="hl">2018 F-250 Lariat 4x4</span> — listed <span class="hl">38 min ago</span> at $31,500.
-        Comparable sold: <span class="hl">$38,900–41,200</span>. Est. spread after fees: <span class="hl">$6,800+</span>.<br/>
-        <span class="dim">Clean title · 61k mi · seller: "moving, need it gone" · 11 mi away</span>
-      </div>
-      <div class="ph-head" style="margin: 12px 0 0"><span>SAMPLE ALERT — WHAT LANDS ON YOUR PHONE</span></div>
-    </div>
-    <div class="alert-cap">This is the whole product: deals found, priced and delivered while you live your life. You make one decision — go or pass.</div>
+  <div class="hero-video h-seq" style="--d:.55s">
+    <video id="hero-film" controls playsinline preload="metadata" poster="media/poster.jpg">
+      <source src="media/explainer.mp4" type="video/mp4" />
+      Your browser can't play this video. <a href="media/explainer.mp4">Download it instead.</a>
+    </video>
+    <div class="video-cap"><span>▶&#xFE0E; THE 3-MINUTE EXPLAINER</span> — how a machine turns attention into deal flow</div>
   </div>
 
   <div class="hero-ctas h-seq" style="--d:.75s">
     <button class="cta" onclick="openBoard()">See where the money moves →</button>
-    <button class="cta ghost" onclick="openFilm()">▶&#xFE0E; Watch the film · 3 min</button>
   </div>
   <span class="sub-cta h-seq" style="--d:.85s">A limited number of machines are built each month · Built and installed in South Florida by WorkDifferentAI</span>
 </div>
@@ -213,6 +203,19 @@
     <div class="machine"><div class="num">02</div><div><div class="name">Runs the numbers</div><div class="what">Each find checked against real sold prices. You see the spread, calculated, before you spend a minute on it.</div></div></div>
     <div class="machine"><div class="num">03</div><div><div class="name">Texts you the deal</div><div class="what">One message: what it is, what it's worth, why it's mispriced. You decide in seconds. It keeps hunting.</div></div></div>
   </div>
+
+  <div class="alert-demo">
+    <div class="phone">
+      <div class="ph-head"><b>DEAL MACHINE</b><span>TODAY · 6:42 AM</span></div>
+      <div class="bubble">
+        <span class="hl">2018 F-250 Lariat 4x4</span> — listed <span class="hl">38 min ago</span> at $31,500.
+        Comparable sold: <span class="hl">$38,900–41,200</span>. Est. spread after fees: <span class="hl">$6,800+</span>.<br/>
+        <span class="dim">Clean title · 61k mi · seller: "moving, need it gone" · 11 mi away</span>
+      </div>
+      <div class="ph-head" style="margin: 12px 0 0"><span>SAMPLE ALERT — WHAT LANDS ON YOUR PHONE</span></div>
+    </div>
+    <div class="alert-cap">One alert like this shows you the math. Now imagine it arriving while you're doing something else entirely.</div>
+  </div>
 </section>
 
 <section class="reveal">
@@ -230,21 +233,14 @@
 </section>
 
 <section class="reveal">
-  <div class="label">WHAT YOU ACTUALLY OWN</div>
-  <h2>An asset, not a subscription.</h2>
+  <div class="label">THE INVESTMENT CASE</div>
+  <h2>Start with one. Stack them.</h2>
   <div class="own">
-    <div class="own-item"><span class="tick">→</span><p><b>Yours forever.</b> It runs on hardware you own — not our cloud, not our platform. If we disappeared tomorrow, yours keeps hunting.</p></div>
-    <div class="own-item"><span class="tick">→</span><p><b>Answers to one person.</b> Cheap deal apps blast the same alert to thousands of subscribers — you'd be racing the whole list. Your machine is tuned to your zip codes and your thresholds, and works for exactly one owner: you.</p></div>
-    <div class="own-item"><span class="tick">→</span><p><b>Runs without your hours.</b> No dashboard to babysit, no daily routine. It works your market while you work your day, and speaks up only when there's money on the table.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>It's an asset, not a subscription.</b> The machine runs on hardware you own — not our cloud, not our platform. Buy it once, and it's yours working for you, forever.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>It scales like a fleet, not a job.</b> Most owners start with one hunting ground. When it proves itself, they add a second — cars, then equipment, then businesses — until machines are working every corner of their market. Your hours don't scale up. The hunting does.</p></div>
+    <div class="own-item"><span class="tick">→</span><p><b>It runs without payroll.</b> No staff, no office, no dashboard to babysit. It works around the clock and speaks up only when there's money on the table — deal flow with almost nothing behind it to feed.</p></div>
   </div>
   <p class="timeline">Getting one is simple: <b>a 20-minute call</b> <span class="ta">→</span> <b>built for your zip codes</b> <span class="ta">→</span> <b>installed on your hardware</b> <span class="ta">→</span> <b>first alerts within days</b>. In-person install available in South Florida.</p>
-</section>
-
-<section class="who reveal">
-  <div class="label">WHO THIS IS FOR</div>
-  <h2>You know margin when you see it.</h2>
-  <p>You've opened the listings more than once and thought: <b>somebody's making real money on these.</b> Somebody is — and the difference isn't talent, it's infrastructure.</p>
-  <p>Not a course, not a guru, not a group chat where every tip is already stale. <b>A machine that answers only to you</b>, hunting one kind of deal in your market, relentlessly — so when the good one drops, you're not finding out on somebody else's timeline.</p>
 </section>
 
 <section class="reveal">
@@ -264,16 +260,6 @@
 </div>
 
 <p class="fineprint">WorkDifferentAI · Alacrity One LLC · Boca Raton, FL · <a href="mailto:jason@meta57.xyz">jason@meta57.xyz</a><br/>Sample alert shown is illustrative. Earnings language is based on market research and is not a promise of results — deal outcomes depend on your capital, effort and local market. Machines are installed on customer-owned hardware; customers are responsible for complying with local licensing laws (e.g. vehicle dealer limits).</p>
-</div>
-
-<div class="overlay" id="film-overlay" onclick="if(event.target===this)closeFilm()">
-  <div class="film-panel">
-    <button class="film-x" onclick="closeFilm()" aria-label="Close">✕</button>
-    <video id="film-video" controls playsinline preload="metadata" poster="media/poster.jpg">
-      <source src="media/explainer.mp4" type="video/mp4" />
-      Your browser can't play this video. <a href="media/explainer.mp4">Download it instead.</a>
-    </video>
-  </div>
 </div>
 
 <div class="overlay" id="board-overlay" onclick="if(event.target===this)closeBoard()">
@@ -336,17 +322,7 @@ document.getElementById('optin-form').addEventListener('submit', function(ev) {
     .then(function(){ reveal(); })
     .catch(function(){ reveal(); }); // never strand the visitor — board opens either way
 });
-function openFilm() {
-  document.getElementById('film-overlay').classList.add('open');
-  var v = document.getElementById('film-video');
-  var p = v.play();
-  if (p && p.catch) p.catch(function(){}); // if autoplay is refused, controls are right there
-}
-function closeFilm() {
-  document.getElementById('film-overlay').classList.remove('open');
-  document.getElementById('film-video').pause();
-}
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { closeBoard(); closeFilm(); } });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeBoard(); });
 
 /* Section reveals (respects prefers-reduced-motion via CSS) */
 (function(){
