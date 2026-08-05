@@ -100,6 +100,20 @@
   .r-sources a { display: inline-block; font-size: 12px; font-weight: 600; color: var(--ink); text-decoration: none; border: 1px solid var(--line); background: var(--card); border-radius: 18px; padding: 9px 14px; margin: 0 6px 6px 0; }
   .r-sources a:hover { border-color: var(--ink); }
   .r-sources a span { color: var(--orange); }
+  .s-nudge { font-size: 11px; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+  .s-auto { background: none; border: 0; font-family: inherit; font-size: 11px; font-weight: 600; color: var(--orange); text-decoration: underline; cursor: pointer; padding: 14px 0; }
+  .s-auto:hover { color: #D93400; }
+
+  /* Activation block */
+  .r-activate { background: var(--ink); color: var(--paper); border-radius: 14px; padding: 26px 22px; margin-top: 14px; text-align: center; }
+  .ra-eyebrow { font-size: 10px; letter-spacing: 2.5px; color: #FF6A3C; font-weight: 600; }
+  .ra-title { font-family: 'Fraunces', serif; font-size: clamp(21px, 4.5vw, 26px); font-weight: 800; color: #fff; margin: 8px 0 8px; line-height: 1.15; }
+  .ra-copy { font-size: 12.5px; color: #D8D2C8; line-height: 1.65; max-width: 420px; margin: 0 auto; }
+  .ra-copy b { color: #fff; }
+  .ra-btn { display: inline-block; margin-top: 18px; background: var(--orange); color: #fff; border: 0; font-family: inherit; font-weight: 600; font-size: 14px; letter-spacing: 0.3px; padding: 15px 28px; border-radius: 30px; cursor: pointer; }
+  .ra-btn:hover { background: #D93400; }
+  .ra-sub { font-size: 10px; letter-spacing: 1px; color: #8A8377; margin-top: 12px; }
+
   .r-foot { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 18px; font-size: 12px; }
   .r-foot a, .r-foot button { font-family: inherit; font-size: 12px; color: var(--muted); background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 13px 0; }
   .r-foot a:hover, .r-foot button:hover { color: var(--ink); }
@@ -518,16 +532,17 @@ function fitLine(m) {
 function sourcesFor(m) {
   var q = encodeURIComponent(m.q || m.n);
   var zip = F.zip;
+  var pin = zip ? ' · pinned to ' + zip : '';
   var defaults = [
-    { l: 'Craigslist near you', u: 'https://www.craigslist.org/search/' + (m.cl || 'sss') + '?query=' + q + (zip ? '&postal=' + zip + '&search_distance=50' : '') },
-    { l: 'Facebook Marketplace', u: 'https://www.facebook.com/marketplace/search/?query=' + q },
-    { l: 'OfferUp', u: 'https://offerup.com/search?q=' + q },
-    { l: 'eBay SOLD comps', u: 'EBAY' }
+    { l: 'Craigslist' + pin, u: 'https://www.craigslist.org/search/' + (m.cl || 'sss') + '?query=' + q + (zip ? '&postal=' + zip + '&search_distance=50' : '') },
+    { l: 'eBay SOLD comps' + pin, u: 'EBAY' },
+    { l: 'Facebook Marketplace · your account location', u: 'https://www.facebook.com/marketplace/search/?query=' + q },
+    { l: 'OfferUp · its saved location', u: 'https://offerup.com/search?q=' + q }
   ];
   var list = m.src || defaults;
   return list.map(function(s){
     var u = s.u;
-    if (u === 'EBAY') u = 'https://www.ebay.com/sch/i.html?_nkw=' + q + '&LH_Sold=1&LH_Complete=1';
+    if (u === 'EBAY') u = 'https://www.ebay.com/sch/i.html?_nkw=' + q + '&LH_Sold=1&LH_Complete=1' + (zip ? '&_stpos=' + zip : '');
     if (u.indexOf('CL:') === 0) u = 'https://www.craigslist.org/search/' + u.slice(3) + '?query=' + q + (zip ? '&postal=' + zip + '&search_distance=50' : '');
     u = u.replace('ZIP', zip || 'me');
     return { l: s.l, u: u };
@@ -593,13 +608,22 @@ function renderResults() {
       + '<div class="r-est">EST · FROM OUR MARKET RESEARCH · NOT A GUARANTEE</div>'
       + '<div class="r-actions">'
       +   '<button class="r-btn live" onclick="toggleSources(this)">See live listings now →</button>'
-      +   '<button class="r-btn build" onclick="openContact(\'' + esc(m.n).replace(/'/g, "\\'") + '\')">Build this for my zip →</button>'
+      +   '<button class="r-btn build" onclick="openContact(\'' + esc(m.n).replace(/'/g, "\\'") + '\', true)">Automate this hunt →</button>'
       + '</div>'
-      + '<div class="r-sources"><div class="s-cap">These are the raw feeds — live right now' + (F.zip ? ' near ' + F.zip : '') + '. Your machine would read them every 15 minutes and do the comp math for you.</div>'
+      + '<div class="r-sources"><div class="s-cap">The raw feeds, live right now. Craigslist and eBay open pinned' + (F.zip ? ' to ' + F.zip : ' to your area') + '; Facebook and OfferUp follow the location saved on your account — set it once there and every search lands right.</div>'
       +   srcs.map(function(s){ return '<a href="' + s.u + '" target="_blank" rel="noopener"><span>↗</span> ' + esc(s.l) + '</a>'; }).join('')
+      +   '<div class="s-nudge">Checking these by hand is the hustle. Reading them every 15 minutes with the comp math done — <button class="s-auto" onclick="openContact(\'' + esc(m.n).replace(/'/g, "\\'") + '\', true)">that’s the machine’s job →</button></div>'
       + '</div>'
       + '</div>';
   });
+  var topName = F.matches.length ? F.matches[0].m.n : '';
+  html += '<div class="r-activate">'
+    + '<div class="ra-eyebrow">THE WHOLE POINT</div>'
+    + '<div class="ra-title">Stop searching. Put a machine on it.</div>'
+    + '<div class="ra-copy">Your own AI agent runs this exact hunt' + (F.zip ? ' near <b>' + F.zip + '</b>' : '') + ' every 15 minutes, around the clock — reads the feeds, does the comp math against sold prices, and texts you the second something’s underpriced. Built for you, on hardware you own.</div>'
+    + '<button class="ra-btn" onclick="openContact(\'' + esc(topName).replace(/'/g, "\\'") + '\', true)">⚡&#xFE0E; Activate my Deal Machine →</button>'
+    + '<div class="ra-sub">A limited number of machines are built each month.</div>'
+    + '</div>';
   document.getElementById('r-list').innerHTML = html;
   showStep(7);
 }
@@ -620,15 +644,30 @@ document.getElementById('zip-input').addEventListener('keydown', function(e){ if
 document.getElementById('email-input').addEventListener('keydown', function(e){ if (e.key === 'Enter') submitFinder(); });
 
 /* ---------- Contact panel ---------- */
-function openContact(machine) {
-  var goalBits = fmt(F.goal || 0) !== '$0'
+function openContact(machine, automate) {
+  var haveFinder = F.goal > 0;
+  var goalBits = haveFinder
     ? ('My goal: ' + fmt(F.goal) + ' in ' + (F.timeLabel || 'the best window') + '\nCapital I can work with: ' + (F.capLabel || '') + '\nMy zip: ' + (F.zip || '') + '\n')
     : 'My city / market: \nCapital I can work with: \n';
-  var body = 'Hi Jason,\n\nI want a Deal Machine built to hunt my market.\n\n'
-    + 'The opportunity I want: ' + (machine || '') + '\n' + goalBits
-    + '\nWhat’s the build and what does it take?\n\nThanks!';
+  var body, subject, title, sub;
+  if (automate) {
+    title = 'Activate your Deal Machine';
+    sub = 'One email starts the build. We reply within one business day with the plan for your market.';
+    subject = 'Activate a Deal Machine — ' + (machine || 'my market') + (F.zip ? ' near ' + F.zip : '');
+    body = 'Hi Jason,\n\nI just ran the opportunity finder and I want to automate this search with my own machine.\n\n'
+      + 'The hunt: ' + (machine || '') + '\n' + goalBits
+      + '\nWhat’s the build and the next step?\n\nThanks!';
+  } else {
+    title = 'Build this machine for my zip';
+    sub = 'One email starts it. We’ll get straight into your market and what a build takes.';
+    subject = 'Deal Machine build — ' + (machine || 'my market');
+    body = 'Hi Jason,\n\nI want a Deal Machine built to hunt my market.\n\n'
+      + 'The opportunity I want: ' + (machine || '') + '\n' + goalBits
+      + '\nWhat’s the build and what does it take?\n\nThanks!';
+  }
+  document.getElementById('c-title').textContent = title;
+  document.getElementById('c-sub').textContent = sub;
   document.getElementById('c-template').value = body;
-  var subject = 'Deal Machine build — ' + (machine || 'my market');
   document.getElementById('c-mailto').href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   document.getElementById('contact-overlay').classList.add('open');
 }
