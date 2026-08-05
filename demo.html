@@ -33,7 +33,8 @@ body.locked{overflow:hidden}
 .pass-row input:focus{border-color:#ff6a3c;box-shadow:0 0 0 2px rgba(255,106,60,.2)}
 .pass-row button{border:0;background:var(--orange);color:#fff;border-radius:10px;padding:0 18px;font-weight:700}
 .gate-error{min-height:18px;margin-top:9px;color:#ff8c68;font-size:11px}
-.gate-fine{margin:22px 0 0!important;color:#756e66!important;font-size:10px!important}
+.gate-fine{margin:22px 0 0!important;color:#aaa197!important;font-size:11px!important}
+.gate-access{display:inline-block;color:#d0c8bd;font-size:10px;margin-top:10px}
 
 /* Shell */
 .topbar{background:var(--ink);color:#fff;border-bottom:3px solid var(--orange)}
@@ -83,7 +84,7 @@ body.locked{overflow:hidden}
 
 .proof{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}.proof h2{font-size:28px}.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:17px}.proof-item{border-top:3px solid var(--ink);padding-top:12px}.proof-item b{font:700 17px Fraunces,serif}.proof-item p{font-size:10px;color:var(--muted);margin-top:5px}
 .cta-band{background:var(--orange);color:#fff;border-radius:16px;padding:28px;margin-top:14px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}.cta-band h2{font-size:30px;line-height:1}.cta-band p{font-size:10px;opacity:.82;margin-top:8px}.cta-link{background:#fff;color:var(--ink);text-decoration:none;border-radius:28px;padding:14px 20px;font-size:11px;font-weight:700;text-align:center}
-.legal{font-size:9px;color:#8a8278;text-align:center;margin-top:20px;line-height:1.7}
+.legal{font-size:10px;color:#6f675e;text-align:center;margin-top:20px;line-height:1.7}
 
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:#fff;border-radius:24px;padding:11px 18px;font-size:10px;opacity:0;pointer-events:none;transition:.25s;z-index:80}.toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -96,12 +97,13 @@ body.locked{overflow:hidden}
   <div class="gate-card">
     <div class="gate-mark">WORKDIFFERENTAI · PRIVATE DEMO</div>
     <h1>Deal flow,<br/>without the hunt.</h1>
-    <p>Enter the prospect demo passcode to see two autonomous Deal Machines working a South Florida market.</p>
+    <p>Enter the prospect demo passcode to explore a static interactive simulation of two Deal Machines configured for a South Florida market.</p>
     <form class="pass-row" id="gate-form">
       <input type="password" id="passcode" autocomplete="current-password" placeholder="Demo passcode" aria-label="Demo passcode" />
       <button type="submit">Enter →</button>
     </form>
-    <div class="gate-error" id="gate-error"></div>
+    <div class="gate-error" id="gate-error" role="status" aria-live="polite"></div>
+    <a class="gate-access" href="mailto:jason@meta57.xyz?subject=Deal%20Machine%20demo%20access">Need access? Request a passcode.</a>
     <p class="gate-fine">PRIVATE PREVIEW · SAMPLE DATA · ESTIMATES, NOT GUARANTEES</p>
   </div>
 </div>
@@ -113,10 +115,10 @@ body.locked{overflow:hidden}
   </div>
 </header>
 
-<main class="shell" id="demo-app">
+<main class="shell" id="demo-app" tabindex="-1">
   <section class="hero">
     <div>
-      <div class="eyebrow">TWO MACHINES · ONE MARKET · ALWAYS WATCHING</div>
+      <div class="eyebrow">INTERACTIVE SIMULATION · NO LIVE DATA</div>
       <h1>Your market gets watched.<br/>The math arrives first.</h1>
       <p>This is how a Deal Machine turns scattered listings into a short, decision-ready alert: find the asset, verify sold comps, subtract fees and friction, and stay quiet unless the spread survives.</p>
     </div>
@@ -124,24 +126,24 @@ body.locked{overflow:hidden}
   </section>
 
   <section class="metrics" aria-label="Demo machine metrics">
-    <div class="metric"><div class="k"><span class="live-dot"></span>MACHINES ONLINE</div><div class="v">2 / 2</div><div class="s">isolated hunt agents</div></div>
-    <div class="metric"><div class="k">SOURCES WATCHED</div><div class="v">5</div><div class="s">public, policy-safe feeds</div></div>
+    <div class="metric"><div class="k">MACHINES MODELED</div><div class="v">2 / 2</div><div class="s">configured hunt agents</div></div>
+    <div class="metric"><div class="k">DEMO SOURCES</div><div class="v">5</div><div class="s">public, policy-safe feeds</div></div>
     <div class="metric"><div class="k">EQUIPMENT CADENCE</div><div class="v">45 min</div><div class="s">7 AM–10 PM ET</div></div>
     <div class="metric"><div class="k">SURPLUS CADENCE</div><div class="v">2× daily</div><div class="s">8 AM + 4 PM ET</div></div>
   </section>
 
   <div class="machine-tabs" role="tablist">
-    <button class="tab active" data-machine="equipment" onclick="showMachine('equipment',this)">Equipment <small>liquidations</small></button>
-    <button class="tab" data-machine="gov" onclick="showMachine('gov',this)">Gov Surplus <small>auctions</small></button>
+    <button class="tab active" id="tab-equipment" role="tab" aria-selected="true" aria-controls="panel-equipment" data-machine="equipment" onclick="showMachine('equipment',this)">Equipment <small>liquidations</small></button>
+    <button class="tab" id="tab-gov" role="tab" aria-selected="false" aria-controls="panel-gov" data-machine="gov" onclick="showMachine('gov',this)">Gov Surplus <small>auctions</small></button>
   </div>
 
-  <section class="panel active" id="panel-equipment">
+  <section class="panel active" id="panel-equipment" role="tabpanel" aria-labelledby="tab-equipment">
     <div class="machine-head">
       <div><h2 class="machine-title">Equipment Liquidation Sniper</h2><p class="machine-sub">Finds underpriced restaurant, gym and commercial equipment near the configured market.</p><div class="source-row"><span class="source">Craigslist · 50 mi</span><span class="source">eBay SOLD comps</span><span class="source">Local bulky-item comps</span></div></div>
-      <div class="status"><span></span>AUTOMATIC · NEXT CYCLE &lt;45 MIN</div>
+      <div class="status">DEMO CONFIG · 45-MINUTE CADENCE</div>
     </div>
     <div class="pipeline"><div class="pipe"><div class="n">01 · FETCH</div><b>Scan listings</b><p>One polite request per tuned query.</p></div><div class="pipe"><div class="n">02 · FILTER</div><b>Remove noise</b><p>Dedupe, price bands, scam signals.</p></div><div class="pipe"><div class="n">03 · VERIFY</div><b>Check SOLD</b><p>Comparable condition and model only.</p></div><div class="pipe"><div class="n">04 · ALERT</div><b>Send the math</b><p>Only if estimated spread survives.</p></div></div>
-    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">A 12-second simulation of the real decision pipeline.</p></div><button class="run-btn" onclick="runCycle('equipment',this)">Run demo cycle →</button></div><div class="progress"><i id="progress-equipment"></i></div><div class="run-log" id="log-equipment">Ready — sample listings are queued.</div></div>
+    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">A short simulation of the real decision pipeline.</p></div><button class="run-btn" onclick="runCycle('equipment',this)">Run demo cycle →</button></div><div class="progress" role="progressbar" aria-label="Equipment demo cycle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-equipment"></i></div><div class="run-log" id="log-equipment" role="status" aria-live="polite">Ready — sample listings are queued.</div></div>
     <div class="feed-title"><h2>Decision-ready output</h2><span>SAMPLE DATA · HONEST HAIRCUTS APPLIED</span></div>
     <div class="deal-grid">
       <article class="alert"><div class="alert-label">🔶 DEAL MACHINE · EQUIPMENT</div><h3>Turbo Air 48″ Prep Table</h3><div class="ask">Listed at $625 · Pompano Beach · “closing restaurant”</div><div class="comp"><div><small>COMPARABLE SOLD</small><b>$1,250–$1,575</b></div><div><small>EST. RESALE</small><b>$1,200</b></div><div><small>EST. SPREAD</small><b>$575</b></div></div><p class="verdict"><b>Verdict:</b> Worth inspecting today if the compressor holds temperature; the closing signal and named brand create real room.</p><div class="estimate">ESTIMATE AFTER FEES + FRICTION · NOT GUARANTEED PROFIT</div><a class="deal-link" href="#" onclick="demoOnly(event)">Open sample listing →</a></article>
@@ -149,13 +151,13 @@ body.locked{overflow:hidden}
     </div>
   </section>
 
-  <section class="panel" id="panel-gov">
+  <section class="panel" id="panel-gov" role="tabpanel" aria-labelledby="tab-gov">
     <div class="machine-head">
       <div><h2 class="machine-title">Government Surplus Sniper</h2><p class="machine-sub">Finds Florida public-auction lots closing soon and calculates a conservative bid ceiling.</p><div class="source-row"><span class="source">GSA Auctions API</span><span class="source">GovDeals · first page</span><span class="source">eBay SOLD comps</span><span class="source">Pickup distance</span></div></div>
-      <div class="status"><span></span>AUTOMATIC · 8 AM + 4 PM ET</div>
+      <div class="status">DEMO CONFIG · 8 AM + 4 PM ET</div>
     </div>
     <div class="pipeline"><div class="pipe"><div class="n">01 · FETCH</div><b>Scan Florida lots</b><p>Closing window and category filters.</p></div><div class="pipe"><div class="n">02 · FORECAST</div><b>Model bid-up</b><p>Assume popular lots rise 30–60%.</p></div><div class="pipe"><div class="n">03 · HAIRCUT</div><b>Price the risk</b><p>Fees, pickup, condition, logistics.</p></div><div class="pipe"><div class="n">04 · CEILING</div><b>Set max bid</b><p>The number where the deal stops.</p></div></div>
-    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">See how a low current bid becomes a conservative bid ceiling.</p></div><button class="run-btn" onclick="runCycle('gov',this)">Run demo cycle →</button></div><div class="progress"><i id="progress-gov"></i></div><div class="run-log" id="log-gov">Ready — sample Florida lots are queued.</div></div>
+    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">See how a low current bid becomes a conservative bid ceiling.</p></div><button class="run-btn" onclick="runCycle('gov',this)">Run demo cycle →</button></div><div class="progress" role="progressbar" aria-label="Government surplus demo cycle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-gov"></i></div><div class="run-log" id="log-gov" role="status" aria-live="polite">Ready — sample Florida lots are queued.</div></div>
     <div class="feed-title"><h2>Decision-ready output</h2><span>SAMPLE DATA · BID-UP + PICKUP INCLUDED</span></div>
     <div class="deal-grid">
       <article class="alert"><div class="alert-label">🔶 DEAL MACHINE · GOV SURPLUS</div><h3>Generac 22kW Standby Generator</h3><div class="ask">Current bid $1,150 · closes Friday · Fort Lauderdale, FL</div><div class="comp"><div><small>COMPARABLE SOLD</small><b>$3,400–$4,200</b></div><div><small>EST. ALL-IN</small><b>$1,850</b></div><div><small>BID CEILING</small><b>$1,700</b></div></div><p class="verdict"><b>Verdict:</b> Local pickup protects the spread. Stop at $1,700 unless inspection confirms low hours and transfer switch included.</p><div class="estimate">ESTIMATE AFTER FEES, BID-UP + CONDITION RISK · NOT GUARANTEED PROFIT</div><a class="deal-link" href="#" onclick="demoOnly(event)">Open sample auction →</a></article>
@@ -170,7 +172,7 @@ body.locked{overflow:hidden}
   <section class="cta-band"><div><h2>What should your machine hunt?</h2><p>We configure the market, rules, cadence, comp logic and alert channel around the opportunity you know.</p></div><a class="cta-link" href="mailto:jason@meta57.xyz?subject=Private%20Deal%20Machine%20demo%20follow-up">Design my machine →</a></section>
   <p class="legal">PRIVATE PROSPECT DEMO · SAMPLE LISTINGS AND FIGURES ARE ILLUSTRATIVE ESTIMATES, NOT PROMISES OF PROFIT.<br/>WorkDifferentAI · Alacrity One LLC · Boca Raton, FL</p>
 </main>
-<div class="toast" id="toast">Demo only — no live listing exposed.</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Demo only — no live listing exposed.</div>
 <script>
 var PASS_HASH='807d92314cd849d59f8fdb9924bd15b83d808934638ead0d080b67c363d06b85';
 var SESSION_KEY='wdai-deal-demo-unlocked';
@@ -180,9 +182,11 @@ function unlock(){document.body.classList.remove('locked');document.getElementBy
 function lockDemo(){sessionStorage.removeItem(SESSION_KEY);document.body.classList.add('locked');document.getElementById('passcode').value='';document.getElementById('gate').classList.remove('hidden');document.getElementById('passcode').focus()}
 if(sessionStorage.getItem(SESSION_KEY)==='1')unlock();
 document.getElementById('gate-form').addEventListener('submit',async function(e){e.preventDefault();var input=document.getElementById('passcode');var err=document.getElementById('gate-error');err.textContent='Checking…';try{if(await digest(input.value)===PASS_HASH){err.textContent='';unlock()}else{err.textContent='That passcode did not match.';input.select()}}catch(x){err.textContent='This browser cannot verify the passcode.'}});
-function showMachine(name,btn){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});btn.classList.add('active');document.getElementById('panel-'+name).classList.add('active')}
-var cycleCopy={equipment:['Fetching 5 tuned Craigslist queries…','Dedupe complete — 353 seen listings skipped.','Comp-checking 3 candidates against SOLD data…','2 rejected · 1 estimated spread survives.','Alert ready — owner gets the math, not the noise.'],gov:['Fetching Florida GSA lots + GovDeals first pages…','Filtering closing window and pickup distance…','Modeling 30–60% bid-up + buyer fees…','3 rejected · 1 stays below the bid ceiling.','Alert ready — ceiling included.']};
-function runCycle(name,btn){if(btn.disabled)return;btn.disabled=true;btn.textContent='Cycle running…';var bar=document.getElementById('progress-'+name),log=document.getElementById('log-'+name),steps=cycleCopy[name],i=0;bar.style.width='10%';log.textContent=steps[0];var timer=setInterval(function(){i++;if(i<steps.length){bar.style.width=(10+i*22)+'%';log.textContent=steps[i]}else{clearInterval(timer);bar.style.width='100%';btn.disabled=false;btn.textContent='Run again →';setTimeout(function(){bar.style.width='0%'},1000)}},720)}
+function showMachine(name,btn){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false')});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById('panel-'+name).classList.add('active')}
+document.querySelector('.machine-tabs').addEventListener('keydown',function(e){var tabs=Array.from(document.querySelectorAll('.tab')),i=tabs.indexOf(document.activeElement);if(i<0||!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();var next=e.key==='ArrowRight'?(i+1)%tabs.length:(i-1+tabs.length)%tabs.length;tabs[next].focus();showMachine(tabs[next].dataset.machine,tabs[next])});
+var cycleCopy={equipment:['Sample: fetching 5 tuned Craigslist queries…','Sample: known listing IDs removed by dedupe.','Sample: comp-checking 3 candidates against SOLD data…','Sample result: 2 rejected · 1 estimated spread survives.','Sample alert ready — the owner gets the math, not the noise.'],gov:['Sample: fetching Florida GSA lots + GovDeals first pages…','Sample: filtering closing window and pickup distance…','Sample: modeling 30–60% bid-up + buyer fees…','Sample result: 3 rejected · 1 stays below the bid ceiling.','Sample alert ready — ceiling included.']};
+function setProgress(el,value){el.style.width=value+'%';el.parentElement.setAttribute('aria-valuenow',String(value))}
+function runCycle(name,btn){if(btn.disabled)return;btn.disabled=true;btn.textContent='Cycle running…';var bar=document.getElementById('progress-'+name),log=document.getElementById('log-'+name),steps=cycleCopy[name],i=0;setProgress(bar,10);log.textContent=steps[0];var timer=setInterval(function(){i++;if(i<steps.length){setProgress(bar,10+i*22);log.textContent=steps[i]}else{clearInterval(timer);setProgress(bar,100);btn.disabled=false;btn.textContent='Run again →';setTimeout(function(){setProgress(bar,0)},1000)}},720)}
 function demoOnly(e){e.preventDefault();var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1800)}
 </script>
 </body>

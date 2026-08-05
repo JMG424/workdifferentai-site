@@ -42,8 +42,7 @@
   .cta.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink); padding: 12px 24px; }
   .cta.ghost:hover { background: var(--ink); color: var(--paper); }
   .sub-cta { display: block; margin-top: 14px; font-size: 12px; color: var(--muted); }
-  .demo-link { display: inline-block; margin-top: 10px; color: var(--ink); font-size: 11px; font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--ink); }
-  .demo-link:hover { color: var(--orange); border-color: var(--orange); }
+
 
   /* Finder card */
   .finder { background: var(--card); border: 2px solid var(--ink); border-radius: 16px; padding: 26px 24px 24px; margin-top: 24px; position: relative; }
@@ -218,7 +217,7 @@
 <div class="wrap hero" id="finder-top">
   <div class="eyebrow">WORKDIFFERENTAI · DEAL MACHINES</div>
   <h1>Tell us what you want to <em>make</em>.<br/>We'll show you where it's hiding.</h1>
-  <p class="clarifier">Machines that watch your local market — Craigslist, OfferUp, Facebook Marketplace — check every find against eBay sold prices, and text you what's underpriced. Start by telling us your goal.</p>
+  <p class="clarifier">Machines that watch your local market — Craigslist, public auctions and policy-safe feeds — check each promising find against sold prices, and text you what's underpriced. Start by telling us your goal.</p>
 
   <div class="finder" id="finder">
     <!-- Step 1: goal -->
@@ -317,7 +316,7 @@
   </div>
 
   <span class="sub-cta">A limited number of machines are built each month · Built and installed in South Florida by WorkDifferentAI</span>
-  <a class="demo-link" href="demo.html">Private prospect demo →</a>
+
 
   <div class="hero-video">
     <video id="hero-film" controls playsinline preload="metadata" poster="media/poster.jpg">
@@ -336,7 +335,7 @@
     <p>Every day, assets sell below their value in plain sight — for a few hours. The people who win them aren't smarter or richer. They simply <b>see them first</b>.</p>
   </div>
   <div class="machines">
-    <div class="machine"><div class="num">01</div><div><div class="name">Watches your market</div><div class="what">Every listing, auction and public record in your area, scanned every 15 minutes, around the clock.</div></div></div>
+    <div class="machine"><div class="num">01</div><div><div class="name">Watches your market</div><div class="what">Public listings, auctions and records in your area, scanned on a cadence tuned to the market.</div></div></div>
     <div class="machine"><div class="num">02</div><div><div class="name">Runs the numbers</div><div class="what">Each find checked against real sold prices. You see the spread, calculated, before you spend a minute on it.</div></div></div>
     <div class="machine"><div class="num">03</div><div><div class="name">Texts you the deal</div><div class="what">One message: what it is, what it's worth, why it's mispriced. You decide in seconds. It keeps hunting.</div></div></div>
   </div>
@@ -623,7 +622,7 @@ function renderResults() {
   html += '<div class="r-activate">'
     + '<div class="ra-eyebrow">THE WHOLE POINT</div>'
     + '<div class="ra-title">Stop searching. Put a machine on it.</div>'
-    + '<div class="ra-copy">Your own AI agent runs this exact hunt' + (F.zip ? ' near <b>' + F.zip + '</b>' : '') + ' every 15 minutes, around the clock — reads the feeds, does the comp math against sold prices, and texts you the second something’s underpriced. Built for you, on hardware you own.</div>'
+    + '<div class="ra-copy">Your own AI agent runs this exact hunt' + (F.zip ? ' near <b>' + F.zip + '</b>' : '') + ' on a schedule tuned to the market — reads policy-safe feeds, does the comp math against sold prices, and texts you when something appears underpriced. Built for you, on hardware you own.</div>'
     + '<button class="ra-btn" onclick="openContact(\'' + esc(topName).replace(/'/g, "\\'") + '\', true)">⚡&#xFE0E; Activate my Deal Machine →</button>'
     + '<div class="ra-sub">A limited number of machines are built each month.</div>'
     + '</div>';
