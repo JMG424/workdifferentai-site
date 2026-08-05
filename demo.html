@@ -99,7 +99,7 @@ body.locked{overflow:hidden}
     <h1>Deal flow,<br/>without the hunt.</h1>
     <p>Enter the prospect demo passcode to explore a static interactive simulation of two Deal Machines configured for a South Florida market.</p>
     <form class="pass-row" id="gate-form">
-      <input type="password" id="passcode" autocomplete="current-password" placeholder="Demo passcode" aria-label="Demo passcode" />
+      <input type="password" id="passcode" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="Demo passcode" aria-label="Demo passcode" />
       <button type="submit">Enter →</button>
     </form>
     <div class="gate-error" id="gate-error" role="status" aria-live="polite"></div>
@@ -181,7 +181,7 @@ async function digest(s){var data=new TextEncoder().encode(s);return bytesToHex(
 function unlock(){document.body.classList.remove('locked');document.getElementById('gate').classList.add('hidden');sessionStorage.setItem(SESSION_KEY,'1');document.getElementById('demo-app').focus()}
 function lockDemo(){sessionStorage.removeItem(SESSION_KEY);document.body.classList.add('locked');document.getElementById('passcode').value='';document.getElementById('gate').classList.remove('hidden');document.getElementById('passcode').focus()}
 if(sessionStorage.getItem(SESSION_KEY)==='1')unlock();
-document.getElementById('gate-form').addEventListener('submit',async function(e){e.preventDefault();var input=document.getElementById('passcode');var err=document.getElementById('gate-error');err.textContent='Checking…';try{if(await digest(input.value)===PASS_HASH){err.textContent='';unlock()}else{err.textContent='That passcode did not match.';input.select()}}catch(x){err.textContent='This browser cannot verify the passcode.'}});
+document.getElementById('gate-form').addEventListener('submit',async function(e){e.preventDefault();var input=document.getElementById('passcode');var err=document.getElementById('gate-error');err.textContent='Checking…';try{if(await digest(input.value.trim())===PASS_HASH){err.textContent='';unlock()}else{err.textContent='That passcode did not match.';input.select()}}catch(x){err.textContent='This browser cannot verify the passcode.'}});
 function showMachine(name,btn){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false')});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById('panel-'+name).classList.add('active')}
 document.querySelector('.machine-tabs').addEventListener('keydown',function(e){var tabs=Array.from(document.querySelectorAll('.tab')),i=tabs.indexOf(document.activeElement);if(i<0||!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();var next=e.key==='ArrowRight'?(i+1)%tabs.length:(i-1+tabs.length)%tabs.length;tabs[next].focus();showMachine(tabs[next].dataset.machine,tabs[next])});
 var cycleCopy={equipment:['Sample: fetching 5 tuned Craigslist queries…','Sample: known listing IDs removed by dedupe.','Sample: comp-checking 3 candidates against SOLD data…','Sample result: 2 rejected · 1 estimated spread survives.','Sample alert ready — the owner gets the math, not the noise.'],gov:['Sample: fetching Florida GSA lots + GovDeals first pages…','Sample: filtering closing window and pickup distance…','Sample: modeling 30–60% bid-up + buyer fees…','Sample result: 3 rejected · 1 stays below the bid ceiling.','Sample alert ready — ceiling included.']};
