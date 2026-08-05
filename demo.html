@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light only" />
+<meta name="theme-color" content="#141210" />
+<title>Private Deal Machine Demo | WorkDifferentAI</title>
+<meta name="robots" content="noindex,nofollow,noarchive" />
+<meta name="description" content="Private interactive demo of the WorkDifferentAI Equipment Liquidation and Government Surplus Deal Machines." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔶</text></svg>" />
+<style>
+@font-face{font-family:Fraunces;font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/fraunces.woff2) format('woff2')}
+@font-face{font-family:JetBrains Mono;font-style:normal;font-weight:100 800;font-display:swap;src:url(fonts/jetbrains-mono.woff2) format('woff2')}
+:root{--ink:#141210;--paper:#faf7f2;--orange:#e63600;--muted:#5e574f;--line:#ddd5ca;--card:#fff;--green:#14783b;--red:#a72c1e;--blue:#215a75;--soft:#f0e9df}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'JetBrains Mono',monospace;line-height:1.55;-webkit-text-size-adjust:100%}
+button,input,a{font:inherit}
+button{cursor:pointer}
+h1,h2,h3{font-family:Fraunces,serif;text-wrap:balance}
+.hidden{display:none!important}
+body.locked .topbar,body.locked .shell{display:none}
+body.locked{overflow:hidden}
+
+/* Gate */
+.gate{position:fixed;inset:0;z-index:100;background:var(--ink);color:#fff;display:grid;place-items:center;padding:24px}
+.gate-card{width:min(440px,100%);border:1px solid #3b3732;border-radius:18px;background:#1d1a17;padding:34px 30px;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.gate-mark{font-size:11px;letter-spacing:2.2px;color:#ff6a3c;font-weight:700}
+.gate h1{font-size:clamp(30px,8vw,43px);line-height:1.03;margin:12px 0 10px}
+.gate p{color:#c9c1b7;font-size:12px;margin-bottom:22px}
+.pass-row{display:flex;gap:9px}
+.pass-row input{flex:1;min-width:0;border:1px solid #514b44;background:#0f0e0c;color:#fff;border-radius:10px;padding:14px;font-size:16px;outline:none}
+.pass-row input:focus{border-color:#ff6a3c;box-shadow:0 0 0 2px rgba(255,106,60,.2)}
+.pass-row button{border:0;background:var(--orange);color:#fff;border-radius:10px;padding:0 18px;font-weight:700}
+.gate-error{min-height:18px;margin-top:9px;color:#ff8c68;font-size:11px}
+.gate-fine{margin:22px 0 0!important;color:#756e66!important;font-size:10px!important}
+
+/* Shell */
+.topbar{background:var(--ink);color:#fff;border-bottom:3px solid var(--orange)}
+.topbar-in{max-width:1120px;margin:auto;padding:15px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-size:11px;letter-spacing:2px;font-weight:700}.brand b{color:#ff6a3c}
+.top-actions{display:flex;align-items:center;gap:10px}
+.demo-pill{font-size:9px;letter-spacing:1.4px;border:1px solid #514b44;border-radius:16px;padding:6px 10px;color:#d0c8bd}
+.exit-btn{border:0;background:none;color:#8e867d;font-size:10px;text-decoration:underline;padding:8px}
+.shell{max-width:1120px;margin:auto;padding:34px 24px 70px}
+.hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:10px;letter-spacing:2.3px;color:var(--orange);font-weight:700}
+.hero h1{font-size:clamp(34px,6vw,58px);line-height:.98;margin:9px 0 12px;max-width:720px}
+.hero p{font-size:13px;color:var(--muted);max-width:680px}
+.hero-stat{text-align:right;min-width:170px}.hero-stat .num{font:800 38px/1 Fraunces,serif;color:var(--orange)}.hero-stat .cap{font-size:9px;letter-spacing:1.5px;color:var(--muted);margin-top:6px}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+.metric{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px}
+.metric .k{font-size:9px;letter-spacing:1.2px;color:var(--muted)}
+.metric .v{font:800 24px/1.1 Fraunces,serif;margin-top:6px}.metric .s{font-size:10px;color:var(--muted);margin-top:4px}
+.metric .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2db75d;margin-right:6px;box-shadow:0 0 0 4px rgba(45,183,93,.12)}
+
+.machine-tabs{display:flex;gap:8px;margin:28px 0 14px}
+.tab{border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:30px;padding:11px 16px;font-size:11px;font-weight:700}
+.tab.active{background:var(--ink);color:#fff}.tab small{font-weight:400;color:inherit;opacity:.65;margin-left:5px}
+.panel{display:none}.panel.active{display:block}
+.machine-head{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.machine-title{font-size:25px;line-height:1}.machine-sub{font-size:11px;color:var(--muted);margin-top:7px}
+.status{font-size:10px;color:var(--green);font-weight:700;text-align:right}.status span{display:inline-block;width:8px;height:8px;background:#2db75d;border-radius:50%;margin-right:6px}
+.source-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.source{border:1px solid var(--line);border-radius:18px;background:var(--paper);font-size:9px;padding:6px 10px;color:var(--muted)}
+
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.pipe{position:relative;background:var(--soft);border-radius:10px;padding:13px 12px;min-height:88px}.pipe:not(:last-child):after{content:'→';position:absolute;right:-9px;top:31px;z-index:2;color:var(--orange);font-weight:800}.pipe .n{font-size:9px;color:var(--orange);font-weight:700}.pipe b{display:block;font:700 15px Fraunces,serif;margin:3px 0}.pipe p{font-size:9px;color:var(--muted)}
+
+.cycle{background:var(--ink);color:#fff;border-radius:14px;padding:20px;margin-top:12px}
+.cycle-top{display:flex;align-items:center;justify-content:space-between;gap:14px}.cycle h3{font-size:22px}.cycle-copy{color:#bdb5ab;font-size:10px;margin-top:4px}
+.run-btn{border:0;border-radius:25px;background:var(--orange);color:#fff;padding:12px 18px;font-size:11px;font-weight:700;white-space:nowrap}
+.run-btn:disabled{opacity:.55;cursor:wait}
+.progress{height:4px;background:#34302c;border-radius:3px;overflow:hidden;margin-top:17px}.progress i{display:block;width:0;height:100%;background:#ff6a3c;transition:width .45s ease}
+.run-log{font-size:10px;color:#9f978e;margin-top:9px;min-height:16px}
+
+.feed-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 10px}.feed-title h2{font-size:26px}.feed-title span{font-size:9px;color:var(--muted);letter-spacing:1px}
+.deal-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.alert{background:var(--card);border:2px solid var(--orange);border-radius:14px;padding:19px}.alert-label{font-size:9px;letter-spacing:1.8px;color:var(--orange);font-weight:700}.alert h3{font-size:23px;margin:5px 0 2px}.ask{font-size:11px;color:var(--muted)}
+.comp{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0}.comp div{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px}.comp small{display:block;font-size:8px;letter-spacing:1px;color:var(--muted)}.comp b{font-size:14px;color:var(--ink)}
+.verdict{font-size:11px;border-left:3px solid var(--orange);padding-left:11px}.estimate{font-size:8px;color:#8c847a;letter-spacing:1px;margin-top:10px}.deal-link{display:inline-block;margin-top:13px;color:var(--ink);font-size:10px;font-weight:700;text-decoration:none;border-bottom:1px solid var(--ink)}
+.rejections{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px}.rejections h3{font-size:19px;margin-bottom:8px}.reject{padding:10px 0;border-top:1px solid var(--line)}.reject:first-of-type{border-top:0}.reject b{font-size:11px}.reject p{font-size:9px;color:var(--muted);margin-top:3px}.reject .why{color:var(--red)}
+
+.proof{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}.proof h2{font-size:28px}.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:17px}.proof-item{border-top:3px solid var(--ink);padding-top:12px}.proof-item b{font:700 17px Fraunces,serif}.proof-item p{font-size:10px;color:var(--muted);margin-top:5px}
+.cta-band{background:var(--orange);color:#fff;border-radius:16px;padding:28px;margin-top:14px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}.cta-band h2{font-size:30px;line-height:1}.cta-band p{font-size:10px;opacity:.82;margin-top:8px}.cta-link{background:#fff;color:var(--ink);text-decoration:none;border-radius:28px;padding:14px 20px;font-size:11px;font-weight:700;text-align:center}
+.legal{font-size:9px;color:#8a8278;text-align:center;margin-top:20px;line-height:1.7}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:#fff;border-radius:24px;padding:11px 18px;font-size:10px;opacity:0;pointer-events:none;transition:.25s;z-index:80}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero-stat{text-align:left}.metrics{grid-template-columns:repeat(2,1fr)}.pipeline{grid-template-columns:repeat(2,1fr)}.pipe:nth-child(2):after{display:none}.deal-grid{grid-template-columns:1fr}.proof-grid{grid-template-columns:1fr}.cta-band{grid-template-columns:1fr}.machine-head{grid-template-columns:1fr}.status{text-align:left}}
+@media(max-width:470px){.shell{padding:25px 18px 55px}.topbar-in{padding:13px 18px}.demo-pill{display:none}.metrics{grid-template-columns:1fr 1fr}.metric .v{font-size:20px}.machine-tabs{display:grid;grid-template-columns:1fr 1fr}.tab{padding:10px 7px}.pipeline{grid-template-columns:1fr}.pipe:not(:last-child):after{content:'↓';right:16px;top:auto;bottom:-12px}.comp{grid-template-columns:1fr}.cycle-top{align-items:flex-start;flex-direction:column}.run-btn{width:100%}}
+</style>
+</head>
+<body class="locked">
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-mark">WORKDIFFERENTAI · PRIVATE DEMO</div>
+    <h1>Deal flow,<br/>without the hunt.</h1>
+    <p>Enter the prospect demo passcode to see two autonomous Deal Machines working a South Florida market.</p>
+    <form class="pass-row" id="gate-form">
+      <input type="password" id="passcode" autocomplete="current-password" placeholder="Demo passcode" aria-label="Demo passcode" />
+      <button type="submit">Enter →</button>
+    </form>
+    <div class="gate-error" id="gate-error"></div>
+    <p class="gate-fine">PRIVATE PREVIEW · SAMPLE DATA · ESTIMATES, NOT GUARANTEES</p>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand"><b>◆</b> WORKDIFFERENTAI · DEAL MACHINE CONTROL ROOM</div>
+    <div class="top-actions"><span class="demo-pill">PRIVATE PROSPECT DEMO</span><button class="exit-btn" onclick="lockDemo()">Lock</button></div>
+  </div>
+</header>
+
+<main class="shell" id="demo-app">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">TWO MACHINES · ONE MARKET · ALWAYS WATCHING</div>
+      <h1>Your market gets watched.<br/>The math arrives first.</h1>
+      <p>This is how a Deal Machine turns scattered listings into a short, decision-ready alert: find the asset, verify sold comps, subtract fees and friction, and stay quiet unless the spread survives.</p>
+    </div>
+    <div class="hero-stat"><div class="num">33433</div><div class="cap">DEMO MARKET · SOUTH FLORIDA</div></div>
+  </section>
+
+  <section class="metrics" aria-label="Demo machine metrics">
+    <div class="metric"><div class="k"><span class="live-dot"></span>MACHINES ONLINE</div><div class="v">2 / 2</div><div class="s">isolated hunt agents</div></div>
+    <div class="metric"><div class="k">SOURCES WATCHED</div><div class="v">5</div><div class="s">public, policy-safe feeds</div></div>
+    <div class="metric"><div class="k">EQUIPMENT CADENCE</div><div class="v">45 min</div><div class="s">7 AM–10 PM ET</div></div>
+    <div class="metric"><div class="k">SURPLUS CADENCE</div><div class="v">2× daily</div><div class="s">8 AM + 4 PM ET</div></div>
+  </section>
+
+  <div class="machine-tabs" role="tablist">
+    <button class="tab active" data-machine="equipment" onclick="showMachine('equipment',this)">Equipment <small>liquidations</small></button>
+    <button class="tab" data-machine="gov" onclick="showMachine('gov',this)">Gov Surplus <small>auctions</small></button>
+  </div>
+
+  <section class="panel active" id="panel-equipment">
+    <div class="machine-head">
+      <div><h2 class="machine-title">Equipment Liquidation Sniper</h2><p class="machine-sub">Finds underpriced restaurant, gym and commercial equipment near the configured market.</p><div class="source-row"><span class="source">Craigslist · 50 mi</span><span class="source">eBay SOLD comps</span><span class="source">Local bulky-item comps</span></div></div>
+      <div class="status"><span></span>AUTOMATIC · NEXT CYCLE &lt;45 MIN</div>
+    </div>
+    <div class="pipeline"><div class="pipe"><div class="n">01 · FETCH</div><b>Scan listings</b><p>One polite request per tuned query.</p></div><div class="pipe"><div class="n">02 · FILTER</div><b>Remove noise</b><p>Dedupe, price bands, scam signals.</p></div><div class="pipe"><div class="n">03 · VERIFY</div><b>Check SOLD</b><p>Comparable condition and model only.</p></div><div class="pipe"><div class="n">04 · ALERT</div><b>Send the math</b><p>Only if estimated spread survives.</p></div></div>
+    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">A 12-second simulation of the real decision pipeline.</p></div><button class="run-btn" onclick="runCycle('equipment',this)">Run demo cycle →</button></div><div class="progress"><i id="progress-equipment"></i></div><div class="run-log" id="log-equipment">Ready — sample listings are queued.</div></div>
+    <div class="feed-title"><h2>Decision-ready output</h2><span>SAMPLE DATA · HONEST HAIRCUTS APPLIED</span></div>
+    <div class="deal-grid">
+      <article class="alert"><div class="alert-label">🔶 DEAL MACHINE · EQUIPMENT</div><h3>Turbo Air 48″ Prep Table</h3><div class="ask">Listed at $625 · Pompano Beach · “closing restaurant”</div><div class="comp"><div><small>COMPARABLE SOLD</small><b>$1,250–$1,575</b></div><div><small>EST. RESALE</small><b>$1,200</b></div><div><small>EST. SPREAD</small><b>$575</b></div></div><p class="verdict"><b>Verdict:</b> Worth inspecting today if the compressor holds temperature; the closing signal and named brand create real room.</p><div class="estimate">ESTIMATE AFTER FEES + FRICTION · NOT GUARANTEED PROFIT</div><a class="deal-link" href="#" onclick="demoOnly(event)">Open sample listing →</a></article>
+      <aside class="rejections"><h3>Rejected before you saw them</h3><div class="reject"><b>No-name double panini grill · $384</b><p class="why">REJECT · New imports sell for the same amount. No spread.</p></div><div class="reject"><b>Sole F63 treadmill · $800</b><p class="why">REJECT · Asking price is above comparable used sales.</p></div><div class="reject"><b>Generic sandwich table · $285</b><p class="why">REJECT · Missing brand, model and dimensions. Cannot comp honestly.</p></div></aside>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-gov">
+    <div class="machine-head">
+      <div><h2 class="machine-title">Government Surplus Sniper</h2><p class="machine-sub">Finds Florida public-auction lots closing soon and calculates a conservative bid ceiling.</p><div class="source-row"><span class="source">GSA Auctions API</span><span class="source">GovDeals · first page</span><span class="source">eBay SOLD comps</span><span class="source">Pickup distance</span></div></div>
+      <div class="status"><span></span>AUTOMATIC · 8 AM + 4 PM ET</div>
+    </div>
+    <div class="pipeline"><div class="pipe"><div class="n">01 · FETCH</div><b>Scan Florida lots</b><p>Closing window and category filters.</p></div><div class="pipe"><div class="n">02 · FORECAST</div><b>Model bid-up</b><p>Assume popular lots rise 30–60%.</p></div><div class="pipe"><div class="n">03 · HAIRCUT</div><b>Price the risk</b><p>Fees, pickup, condition, logistics.</p></div><div class="pipe"><div class="n">04 · CEILING</div><b>Set max bid</b><p>The number where the deal stops.</p></div></div>
+    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">See how a low current bid becomes a conservative bid ceiling.</p></div><button class="run-btn" onclick="runCycle('gov',this)">Run demo cycle →</button></div><div class="progress"><i id="progress-gov"></i></div><div class="run-log" id="log-gov">Ready — sample Florida lots are queued.</div></div>
+    <div class="feed-title"><h2>Decision-ready output</h2><span>SAMPLE DATA · BID-UP + PICKUP INCLUDED</span></div>
+    <div class="deal-grid">
+      <article class="alert"><div class="alert-label">🔶 DEAL MACHINE · GOV SURPLUS</div><h3>Generac 22kW Standby Generator</h3><div class="ask">Current bid $1,150 · closes Friday · Fort Lauderdale, FL</div><div class="comp"><div><small>COMPARABLE SOLD</small><b>$3,400–$4,200</b></div><div><small>EST. ALL-IN</small><b>$1,850</b></div><div><small>BID CEILING</small><b>$1,700</b></div></div><p class="verdict"><b>Verdict:</b> Local pickup protects the spread. Stop at $1,700 unless inspection confirms low hours and transfer switch included.</p><div class="estimate">ESTIMATE AFTER FEES, BID-UP + CONDITION RISK · NOT GUARANTEED PROFIT</div><a class="deal-link" href="#" onclick="demoOnly(event)">Open sample auction →</a></article>
+      <aside class="rejections"><h3>Rejected before you saw them</h3><div class="reject"><b>2017 utility truck · $13,900</b><p class="why">REJECT · Mechanical uncertainty and expected bid-up erase margin.</p></div><div class="reject"><b>Mixed laptop lot · $2,400</b><p class="why">REJECT · No drive-status inventory; resale estimate too fragile.</p></div><div class="reject"><b>Forklift · Alabama pickup</b><p class="why">REJECT · Freight and inspection distance overwhelm projected spread.</p></div></aside>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="eyebrow">WHAT THE PROSPECT IS REALLY BUYING</div><h2>A disciplined decision loop—not another dashboard.</h2>
+    <div class="proof-grid"><div class="proof-item"><b>Selective by design</b><p>Most listings are rejected. One defensible opportunity beats ten hopeful maybes.</p></div><div class="proof-item"><b>Honest math</b><p>Every spread is estimated after fees, friction, bid-up and condition risk.</p></div><div class="proof-item"><b>Quiet automation</b><p>The machine speaks when money may be on the table—or when it needs tuning.</p></div></div>
+  </section>
+  <section class="cta-band"><div><h2>What should your machine hunt?</h2><p>We configure the market, rules, cadence, comp logic and alert channel around the opportunity you know.</p></div><a class="cta-link" href="mailto:jason@meta57.xyz?subject=Private%20Deal%20Machine%20demo%20follow-up">Design my machine →</a></section>
+  <p class="legal">PRIVATE PROSPECT DEMO · SAMPLE LISTINGS AND FIGURES ARE ILLUSTRATIVE ESTIMATES, NOT PROMISES OF PROFIT.<br/>WorkDifferentAI · Alacrity One LLC · Boca Raton, FL</p>
+</main>
+<div class="toast" id="toast">Demo only — no live listing exposed.</div>
+<script>
+var PASS_HASH='807d92314cd849d59f8fdb9924bd15b83d808934638ead0d080b67c363d06b85';
+var SESSION_KEY='wdai-deal-demo-unlocked';
+function bytesToHex(buf){return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('')}
+async function digest(s){var data=new TextEncoder().encode(s);return bytesToHex(await crypto.subtle.digest('SHA-256',data))}
+function unlock(){document.body.classList.remove('locked');document.getElementById('gate').classList.add('hidden');sessionStorage.setItem(SESSION_KEY,'1');document.getElementById('demo-app').focus()}
+function lockDemo(){sessionStorage.removeItem(SESSION_KEY);document.body.classList.add('locked');document.getElementById('passcode').value='';document.getElementById('gate').classList.remove('hidden');document.getElementById('passcode').focus()}
+if(sessionStorage.getItem(SESSION_KEY)==='1')unlock();
+document.getElementById('gate-form').addEventListener('submit',async function(e){e.preventDefault();var input=document.getElementById('passcode');var err=document.getElementById('gate-error');err.textContent='Checking…';try{if(await digest(input.value)===PASS_HASH){err.textContent='';unlock()}else{err.textContent='That passcode did not match.';input.select()}}catch(x){err.textContent='This browser cannot verify the passcode.'}});
+function showMachine(name,btn){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});btn.classList.add('active');document.getElementById('panel-'+name).classList.add('active')}
+var cycleCopy={equipment:['Fetching 5 tuned Craigslist queries…','Dedupe complete — 353 seen listings skipped.','Comp-checking 3 candidates against SOLD data…','2 rejected · 1 estimated spread survives.','Alert ready — owner gets the math, not the noise.'],gov:['Fetching Florida GSA lots + GovDeals first pages…','Filtering closing window and pickup distance…','Modeling 30–60% bid-up + buyer fees…','3 rejected · 1 stays below the bid ceiling.','Alert ready — ceiling included.']};
+function runCycle(name,btn){if(btn.disabled)return;btn.disabled=true;btn.textContent='Cycle running…';var bar=document.getElementById('progress-'+name),log=document.getElementById('log-'+name),steps=cycleCopy[name],i=0;bar.style.width='10%';log.textContent=steps[0];var timer=setInterval(function(){i++;if(i<steps.length){bar.style.width=(10+i*22)+'%';log.textContent=steps[i]}else{clearInterval(timer);bar.style.width='100%';btn.disabled=false;btn.textContent='Run again →';setTimeout(function(){bar.style.width='0%'},1000)}},720)}
+function demoOnly(e){e.preventDefault();var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1800)}
+</script>
+</body>
+</html>
