@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light only" />
 <meta name="theme-color" content="#FAF7F2" />
-<title>Deal Machines — Own the machine, not the hustle | WorkDifferentAI</title>
-<meta name="description" content="A machine that watches your local market around the clock — underpriced cars, businesses, equipment, estates — and texts you the deal with the numbers already run. Built for your city. Installed on hardware you own." />
-<meta property="og:title" content="Deal Machines — Own the machine, not the hustle" />
-<meta property="og:description" content="A machine that watches your local market around the clock and texts you mispriced assets with the numbers already run. Built for your city. Yours forever." />
+<title>Deal Machines — Tell us what you want to make. We'll show you where it's hiding.</title>
+<meta name="description" content="Enter the money you want to make, your timeframe, and your zip. We'll match you to the best local deal-hunting opportunities — scored on real market research — and show you the live feeds a machine would watch for you." />
+<meta property="og:title" content="Deal Machines — Tell us what you want to make." />
+<meta property="og:description" content="We'll match your goal to the best local deal-hunting opportunities and show you where they're hiding." />
 <meta property="og:type" content="website" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔶</text></svg>" />
 <style>
@@ -22,6 +22,8 @@
     --muted: #45403A;
     --line: #E4DED4;
     --card: #FFFFFF;
+    --seg: #EDE7DD;
+    --grey: #B7B0A4;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { background: var(--paper); scroll-behavior: smooth; }
@@ -31,55 +33,95 @@
   h1, h2, h3 { font-family: 'Fraunces', serif; text-wrap: balance; }
 
   /* Hero */
-  .hero { padding: 60px 0 44px; }
-  .hero h1 { font-size: clamp(36px, 7.5vw, 56px); font-weight: 900; line-height: 1.02; margin: 14px 0 18px; }
+  .hero { padding: 48px 0 36px; }
+  .hero h1 { font-size: clamp(30px, 6.5vw, 46px); font-weight: 900; line-height: 1.05; margin: 14px 0 8px; }
   .hero h1 em { font-style: normal; color: var(--orange); }
-  .hero p { font-size: 14px; color: var(--muted); max-width: 540px; }
+  .hero .clarifier { font-size: 14px; line-height: 1.6; color: var(--muted); max-width: 540px; }
   .cta { display: inline-block; background: var(--orange); color: #fff; border: 0; font-family: inherit; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; padding: 14px 26px; border-radius: 30px; cursor: pointer; }
   .cta:hover { background: #D93400; }
   .cta.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink); padding: 12px 24px; }
   .cta.ghost:hover { background: var(--ink); color: var(--paper); }
-  .hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 26px; }
-  .sub-cta { display: block; margin-top: 12px; font-size: 12px; color: var(--muted); }
-  .hero .clarifier { font-size: 16.5px; line-height: 1.55; color: var(--ink); max-width: 560px; }
-  .hero .alert-demo { margin-top: 24px; }
+  .sub-cta { display: block; margin-top: 14px; font-size: 12px; color: var(--muted); }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .h-seq { opacity: 0; transform: translateY(12px); animation: rise .5s ease forwards; animation-delay: var(--d, 0s); }
-    @keyframes rise { to { opacity: 1; transform: none; } }
-    .hero .bubble { opacity: 0; transform: scale(.94); transform-origin: 20% 100%; animation: pop .5s cubic-bezier(.3,1.4,.55,1) forwards; animation-delay: 1.15s; }
-    @keyframes pop { to { opacity: 1; transform: scale(1); } }
-  }
+  /* Finder card */
+  .finder { background: var(--card); border: 2px solid var(--ink); border-radius: 16px; padding: 26px 24px 24px; margin-top: 24px; position: relative; }
+  .f-step { display: none; }
+  .f-step.on { display: block; }
+  .f-q { font-family: 'Fraunces', serif; font-size: clamp(21px, 4.5vw, 26px); font-weight: 800; line-height: 1.15; margin-bottom: 4px; }
+  .f-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+  .chip { font-family: inherit; font-size: 14px; font-weight: 600; border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 26px; padding: 12px 18px; cursor: pointer; }
+  .chip:hover { background: var(--ink); color: var(--paper); }
+  .chip.orange { border-color: var(--orange); color: var(--orange); }
+  .chip.orange:hover { background: var(--orange); color: #fff; }
+  .f-input-row { display: flex; gap: 9px; margin-top: 12px; }
+  .f-input-row input { flex: 1; min-width: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); font-family: inherit; font-size: 16px; color: var(--ink); padding: 13px 14px; }
+  .f-input-row input:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+  .f-input-row .go { background: var(--ink); color: var(--paper); border: 0; border-radius: 10px; font-family: inherit; font-weight: 600; font-size: 13px; padding: 0 18px; cursor: pointer; }
+  .f-input-row .go:hover { background: #000; }
+  .f-err { color: var(--orange); font-size: 12px; min-height: 15px; margin-top: 8px; line-height: 1.3; }
+  .f-skip { background: none; border: 0; font-family: inherit; font-size: 12px; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 10px 0 0; }
+  .f-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+  .f-back { background: none; border: 0; font-family: inherit; font-size: 12px; color: var(--muted); cursor: pointer; padding: 13px 13px 13px 0; visibility: hidden; }
+  .f-back.show { visibility: visible; }
+  .f-dots { display: flex; gap: 6px; }
+  .f-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--seg); }
+  .f-dot.on { background: var(--orange); }
+  .f-privacy { font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+
+  /* Matching sequence */
+  .f-matching { text-align: center; padding: 26px 0 18px; }
+  .f-matching .m-line { font-size: 13px; color: var(--muted); min-height: 20px; }
+  .m-bar { height: 4px; background: var(--seg); border-radius: 2px; margin: 18px auto 0; max-width: 320px; overflow: hidden; }
+  .m-bar i { display: block; height: 100%; width: 0%; background: var(--orange); transition: width .5s ease; }
+
+  /* Results */
+  .r-head { margin-bottom: 6px; }
+  .r-goal { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .r-goal b { color: var(--ink); }
+  .r-card { border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 16px; margin-top: 12px; }
+  .r-card.top { border: 2px solid var(--orange); }
+  .r-rank { font-size: 10px; letter-spacing: 1.5px; color: var(--orange); font-weight: 600; }
+  .r-name-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 2px; }
+  .r-name { font-family: 'Fraunces', serif; font-weight: 800; font-size: 19px; line-height: 1.2; }
+  .r-score { font-weight: 600; font-size: 20px; color: var(--orange); font-variant-numeric: tabular-nums; }
+  .r-fit { font-size: 12.5px; color: var(--muted); margin-top: 8px; line-height: 1.65; }
+  .r-fit b { color: var(--ink); }
+  .r-est { font-size: 9px; letter-spacing: 1.5px; color: var(--grey); margin-top: 8px; }
+  .r-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .r-btn { font-family: inherit; font-size: 12px; font-weight: 600; border-radius: 24px; padding: 13px 17px; cursor: pointer; border: 0; }
+  .r-btn.live { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+  .r-btn.live:hover { background: var(--ink); color: var(--paper); }
+  .r-btn.build { background: var(--orange); color: #fff; }
+  .r-btn.build:hover { background: #D93400; }
+  .r-sources { display: none; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .r-sources.open { display: block; }
+  .r-sources .s-cap { font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
+  .r-sources a { display: inline-block; font-size: 12px; font-weight: 600; color: var(--ink); text-decoration: none; border: 1px solid var(--line); background: var(--card); border-radius: 18px; padding: 9px 14px; margin: 0 6px 6px 0; }
+  .r-sources a:hover { border-color: var(--ink); }
+  .r-sources a span { color: var(--orange); }
+  .r-foot { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 18px; font-size: 12px; }
+  .r-foot a, .r-foot button { font-family: inherit; font-size: 12px; color: var(--muted); background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 13px 0; }
+  .r-foot a:hover, .r-foot button:hover { color: var(--ink); }
 
   /* Hero video */
-  .hero-video { margin-top: 26px; max-width: 580px; }
+  .hero-video { margin-top: 34px; max-width: 580px; }
   .hero-video video { display: block; width: 100%; border-radius: 14px; background: #000; border: 1px solid var(--line); }
   .video-cap { font-size: 11px; letter-spacing: 0.5px; color: var(--muted); margin-top: 10px; }
   .video-cap span { color: var(--orange); font-weight: 600; letter-spacing: 1.5px; }
 
-  @media (max-width: 520px) {
-    .hero-ctas { flex-direction: column; align-items: stretch; }
-    .hero-ctas .cta { text-align: center; }
-    .panel { max-height: 85dvh; }
-  }
-
-  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 12px 0; overflow: hidden; white-space: nowrap; font-size: 11px; letter-spacing: 1px; color: var(--muted); }
-  .strip span { color: var(--orange); font-weight: 600; }
-  .strip .marquee { display: inline-block; padding-right: 40px; }
-  @media (prefers-reduced-motion: no-preference) {
-    .strip .marquee { animation: ticker 28s linear infinite; }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  }
-
-  section { padding: 46px 0; }
+  section { padding: 44px 0; }
   .label { font-size: 11px; letter-spacing: 2.5px; color: var(--orange); font-weight: 600; margin-bottom: 10px; }
   h2 { font-size: clamp(26px, 5vw, 34px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
-  .lede { font-size: 14px; color: var(--muted); max-width: 540px; }
-
   .prob { border-left: 3px solid var(--orange); padding-left: 18px; margin-top: 22px; }
-  .prob p { font-size: 14px; margin-bottom: 12px; }
-  .prob p:last-child { margin-bottom: 0; }
+  .prob p { font-size: 14px; }
   .prob b { color: var(--ink); }
+
+  .machines { display: grid; gap: 10px; margin-top: 24px; }
+  .machine { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; gap: 14px; align-items: baseline; }
+  .machine .num { font-size: 11px; color: #8A8377; min-width: 22px; }
+  .machine .name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; }
+  .machine .what { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
   /* Sample alert */
   .alert-demo { margin-top: 26px; }
@@ -91,33 +133,15 @@
   .bubble .dim { color: #A39C90; }
   .alert-cap { font-size: 11px; color: var(--muted); margin-top: 10px; max-width: 420px; }
 
-  /* Edge cards */
-  .machines { display: grid; gap: 10px; margin-top: 24px; }
-  .machine { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; gap: 14px; align-items: baseline; }
-  .machine .num { font-size: 11px; color: #8A8377; min-width: 22px; }
-  .machine .name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; }
-  .machine .what { font-size: 12px; color: var(--muted); margin-top: 3px; }
-
-  /* Teaser */
-  .teaser { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px 22px; margin-top: 24px; }
-  .trow { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid #F1ECE4; }
-  .trow:first-child { border-top: 0; }
-  .trow .tn { font-family: 'Fraunces', serif; font-weight: 600; font-size: 14px; }
-  .trow .ts { font-weight: 600; font-size: 16px; color: var(--orange); font-variant-numeric: tabular-nums; }
-  .teaser .more { font-size: 12px; color: var(--muted); margin-top: 8px; }
-  .teaser .cta { margin-top: 18px; }
-
-  /* Own it */
+  /* Investment case */
   .own { display: grid; gap: 10px; margin-top: 24px; }
   .own-item { display: flex; gap: 12px; align-items: baseline; border-top: 1px solid var(--line); padding: 13px 0 0; }
   .own-item:first-child { border-top: 0; padding-top: 0; }
   .own-item .tick { color: var(--orange); font-weight: 600; }
   .own-item p { font-size: 13.5px; color: var(--muted); }
   .own-item p b { color: var(--ink); }
-
-  /* Timeline line */
-  .timeline { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 16px; font-size: 13px; color: var(--muted); line-height: 1.8; }
-  .timeline b { color: var(--ink); font-weight: 600; }
+  .timeline { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 16px; font-size: 13px; color: var(--muted); }
+  .timeline b { color: var(--ink); }
   .timeline .ta { color: var(--orange); font-weight: 600; }
 
   .qa { border-top: 1px solid var(--line); padding: 16px 0; }
@@ -132,63 +156,159 @@
   .fineprint { font-size: 11px; color: #6B655C; text-align: center; padding-bottom: 40px; line-height: 1.7; }
   .fineprint a { color: #6B655C; }
 
-  /* Opt-in modal */
+  /* Contact modal (copy + mailto) */
   .overlay { display: none; position: fixed; inset: 0; background: rgba(20,18,16,0.55); z-index: 50; padding: 20px; }
   .overlay.open { display: flex; align-items: center; justify-content: center; }
-  .panel { background: var(--card); border-radius: 14px; max-width: 460px; width: 100%; padding: 28px 24px; position: relative; max-height: 90vh; overflow-y: auto; }
+  .panel { background: var(--card); border-radius: 14px; max-width: 460px; width: 100%; padding: 26px 24px; position: relative; max-height: 90vh; overflow-y: auto; }
   .panel .x { position: absolute; top: 6px; right: 8px; background: none; border: 0; font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1; padding: 12px; font-family: inherit; }
   .panel h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
   .panel .p-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
-  .optin-form { display: flex; flex-direction: column; gap: 10px; margin: 6px 0 4px; }
-  .optin-form input { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font-family: inherit; font-size: 16px; color: var(--ink); padding: 12px 14px; width: 100%; }
-  .optin-form input:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
-  .optin-form .err { color: var(--orange); font-size: 12px; min-height: 15px; line-height: 1.3; }
-  .optin-form button.cta { margin-top: 2px; width: 100%; text-align: center; }
-  .optin-form button.cta[disabled] { opacity: 0.6; cursor: wait; }
-  .privacy { font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
-  .board-step { display: none; }
-  .board-step.show { display: block; }
-  #board-step-2 .cta { width: 100%; text-align: center; margin-top: 10px; }
-  .check { display: inline-block; background: #1E7B34; color: #fff; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; font-size: 13px; margin-right: 6px; vertical-align: middle; }
+  .panel .cta-mail { display: block; text-align: center; background: var(--orange); color: #fff; text-decoration: none; font-weight: 600; font-size: 13px; padding: 13px 0; border-radius: 26px; }
+  .panel .cta-mail:hover { background: #D93400; }
+  .divider { display: flex; align-items: center; gap: 10px; margin: 16px 0 12px; color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .row { display: flex; gap: 8px; align-items: stretch; margin-bottom: 12px; }
+  .row .box { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 14px; font-weight: 600; background: var(--paper); user-select: all; overflow-x: auto; white-space: nowrap; display: flex; align-items: center; }
+  .copy-btn { background: var(--ink); color: #fff; border: 0; border-radius: 8px; font-family: inherit; font-weight: 600; font-size: 12px; padding: 0 15px; cursor: pointer; white-space: nowrap; }
+  .copy-btn.copied { background: #1E7B34; }
+  .panel textarea { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font-family: inherit; font-size: 12px; color: var(--ink); padding: 10px 12px; min-height: 118px; resize: vertical; line-height: 1.5; }
+  .panel .t-copy { margin-top: 8px; width: 100%; padding: 12px 0; font-size: 12px; }
+  .panel .hint { font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
 
+  .reveal { }
   @media (prefers-reduced-motion: no-preference) {
     .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in { opacity: 1; transform: none; }
+    .f-step.on { animation: stepin .3s ease; }
+    @keyframes stepin { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
+  }
+
+  @media (max-width: 640px) {
+    .panel { max-height: 85dvh; }
+    .panel textarea { font-size: 16px; min-height: 150px; }
+    .finder { padding: 22px 18px 20px; }
   }
 
   /* Mobile gutters — keep last so these win the cascade */
   @media (max-width: 700px) {
     .wrap { padding-left: 28px; padding-right: 28px; }
-    .strip { padding-left: 8px; }
     .machine { padding: 16px 18px; }
-    .teaser { padding: 26px 24px; }
     .final { border-radius: 0; margin-left: -28px; margin-right: -28px; padding-left: 28px; padding-right: 28px; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap hero">
-  <div class="eyebrow h-seq" style="--d:.05s">WORKDIFFERENTAI · DEAL MACHINES</div>
-  <h1 class="h-seq" style="--d:.15s">Own the <em>machine</em>,<br/>not the hustle.</h1>
-  <p class="clarifier h-seq" style="--d:.35s">A machine that watches your city for underpriced cars, equipment and whole businesses — and texts you before anyone else has moved. You put money to work on the deals. It finds them.</p>
+<div class="wrap hero" id="finder-top">
+  <div class="eyebrow">WORKDIFFERENTAI · DEAL MACHINES</div>
+  <h1>Tell us what you want to <em>make</em>.<br/>We'll show you where it's hiding.</h1>
+  <p class="clarifier">Machines that watch your local market — Craigslist, OfferUp, Facebook Marketplace — check every find against eBay sold prices, and text you what's underpriced. Start by telling us your goal.</p>
 
-  <div class="hero-video h-seq" style="--d:.55s">
+  <div class="finder" id="finder">
+    <!-- Step 1: goal -->
+    <div class="f-step on" data-step="1">
+      <div class="f-q">How much do you want to make?</div>
+      <div class="f-sub">Pick a target — or type your own.</div>
+      <div class="chips">
+        <button class="chip" onclick="pickGoal(2500)">$2,500</button>
+        <button class="chip" onclick="pickGoal(5000)">$5,000</button>
+        <button class="chip" onclick="pickGoal(10000)">$10,000</button>
+        <button class="chip" onclick="pickGoal(25000)">$25,000</button>
+      </div>
+      <div class="f-input-row">
+        <input type="text" inputmode="numeric" id="goal-custom" placeholder="Custom amount, e.g. 7500" />
+        <button class="go" onclick="pickGoalCustom()">Set →</button>
+      </div>
+      <div class="f-err" id="err-1"></div>
+    </div>
+
+    <!-- Step 2: timeframe -->
+    <div class="f-step" data-step="2">
+      <div class="f-q">How fast?</div>
+      <div class="f-sub">A window changes which opportunities fit.</div>
+      <div class="chips">
+        <button class="chip" onclick="pickTime('15–30 days', 22)">15–30 days</button>
+        <button class="chip" onclick="pickTime('30–45 days', 37)">30–45 days</button>
+        <button class="chip" onclick="pickTime('45–60 days', 52)">45–60 days</button>
+        <button class="chip orange" onclick="pickTime('best overall', 0)">Just find me the best</button>
+      </div>
+    </div>
+
+    <!-- Step 3: capital -->
+    <div class="f-step" data-step="3">
+      <div class="f-q">What can you put to work?</div>
+      <div class="f-sub">Capital to buy deals with — it filters what's realistic.</div>
+      <div class="chips">
+        <button class="chip" onclick="pickCap(1, 'under $1k')">Under $1k</button>
+        <button class="chip" onclick="pickCap(2, '$1–5k')">$1–5k</button>
+        <button class="chip" onclick="pickCap(3, '$5–25k')">$5–25k</button>
+        <button class="chip" onclick="pickCap(4, '$25k+')">$25k+</button>
+      </div>
+    </div>
+
+    <!-- Step 4: zip -->
+    <div class="f-step" data-step="4">
+      <div class="f-q">Where should it hunt?</div>
+      <div class="f-sub">Your zip localizes the live feeds we'll show you.</div>
+      <div class="f-input-row">
+        <input type="text" inputmode="numeric" id="zip-input" maxlength="5" placeholder="Zip code" autocomplete="postal-code" />
+        <button class="go" onclick="pickZip()">Next →</button>
+      </div>
+      <div class="f-err" id="err-4"></div>
+      <button class="f-skip" onclick="skipZip()">Skip — search everywhere</button>
+    </div>
+
+    <!-- Step 5: email -->
+    <div class="f-step" data-step="5">
+      <div class="f-q">Where do we send your matches?</div>
+      <div class="f-sub">Your results show instantly — we'll also send them, plus new opportunities as we score them.</div>
+      <div class="f-input-row" style="flex-direction: column;">
+        <input type="text" id="name-input" placeholder="First name (optional)" autocomplete="given-name" />
+        <input type="email" id="email-input" placeholder="you@email.com" autocomplete="email" inputmode="email" />
+      </div>
+      <div class="f-err" id="err-5"></div>
+      <button class="cta" style="width:100%; text-align:center; margin-top: 10px;" onclick="submitFinder()" id="find-btn">Find my opportunities →</button>
+      <div class="f-privacy">No spam, unsubscribe anytime. We never share your info.</div>
+    </div>
+
+    <!-- Matching -->
+    <div class="f-step" data-step="6">
+      <div class="f-matching">
+        <div class="m-line" id="m-line">Scoring 25 markets against your goal…</div>
+        <div class="m-bar"><i id="m-fill"></i></div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="f-step" data-step="7">
+      <div class="r-head">
+        <div class="eyebrow">YOUR BEST OPPORTUNITIES</div>
+        <div class="r-goal" id="r-goal"></div>
+      </div>
+      <div id="r-list"></div>
+      <div class="r-foot">
+        <a href="board.html">Explore all 25 opportunities →</a>
+        <button onclick="restartFinder()">Run another search</button>
+      </div>
+    </div>
+
+    <div class="f-foot">
+      <button class="f-back" id="f-back" onclick="stepBack()">← Back</button>
+      <div class="f-dots" id="f-dots">
+        <div class="f-dot on"></div><div class="f-dot"></div><div class="f-dot"></div><div class="f-dot"></div><div class="f-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <span class="sub-cta">A limited number of machines are built each month · Built and installed in South Florida by WorkDifferentAI</span>
+
+  <div class="hero-video">
     <video id="hero-film" controls playsinline preload="metadata" poster="media/poster.jpg">
       <source src="media/explainer.mp4" type="video/mp4" />
       Your browser can't play this video. <a href="media/explainer.mp4">Download it instead.</a>
     </video>
     <div class="video-cap"><span>▶&#xFE0E; THE 3-MINUTE EXPLAINER</span> — how a machine turns attention into deal flow</div>
   </div>
-
-  <div class="hero-ctas h-seq" style="--d:.75s">
-    <button class="cta" onclick="openBoard()">See where the money moves →</button>
-  </div>
-  <span class="sub-cta h-seq" style="--d:.85s">A limited number of machines are built each month · Built and installed in South Florida by WorkDifferentAI</span>
-</div>
-
-<div class="strip">
-  <div class="marquee"><span>WHERE VALUE HIDES:</span> CARS · BUSINESSES FOR SALE · ESTATE SALES · GOV SURPLUS · EQUIPMENT · STORAGE UNITS · DOMAINS · BOATS · FORECLOSURES · PALLETS &nbsp;·&nbsp; <span>WHERE VALUE HIDES:</span> CARS · BUSINESSES FOR SALE · ESTATE SALES · GOV SURPLUS · EQUIPMENT · STORAGE UNITS · DOMAINS · BOATS · FORECLOSURES · PALLETS &nbsp;·&nbsp;</div>
 </div>
 
 <div class="wrap">
@@ -219,20 +339,6 @@
 </section>
 
 <section class="reveal">
-  <div class="label">THE MAP</div>
-  <h2>25 hunting grounds, ranked by where the money is.</h2>
-  <p class="lede">We scored every market a machine can hunt — on ease, profit, and how often deals show up. Most people never see this layer of the local economy. This is the map of it.</p>
-  <div class="teaser">
-    <div class="trow"><div class="tn">Car Flip Scanner</div><div class="ts">79</div></div>
-    <div class="trow"><div class="tn">Business-for-Sale Screener</div><div class="ts">78</div></div>
-    <div class="trow"><div class="tn">Equipment Liquidation Sniper</div><div class="ts">76</div></div>
-    <div class="trow"><div class="tn">Estate Sale Early-Bird</div><div class="ts">75</div></div>
-    <div class="more">…plus 21 more — boats, storage units, foreclosures, domains, gov surplus and beyond.</div>
-    <button class="cta" onclick="openBoard()">Unlock the full board →</button>
-  </div>
-</section>
-
-<section class="reveal">
   <div class="label">THE INVESTMENT CASE</div>
   <h2>Start with one. Stack them.</h2>
   <div class="own">
@@ -247,84 +353,305 @@
   <div class="label">STRAIGHT ANSWERS</div>
   <h2>What people ask.</h2>
   <div class="qa"><b>Do I need to be technical?</b><p>No. If you can read a text message, you can run a Deal Machine. We build, install and tune it — that's the whole point of having us do it.</p></div>
-  <div class="qa"><b>How much of my time does it take?</b><p>Minutes a day, on your phone. The machine does the watching and the math; you do the judging. Most owners treat alerts like messages from a sharp scout — glance, decide, move on.</p></div>
-  <div class="qa"><b>What does it cost?</b><p>It depends on the market and the opportunity you want hunted, so we'd rather talk it through than slap one number on every situation. Start with the board, then book a short call — we'll lay out the build and the cost plainly, no pressure.</p></div>
+  <div class="qa"><b>How much of my time does it take?</b><p>Minutes a day, on your phone. The machine does the watching and the math; you do the judging.</p></div>
+  <div class="qa"><b>What does it cost?</b><p>It depends on the market and the opportunity you want hunted, so we'd rather talk it through than slap one number on every situation. Run the search above, then book a short call — we'll lay out the build and the cost plainly, no pressure.</p></div>
   <div class="qa"><b>Are results guaranteed?</b><p>No — and be suspicious of anyone who says otherwise. We guarantee a working machine that finds and scores real opportunities in your market. The money is made by acting on them, and that part is yours.</p></div>
 </section>
 
 <div class="final reveal">
   <div class="eyebrow">LIMITED BUILDS EACH MONTH</div>
   <h2 style="margin-top:10px">Stop hunting. Start owning.</h2>
-  <p>See all 25 opportunities scored for where the money is. If one of them fits your market and your capital, we'll talk about building it for you — we take on a limited number of builds each month.</p>
-  <button class="cta" onclick="openBoard()">See the opportunity board →</button>
+  <p>Tell us your goal, see your matches, and if one fits your market and your capital — we'll build it to hunt for you.</p>
+  <a class="cta" href="#finder-top">Find my opportunities →</a>
 </div>
 
-<p class="fineprint">WorkDifferentAI · Alacrity One LLC · Boca Raton, FL · <a href="mailto:jason@meta57.xyz">jason@meta57.xyz</a><br/>Sample alert shown is illustrative. Earnings language is based on market research and is not a promise of results — deal outcomes depend on your capital, effort and local market. Machines are installed on customer-owned hardware; customers are responsible for complying with local licensing laws (e.g. vehicle dealer limits).</p>
+<p class="fineprint">WorkDifferentAI · Alacrity One LLC · Boca Raton, FL · <a href="mailto:jason@meta57.xyz">jason@meta57.xyz</a><br/>Sample alert and all per-deal figures are estimates from our market research, not a promise of results — deal outcomes depend on your capital, effort and local market. Machines are installed on customer-owned hardware; customers are responsible for complying with local licensing laws (e.g. vehicle dealer limits).</p>
 </div>
 
-<div class="overlay" id="board-overlay" onclick="if(event.target===this)closeBoard()">
-  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="board-title">
-    <button class="x" onclick="closeBoard()" aria-label="Close">✕</button>
-    <div class="board-step show" id="board-step-1">
-      <h3 id="board-title">Unlock your market's opportunity board</h3>
-      <div class="p-sub">All 25 deal categories — ranked and scored by ease, profit and how often deals show up. Tell us where to send it, and we'll flag new opportunities as we add them.</div>
-      <form class="optin-form" id="optin-form" novalidate>
-        <input type="text" id="optin-name" placeholder="First name" autocomplete="given-name" />
-        <input type="email" id="optin-email" placeholder="you@email.com" autocomplete="email" inputmode="email" />
-        <div class="err" id="optin-err"></div>
-        <button type="submit" class="cta" id="optin-btn">Show me the board →</button>
-      </form>
-      <div class="privacy">One email to unlock. We'll send the board plus the occasional new-opportunity alert — no spam, unsubscribe anytime.</div>
+<div class="overlay" id="contact-overlay" onclick="if(event.target===this)closeContact()">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="c-title">
+    <button class="x" onclick="closeContact()" aria-label="Close">✕</button>
+    <h3 id="c-title">Build this machine for my zip</h3>
+    <div class="p-sub" id="c-sub">One email starts it. We'll get straight into your market and what a build takes.</div>
+    <a class="cta-mail" id="c-mailto" href="#">Open in your email app →</a>
+    <div class="divider">OR COPY IT YOURSELF</div>
+    <div class="row">
+      <div class="box">jason@meta57.xyz</div>
+      <button class="copy-btn" onclick="copyText('jason@meta57.xyz', this, 'Copy')">Copy</button>
     </div>
-    <div class="board-step" id="board-step-2">
-      <h3><span class="check">✓</span>You're in.</h3>
-      <div class="p-sub">Your opportunity board is ready. Check your inbox too — that's where new opportunities will land.</div>
-      <a class="cta" id="board-link" href="board.html">Open the opportunity board →</a>
-    </div>
+    <textarea id="c-template" readonly></textarea>
+    <button class="copy-btn t-copy" onclick="copyText(document.getElementById('c-template').value, this, 'Copy message')">Copy message</button>
+    <div class="hint">We reply within one business day — with real talk about whether your market can support the machine you want.</div>
   </div>
 </div>
 
 <script>
 var LEAD_ENDPOINT = 'https://formspree.io/f/mgognyge';
+var CONTACT_EMAIL = 'jason@meta57.xyz';
 
-function openBoard() {
-  document.getElementById('board-step-1').classList.add('show');
-  document.getElementById('board-step-2').classList.remove('show');
-  document.getElementById('optin-err').textContent = '';
-  document.getElementById('board-overlay').classList.add('open');
-  setTimeout(function(){ var e = document.getElementById('optin-email'); if (e) e.focus(); }, 60);
+/* Machines: e/p/f scores (as on the board) + finder estimates:
+   cap: 1 <$1k · 2 $1–5k · 3 $5–25k · 4 $25k+   (minimum realistic capital band)
+   perDeal: est. spread per completed deal [$lo, $hi] — market research, conservative
+   dealsMo: est. opportunities a machine surfaces per month worth acting on
+   q: marketplace query · src: optional custom sources replacing the default four */
+var MACHINES = [
+  {n:"Car Flip Scanner", e:8,p:7,f:9, cap:3, perDeal:[1500,4000], dealsMo:6, q:"truck OR car clean title", cl:"cta"},
+  {n:"Equipment Liquidation Sniper", e:8,p:7,f:8, cap:2, perDeal:[300,1200], dealsMo:8, q:"restaurant equipment", cl:"bfa"},
+  {n:"Gov Surplus Sniper", e:8,p:7,f:8, cap:2, perDeal:[400,1500], dealsMo:6, q:"surplus auction tools", cl:"sss",
+   src:[{l:"GovDeals near you", u:"https://www.govdeals.com/"}, {l:"GSA Auctions", u:"https://gsaauctions.gov/"}, {l:"eBay SOLD comps", u:"EBAY"}]},
+  {n:"Estate Sale Early-Bird", e:8,p:6,f:9, cap:1, perDeal:[150,600], dealsMo:8, q:"estate sale",
+   src:[{l:"EstateSales.net near you", u:"https://www.estatesales.net/"}, {l:"Craigslist garage/estate", u:"CL:gms"}, {l:"eBay SOLD comps", u:"EBAY"}]},
+  {n:"Expired Domain Harvester", e:9,p:5,f:9, cap:1, perDeal:[100,800], dealsMo:8, q:"domain",
+   src:[{l:"ExpiredDomains.net", u:"https://www.expireddomains.net/"}, {l:"GoDaddy Auctions", u:"https://auctions.godaddy.com/"}]},
+  {n:"Boat & Jet Ski Flip Scanner", e:8,p:7,f:7, cap:3, perDeal:[1000,3500], dealsMo:4, q:"boat OR jet ski", cl:"boo"},
+  {n:"eBay Mislisting Sniper", e:9,p:4,f:10, cap:1, perDeal:[50,300], dealsMo:12, q:"",
+   src:[{l:"eBay ending soon, no bids", u:"https://www.ebay.com/sch/i.html?_nkw=&_sop=1&LH_Auction=1"}, {l:"eBay SOLD comps", u:"EBAY"}]},
+  {n:"Storage Unit Auction Scout", e:8,p:6,f:8, cap:1, perDeal:[200,1000], dealsMo:6, q:"storage auction",
+   src:[{l:"StorageTreasures near you", u:"https://www.storagetreasures.com/"}, {l:"eBay SOLD comps", u:"EBAY"}]},
+  {n:"Mobile Home / RV Flip Scout", e:7,p:7,f:7, cap:3, perDeal:[2000,6000], dealsMo:3, q:"RV OR mobile home", cl:"rva"},
+  {n:"Sports Card Grading Arbitrage", e:7,p:6,f:8, cap:1, perDeal:[100,500], dealsMo:8, q:"sports cards lot"},
+  {n:"Pallet & Returns Scorer", e:7,p:6,f:8, cap:1, perDeal:[150,600], dealsMo:8, q:"pallet liquidation returns",
+   src:[{l:"B-Stock auctions", u:"https://bstock.com/"}, {l:"Liquidation.com", u:"https://www.liquidation.com/"}, {l:"eBay SOLD comps", u:"EBAY"}]},
+  {n:"Collectible Watch Arbitrage", e:7,p:6,f:7, cap:2, perDeal:[300,1500], dealsMo:5, q:"watch seiko OR tudor OR omega"},
+  {n:"Domain + Business Name Broker", e:8,p:5,f:7, cap:1, perDeal:[200,1500], dealsMo:5, q:"domain",
+   src:[{l:"ExpiredDomains.net", u:"https://www.expireddomains.net/"}, {l:"Namecheap Market", u:"https://www.namecheap.com/market/"}]},
+  {n:"Vending Route Finder", e:7,p:6,f:5, cap:2, perDeal:[1000,4000], dealsMo:2, q:"vending machines route"},
+  {n:"Restaurant Space Matcher", e:4,p:8,f:4, cap:1, perDeal:[2000,10000], dealsMo:1, q:"restaurant space for lease",
+   src:[{l:"Craigslist commercial", u:"CL:off"}, {l:"LoopNet restaurant spaces", u:"https://www.loopnet.com/search/restaurants/for-lease/"}]},
+  {n:"BizBuySell Deal Screener", e:7,p:9,f:7, cap:4, perDeal:[20000,100000], dealsMo:2, q:"business for sale",
+   src:[{l:"BizBuySell near you", u:"https://www.bizbuysell.com/businesses-for-sale/"}, {l:"Craigslist biz for sale", u:"CL:bfs"}]},
+  {n:"Website/SaaS Acquisition Screener", e:7,p:8,f:7, cap:4, perDeal:[5000,50000], dealsMo:2, q:"website",
+   src:[{l:"Flippa live listings", u:"https://flippa.com/search"}, {l:"Acquire.com", u:"https://acquire.com/"}]},
+  {n:"FSBO-to-Investor Matcher", e:6,p:9,f:6, cap:4, perDeal:[10000,40000], dealsMo:2, q:"for sale by owner house", cl:"rea"},
+  {n:"Foreclosure Auction Analyzer", e:5,p:9,f:6, cap:4, perDeal:[15000,60000], dealsMo:2, q:"foreclosure",
+   src:[{l:"Auction.com near you", u:"https://www.auction.com/"}, {l:"Craigslist real estate", u:"CL:rea"}]},
+  {n:"Airbnb Arbitrage Market Finder", e:6,p:7,f:6, cap:2, perDeal:[500,1500], dealsMo:3, q:"apartment for rent", cl:"apa"},
+  {n:"Heavy Equipment Cross-Border Arb", e:4,p:9,f:5, cap:4, perDeal:[8000,30000], dealsMo:2, q:"excavator OR skid steer", cl:"hva",
+   src:[{l:"Ritchie Bros auctions", u:"https://www.rbauction.com/"}, {l:"Craigslist heavy equipment", u:"CL:hva"}, {l:"eBay SOLD comps", u:"EBAY"}]},
+  {n:"Laundromat Deal Analyzer", e:6,p:8,f:4, cap:4, perDeal:[20000,80000], dealsMo:1, q:"laundromat for sale",
+   src:[{l:"BizBuySell laundromats", u:"https://www.bizbuysell.com/laundromats-and-coin-laundry-businesses-for-sale/"}, {l:"Craigslist biz for sale", u:"CL:bfs"}]},
+  {n:"Tax Deed Auction Scout", e:5,p:9,f:5, cap:3, perDeal:[5000,25000], dealsMo:1, q:"land",
+   src:[{l:"Your county tax deed sales", u:"https://www.google.com/search?q=tax+deed+auction+calendar+near+ZIP"}, {l:"Craigslist land", u:"CL:rea"}]},
+  {n:"Liquor License Arbitrage Tracker", e:5,p:9,f:3, cap:4, perDeal:[15000,80000], dealsMo:1, q:"liquor license",
+   src:[{l:"Search license brokers", u:"https://www.google.com/search?q=liquor+license+for+sale+near+ZIP"}]},
+  {n:"Billboard & Land Lease Finder", e:5,p:8,f:3, cap:3, perDeal:[3000,15000], dealsMo:1, q:"land highway", cl:"rea"}
+];
+
+function scoreOf(m) { return Math.round((m.e*0.3 + m.p*0.4 + m.f*0.3) * 10); }
+function mid(r) { return (r[0] + r[1]) / 2; }
+function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+/* ---------- Wizard state ---------- */
+var F = { goal: 0, timeLabel: '', timeDays: 0, cap: 0, capLabel: '', zip: '', name: '', email: '', matches: [] };
+var curStep = 1;
+
+function showStep(n) {
+  curStep = n;
+  document.querySelectorAll('.f-step').forEach(function(s){ s.classList.toggle('on', +s.getAttribute('data-step') === n); });
+  var back = document.getElementById('f-back');
+  back.classList.toggle('show', n > 1 && n <= 5);
+  var dots = document.querySelectorAll('.f-dot');
+  dots.forEach(function(d, i){ d.classList.toggle('on', i <= Math.min(n,5) - 1); });
+  document.getElementById('f-dots').style.visibility = n <= 5 ? 'visible' : 'hidden';
+  if (n === 4) setTimeout(function(){ document.getElementById('zip-input').focus(); }, 80);
+  if (n === 5) setTimeout(function(){ document.getElementById('email-input').focus(); }, 80);
 }
-function closeBoard() { document.getElementById('board-overlay').classList.remove('open'); }
+function stepBack() { if (curStep > 1 && curStep <= 5) showStep(curStep - 1); }
 
-document.getElementById('optin-form').addEventListener('submit', function(ev) {
-  ev.preventDefault();
-  var email = document.getElementById('optin-email').value.trim();
-  var name = document.getElementById('optin-name').value.trim();
-  var err = document.getElementById('optin-err');
-  var btn = document.getElementById('optin-btn');
+function pickGoal(v) { F.goal = v; showStep(2); }
+function pickGoalCustom() {
+  var raw = document.getElementById('goal-custom').value.replace(/[^0-9]/g, '');
+  var v = parseInt(raw, 10);
+  if (!v || v < 100) { document.getElementById('err-1').textContent = 'Enter an amount of at least $100.'; return; }
+  document.getElementById('err-1').textContent = '';
+  pickGoal(v);
+}
+function pickTime(label, days) { F.timeLabel = label; F.timeDays = days; showStep(3); }
+function pickCap(band, label) { F.cap = band; F.capLabel = label; showStep(4); }
+function pickZip() {
+  var z = document.getElementById('zip-input').value.trim();
+  if (!/^\d{5}$/.test(z)) { document.getElementById('err-4').textContent = 'Enter a 5-digit zip, or skip.'; return; }
+  document.getElementById('err-4').textContent = '';
+  F.zip = z; showStep(5);
+}
+function skipZip() { F.zip = ''; showStep(5); }
+
+/* ---------- Matcher ---------- */
+function runMatch() {
+  var eligible = MACHINES.filter(function(m){ return m.cap <= F.cap; });
+  var stretch = [];
+  if (eligible.length < 3) {
+    stretch = MACHINES.filter(function(m){ return m.cap === F.cap + 1; });
+  }
+  function rank(m) {
+    var pace = mid(m.perDeal) * m.dealsMo; // est. $/30 days if you worked every surfaced deal
+    if (!F.timeDays) return Math.log(pace + 1) * 18 + scoreOf(m);
+    var expected = pace * (F.timeDays / 30);
+    var ratio = Math.min(expected / F.goal, 1.5);
+    return ratio * 100 + scoreOf(m) * 0.6;
+  }
+  eligible.sort(function(a,b){ return rank(b) - rank(a); });
+  stretch.sort(function(a,b){ return rank(b) - rank(a); });
+  var out = eligible.slice(0, 3).map(function(m){ return { m: m, stretch: false }; });
+  while (out.length < 3 && stretch.length) out.push({ m: stretch.shift(), stretch: true });
+  return out;
+}
+
+function fitLine(m) {
+  var pace = mid(m.perDeal) * m.dealsMo;
+  var s = 'Fits ' + (m.cap <= F.cap ? F.capLabel + ' capital' : 'a stretch above your capital band') +
+    ' · est. ' + fmt(m.perDeal[0]) + '–' + fmt(m.perDeal[1]) + ' per deal · ~' + m.dealsMo + (m.dealsMo === 1 ? ' deal surfaces' : ' deals surface') + ' monthly.';
+  if (F.timeDays) {
+    var expected = pace * (F.timeDays / 30);
+    if (expected >= F.goal) {
+      s += ' At that pace, <b>' + fmt(F.goal) + ' in ' + F.timeLabel + ' is a realistic target</b> if you work the alerts.';
+    } else {
+      s += ' An honest read: that pace suggests <b>closer to ' + fmt(expected) + '</b> in ' + F.timeLabel + ' — hitting ' + fmt(F.goal) + ' means taking more of the swings.';
+    }
+  } else {
+    s += ' Est. pace if you work every alert: <b>~' + fmt(pace) + ' / month</b>.';
+  }
+  return s;
+}
+
+/* ---------- Live sources ---------- */
+function sourcesFor(m) {
+  var q = encodeURIComponent(m.q || m.n);
+  var zip = F.zip;
+  var defaults = [
+    { l: 'Craigslist near you', u: 'https://www.craigslist.org/search/' + (m.cl || 'sss') + '?query=' + q + (zip ? '&postal=' + zip + '&search_distance=50' : '') },
+    { l: 'Facebook Marketplace', u: 'https://www.facebook.com/marketplace/search/?query=' + q },
+    { l: 'OfferUp', u: 'https://offerup.com/search?q=' + q },
+    { l: 'eBay SOLD comps', u: 'EBAY' }
+  ];
+  var list = m.src || defaults;
+  return list.map(function(s){
+    var u = s.u;
+    if (u === 'EBAY') u = 'https://www.ebay.com/sch/i.html?_nkw=' + q + '&LH_Sold=1&LH_Complete=1';
+    if (u.indexOf('CL:') === 0) u = 'https://www.craigslist.org/search/' + u.slice(3) + '?query=' + q + (zip ? '&postal=' + zip + '&search_distance=50' : '');
+    u = u.replace('ZIP', zip || 'me');
+    return { l: s.l, u: u };
+  });
+}
+
+/* ---------- Submit / results ---------- */
+function submitFinder() {
+  var email = document.getElementById('email-input').value.trim();
+  F.name = document.getElementById('name-input').value.trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    err.textContent = 'Enter a valid email so we can send you the board.';
+    document.getElementById('err-5').textContent = 'Enter a valid email to get your matches.';
     return;
   }
-  err.textContent = '';
-  btn.disabled = true; btn.textContent = 'Unlocking…';
-  function reveal() {
-    btn.disabled = false; btn.textContent = 'Show me the board →';
-    document.getElementById('board-step-1').classList.remove('show');
-    document.getElementById('board-step-2').classList.add('show');
-  }
-  var fd = new FormData();
-  fd.append('email', email);
-  if (name) fd.append('name', name);
-  fd.append('_subject', 'New Deal Machines board opt-in');
-  fd.append('source', 'workdifferentai-site');
-  fetch(LEAD_ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
-    .then(function(){ reveal(); })
-    .catch(function(){ reveal(); }); // never strand the visitor — board opens either way
-});
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeBoard(); });
+  document.getElementById('err-5').textContent = '';
+  F.email = email;
+  F.matches = runMatch();
 
-/* Section reveals (respects prefers-reduced-motion via CSS) */
+  var fd = new FormData();
+  fd.append('email', F.email);
+  if (F.name) fd.append('name', F.name);
+  fd.append('_subject', 'Finder lead: ' + fmt(F.goal) + ' in ' + F.timeLabel);
+  fd.append('goal', fmt(F.goal));
+  fd.append('timeframe', F.timeLabel);
+  fd.append('capital', F.capLabel);
+  fd.append('zip', F.zip || '(skipped)');
+  fd.append('matches', F.matches.map(function(x){ return x.m.n; }).join(', '));
+  fd.append('source', 'workdifferentai-finder');
+  fetch(LEAD_ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } }).catch(function(){});
+
+  showStep(6);
+  var lines = ['Scoring 25 markets against your goal…', 'Checking capital fit…', 'Ranking by spread × frequency…'];
+  var fill = document.getElementById('m-fill');
+  var li = 0;
+  fill.style.width = '18%';
+  var iv = setInterval(function(){
+    li++;
+    if (li < lines.length) {
+      document.getElementById('m-line').textContent = lines[li];
+      fill.style.width = (18 + li * 34) + '%';
+    } else {
+      clearInterval(iv);
+      fill.style.width = '100%';
+      setTimeout(renderResults, 350);
+    }
+  }, 700);
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function renderResults() {
+  document.getElementById('r-goal').innerHTML = 'For <b>' + fmt(F.goal) + '</b>' +
+    (F.timeDays ? ' in <b>' + F.timeLabel + '</b>' : ' at <b>the best available pace</b>') +
+    ' with <b>' + F.capLabel + '</b>' + (F.zip ? ' near <b>' + F.zip + '</b>' : '') + ':';
+  var html = '';
+  F.matches.forEach(function(x, i) {
+    var m = x.m;
+    var srcs = sourcesFor(m);
+    html += '<div class="r-card' + (i === 0 ? ' top' : '') + '">'
+      + '<div class="r-rank">' + (i === 0 ? 'BEST MATCH' : '#' + (i+1) + ' MATCH') + (x.stretch ? ' · STRETCH PICK — needs a bit more capital' : '') + '</div>'
+      + '<div class="r-name-row"><div class="r-name">' + esc(m.n) + '</div><div class="r-score">' + scoreOf(m) + '</div></div>'
+      + '<div class="r-fit">' + fitLine(m) + '</div>'
+      + '<div class="r-est">EST · FROM OUR MARKET RESEARCH · NOT A GUARANTEE</div>'
+      + '<div class="r-actions">'
+      +   '<button class="r-btn live" onclick="toggleSources(this)">See live listings now →</button>'
+      +   '<button class="r-btn build" onclick="openContact(\'' + esc(m.n).replace(/'/g, "\\'") + '\')">Build this for my zip →</button>'
+      + '</div>'
+      + '<div class="r-sources"><div class="s-cap">These are the raw feeds — live right now' + (F.zip ? ' near ' + F.zip : '') + '. Your machine would read them every 15 minutes and do the comp math for you.</div>'
+      +   srcs.map(function(s){ return '<a href="' + s.u + '" target="_blank" rel="noopener"><span>↗</span> ' + esc(s.l) + '</a>'; }).join('')
+      + '</div>'
+      + '</div>';
+  });
+  document.getElementById('r-list').innerHTML = html;
+  showStep(7);
+}
+function toggleSources(btn) {
+  var card = btn.closest('.r-card');
+  card.querySelector('.r-sources').classList.toggle('open');
+}
+function restartFinder() {
+  F = { goal: 0, timeLabel: '', timeDays: 0, cap: 0, capLabel: '', zip: '', name: F.name, email: F.email, matches: [] };
+  document.getElementById('goal-custom').value = '';
+  document.getElementById('zip-input').value = '';
+  showStep(1);
+}
+
+/* Enter-key advances */
+document.getElementById('goal-custom').addEventListener('keydown', function(e){ if (e.key === 'Enter') pickGoalCustom(); });
+document.getElementById('zip-input').addEventListener('keydown', function(e){ if (e.key === 'Enter') pickZip(); });
+document.getElementById('email-input').addEventListener('keydown', function(e){ if (e.key === 'Enter') submitFinder(); });
+
+/* ---------- Contact panel ---------- */
+function openContact(machine) {
+  var goalBits = fmt(F.goal || 0) !== '$0'
+    ? ('My goal: ' + fmt(F.goal) + ' in ' + (F.timeLabel || 'the best window') + '\nCapital I can work with: ' + (F.capLabel || '') + '\nMy zip: ' + (F.zip || '') + '\n')
+    : 'My city / market: \nCapital I can work with: \n';
+  var body = 'Hi Jason,\n\nI want a Deal Machine built to hunt my market.\n\n'
+    + 'The opportunity I want: ' + (machine || '') + '\n' + goalBits
+    + '\nWhat’s the build and what does it take?\n\nThanks!';
+  document.getElementById('c-template').value = body;
+  var subject = 'Deal Machine build — ' + (machine || 'my market');
+  document.getElementById('c-mailto').href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  document.getElementById('contact-overlay').classList.add('open');
+}
+function closeContact() { document.getElementById('contact-overlay').classList.remove('open'); }
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeContact(); });
+function copyText(text, btn, label) {
+  function done(ok) {
+    btn.textContent = ok ? 'Copied ✓' : 'Select & copy';
+    btn.classList.toggle('copied', ok);
+    setTimeout(function(){ btn.textContent = label; btn.classList.remove('copied'); }, 1800);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ fallbackCopy(text, done); });
+  } else { fallbackCopy(text, done); }
+}
+function fallbackCopy(text, done) {
+  var ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select(); var ok=false;
+  try { ok = document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta); done(ok);
+}
+
+/* Section reveals */
 (function(){
   if (!('IntersectionObserver' in window)) {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
