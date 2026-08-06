@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#141210" />
 <title>Private Deal Machine Demo | WorkDifferentAI</title>
 <meta name="robots" content="noindex,nofollow,noarchive" />
-<meta name="description" content="Private interactive demo of the WorkDifferentAI Equipment Liquidation and Government Surplus Deal Machines." />
+<meta name="description" content="Private live control room for 25 allowlisted WorkDifferentAI Deal Machine agents." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔶</text></svg>" />
 <style>
 @font-face{font-family:Fraunces;font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/fraunces.woff2) format('woff2')}
@@ -75,6 +75,25 @@ body.locked{overflow:hidden}
 .progress{height:4px;background:#34302c;border-radius:3px;overflow:hidden;margin-top:17px}.progress i{display:block;width:0;height:100%;background:#ff6a3c;transition:width .45s ease}
 .run-log{font-size:10px;color:#9f978e;margin-top:9px;min-height:16px}
 
+/* Live agent control room */
+.control-room{margin:30px 0;background:#fff;border:2px solid var(--ink);border-radius:16px;overflow:hidden}
+.control-head{padding:22px 22px 17px;display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:1px solid var(--line)}
+.control-head h2{font-size:30px;line-height:1}.control-head p{font-size:10px;color:var(--muted);margin-top:7px;max-width:650px}
+.bridge-state{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--muted);white-space:nowrap}.bridge-state i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#aaa;margin-right:6px}.bridge-state.online{color:var(--green)}.bridge-state.online i{background:#2db75d;box-shadow:0 0 0 4px rgba(45,183,93,.12)}.bridge-state.busy{color:var(--orange)}.bridge-state.busy i{background:var(--orange)}
+.control-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:13px 22px;background:var(--soft);border-bottom:1px solid var(--line)}
+.filter-btn{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 11px;font-size:9px}.filter-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.toolbar-spacer{flex:1}.selected-count{font-size:9px;color:var(--muted)}
+.action-btn{border:0;background:var(--orange);color:#fff;border-radius:20px;padding:9px 13px;font-size:9px;font-weight:700}.action-btn.secondary{background:var(--ink)}.action-btn:disabled{opacity:.4;cursor:not-allowed}
+.skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px}
+.skill-card{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;min-height:170px;transition:.15s;background:var(--card)}.skill-card:hover{border-color:#a69c91;transform:translateY(-1px)}.skill-card.selected{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange)}
+.skill-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.skill-check{width:17px;height:17px;accent-color:var(--orange)}
+.skill-family{font-size:8px;letter-spacing:1px;color:var(--orange);font-weight:700}.skill-card h3{font-size:18px;line-height:1.05;margin:6px 0}.skill-card p{font-size:9px;color:var(--muted);flex:1}.skill-meta{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}.skill-meta span{font-size:7px;border:1px solid var(--line);border-radius:12px;padding:4px 6px;color:var(--muted)}
+.skill-run{align-self:flex-start;border:0;background:var(--ink);color:#fff;border-radius:18px;padding:8px 10px;font-size:8px;font-weight:700}.skill-run:disabled{opacity:.45;cursor:wait}
+.runs{border-top:1px solid var(--line);padding:18px 22px 22px}.runs-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.runs h3{font-size:22px}.runs-note{font-size:8px;color:var(--muted)}
+.run-list{display:grid;gap:8px;margin-top:12px}.run-item{border:1px solid var(--line);border-radius:10px;overflow:hidden}.run-summary{display:grid;grid-template-columns:1fr auto;gap:10px;padding:11px 12px;align-items:center}.run-name{font-size:10px;font-weight:700}.run-time{font-size:8px;color:var(--muted);margin-top:2px}.run-status{font-size:8px;font-weight:700;letter-spacing:1px}.run-status.queued{color:var(--blue)}.run-status.running{color:var(--orange)}.run-status.completed{color:var(--green)}.run-status.failed{color:var(--red)}
+.run-output{white-space:pre-wrap;word-break:break-word;background:#191714;color:#eee8df;padding:14px;font:9px/1.55 'JetBrains Mono',monospace;max-height:360px;overflow:auto;border:0;border-top:1px solid #35312c}.empty-runs{font-size:10px;color:var(--muted);padding:8px 0}
+.control-warning{font-size:8px;color:#756d64;padding:0 22px 18px}.control-warning b{color:var(--ink)}
+
 .feed-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 10px}.feed-title h2{font-size:26px}.feed-title span{font-size:9px;color:var(--muted);letter-spacing:1px}
 .deal-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
 .alert{background:var(--card);border:2px solid var(--orange);border-radius:14px;padding:19px}.alert-label{font-size:9px;letter-spacing:1.8px;color:var(--orange);font-weight:700}.alert h3{font-size:23px;margin:5px 0 2px}.ask{font-size:11px;color:var(--muted)}
@@ -88,8 +107,10 @@ body.locked{overflow:hidden}
 
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:#fff;border-radius:24px;padding:11px 18px;font-size:10px;opacity:0;pointer-events:none;transition:.25s;z-index:80}.toast.show{opacity:1;transform:translate(-50%,0)}
 
-@media(max-width:760px){.hero{grid-template-columns:1fr}.hero-stat{text-align:left}.metrics{grid-template-columns:repeat(2,1fr)}.pipeline{grid-template-columns:repeat(2,1fr)}.pipe:nth-child(2):after{display:none}.deal-grid{grid-template-columns:1fr}.proof-grid{grid-template-columns:1fr}.cta-band{grid-template-columns:1fr}.machine-head{grid-template-columns:1fr}.status{text-align:left}}
-@media(max-width:470px){.shell{padding:25px 18px 55px}.topbar-in{padding:13px 18px}.demo-pill{display:none}.metrics{grid-template-columns:1fr 1fr}.metric .v{font-size:20px}.machine-tabs{display:grid;grid-template-columns:1fr 1fr}.tab{padding:10px 7px}.pipeline{grid-template-columns:1fr}.pipe:not(:last-child):after{content:'↓';right:16px;top:auto;bottom:-12px}.comp{grid-template-columns:1fr}.cycle-top{align-items:flex-start;flex-direction:column}.run-btn{width:100%}}
+@media(max-width:900px){.skill-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero-stat{text-align:left}.metrics{grid-template-columns:repeat(2,1fr)}.pipeline{grid-template-columns:repeat(2,1fr)}.pipe:nth-child(2):after{display:none}.deal-grid{grid-template-columns:1fr}.proof-grid{grid-template-columns:1fr}.cta-band{grid-template-columns:1fr}.machine-head{grid-template-columns:1fr}.status{text-align:left}.control-head{flex-direction:column}.bridge-state{white-space:normal}}
+@media(max-width:540px){.skill-grid{grid-template-columns:1fr}.control-toolbar{align-items:stretch}.toolbar-spacer{display:none}.action-btn{flex:1}.selected-count{width:100%}}
+@media(max-width:470px){.shell{padding:25px 18px 55px}.topbar-in{padding:13px 18px}.demo-pill{display:none}.metrics{grid-template-columns:1fr 1fr}.metric .v{font-size:20px}.machine-tabs{display:grid;grid-template-columns:1fr 1fr}.tab{padding:10px 7px}.pipeline{grid-template-columns:1fr}.pipe:not(:last-child):after{content:'↓';right:16px;top:auto;bottom:-12px}.comp{grid-template-columns:1fr}.cycle-top{align-items:flex-start;flex-direction:column}.run-btn{width:100%}.control-head,.runs{padding-left:16px;padding-right:16px}.skill-grid{padding:10px}.control-toolbar{padding:12px}}
 </style>
 </head>
 <body class="locked">
@@ -97,39 +118,51 @@ body.locked{overflow:hidden}
   <div class="gate-card">
     <div class="gate-mark">WORKDIFFERENTAI · PRIVATE DEMO</div>
     <h1>Deal flow,<br/>without the hunt.</h1>
-    <p>Enter the prospect demo passcode to explore a static interactive simulation of two Deal Machines configured for a South Florida market.</p>
+    <p>Enter the operator passcode to connect to the live Hermes bridge and control 25 allowlisted Deal Machine agents.</p>
     <form class="pass-row" id="gate-form">
       <input type="password" id="passcode" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="Demo passcode" aria-label="Demo passcode" />
       <button type="submit">Enter →</button>
     </form>
     <div class="gate-error" id="gate-error" role="status" aria-live="polite"></div>
     <a class="gate-access" href="mailto:jason@meta57.xyz?subject=Deal%20Machine%20demo%20access">Need access? Request a passcode.</a>
-    <p class="gate-fine">PRIVATE PREVIEW · SAMPLE DATA · ESTIMATES, NOT GUARANTEES</p>
+    <p class="gate-fine">SERVER-AUTHENTICATED · LIVE PUBLIC-DATA HUNTS · ESTIMATES, NOT GUARANTEES</p>
   </div>
 </div>
 
 <header class="topbar">
   <div class="topbar-in">
     <div class="brand"><b>◆</b> WORKDIFFERENTAI · DEAL MACHINE CONTROL ROOM</div>
-    <div class="top-actions"><span class="demo-pill">PRIVATE PROSPECT DEMO</span><button class="exit-btn" onclick="lockDemo()">Lock</button></div>
+    <div class="top-actions"><span class="demo-pill">LIVE OPERATOR DEMO</span><button class="exit-btn" onclick="lockDemo()">Lock</button></div>
   </div>
 </header>
 
 <main class="shell" id="demo-app" tabindex="-1">
   <section class="hero">
     <div>
-      <div class="eyebrow">INTERACTIVE SIMULATION · NO LIVE DATA</div>
-      <h1>Your market gets watched.<br/>The math arrives first.</h1>
-      <p>This is how a Deal Machine turns scattered listings into a short, decision-ready alert: find the asset, verify sold comps, subtract fees and friction, and stay quiet unless the spread survives.</p>
+      <div class="eyebrow">LIVE HERMES BRIDGE · 25 ALLOWLISTED AGENTS</div>
+      <h1>Trigger the hunt.<br/>Watch the agent work.</h1>
+      <p>Select one machine, up to five, or deliberately queue the full catalog. Hermes runs each cycle in isolation, respects dedupe state, verifies comps and returns the decision-ready output here.</p>
     </div>
     <div class="hero-stat"><div class="num">33433</div><div class="cap">DEMO MARKET · SOUTH FLORIDA</div></div>
   </section>
 
   <section class="metrics" aria-label="Demo machine metrics">
-    <div class="metric"><div class="k">MACHINES MODELED</div><div class="v">2 / 2</div><div class="s">configured hunt agents</div></div>
-    <div class="metric"><div class="k">DEMO SOURCES</div><div class="v">5</div><div class="s">public, policy-safe feeds</div></div>
-    <div class="metric"><div class="k">EQUIPMENT CADENCE</div><div class="v">45 min</div><div class="s">7 AM–10 PM ET</div></div>
-    <div class="metric"><div class="k">SURPLUS CADENCE</div><div class="v">2× daily</div><div class="s">8 AM + 4 PM ET</div></div>
+    <div class="metric"><div class="k">AGENTS AVAILABLE</div><div class="v">25 / 25</div><div class="s">fixed, allowlisted skills</div></div>
+    <div class="metric"><div class="k">EXECUTION</div><div class="v">1 at a time</div><div class="s">sequential safety queue</div></div>
+    <div class="metric"><div class="k">ALERT CAP</div><div class="v">Best 5</div><div class="s">per agent cycle</div></div>
+    <div class="metric"><div class="k">AUTH SESSION</div><div class="v">2 hours</div><div class="s">server-issued token</div></div>
+  </section>
+
+  <section class="control-room" aria-labelledby="control-title">
+    <div class="control-head"><div><div class="eyebrow">LIVE CONTROL PLANE</div><h2 id="control-title">Deal Machine launchpad</h2><p>The browser sends only an allowlisted skill slug. The private bridge supplies the fixed operating procedure; arbitrary prompts and shell input are impossible from this page.</p></div><div class="bridge-state" id="bridge-state"><i></i>CONNECTING</div></div>
+    <div class="control-toolbar" id="control-toolbar">
+      <button class="filter-btn active" data-filter="All">All 25</button><button class="filter-btn" data-filter="Fast">Fast</button><button class="filter-btn" data-filter="Deadline">Deadline</button><button class="filter-btn" data-filter="Slow">Slow</button><button class="filter-btn" data-filter="On demand">On demand</button>
+      <span class="toolbar-spacer"></span><span class="selected-count" id="selected-count">0 selected</span>
+      <button class="action-btn" id="run-selected" disabled>Run selected</button><button class="action-btn secondary" id="run-all">Run all 25</button>
+    </div>
+    <div class="skill-grid" id="skill-grid"><div class="empty-runs">Loading live skill catalog…</div></div>
+    <div class="runs"><div class="runs-head"><h3>Run queue & results</h3><span class="runs-note">Auto-refreshes every 5 seconds</span></div><div class="run-list" id="run-list"><div class="empty-runs">No runs in this session.</div></div></div>
+    <p class="control-warning"><b>Guardrails:</b> public-data research only · no arbitrary prompts · no bidding, buying or seller messages · one agent at a time · 30-cycle daily cap · run-all once per 24 hours.</p>
   </section>
 
   <div class="machine-tabs" role="tablist">
@@ -143,7 +176,7 @@ body.locked{overflow:hidden}
       <div class="status">DEMO CONFIG · 45-MINUTE CADENCE</div>
     </div>
     <div class="pipeline"><div class="pipe"><div class="n">01 · FETCH</div><b>Scan listings</b><p>One polite request per tuned query.</p></div><div class="pipe"><div class="n">02 · FILTER</div><b>Remove noise</b><p>Dedupe, price bands, scam signals.</p></div><div class="pipe"><div class="n">03 · VERIFY</div><b>Check SOLD</b><p>Comparable condition and model only.</p></div><div class="pipe"><div class="n">04 · ALERT</div><b>Send the math</b><p>Only if estimated spread survives.</p></div></div>
-    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">A short simulation of the real decision pipeline.</p></div><button class="run-btn" onclick="runCycle('equipment',this)">Run demo cycle →</button></div><div class="progress" role="progressbar" aria-label="Equipment demo cycle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-equipment"></i></div><div class="run-log" id="log-equipment" role="status" aria-live="polite">Ready — sample listings are queued.</div></div>
+    <div class="cycle"><div class="cycle-top"><div><h3>Run the live equipment agent</h3><p class="cycle-copy">Queues one isolated Hermes cycle and returns the real result above.</p></div><button class="run-btn" onclick="triggerOne('equipment-liquidation-sniper')">Run live cycle →</button></div><div class="run-log" role="status">Public-data research only. No seller contact or transaction.</div></div>
     <div class="feed-title"><h2>Decision-ready output</h2><span>SAMPLE DATA · HONEST HAIRCUTS APPLIED</span></div>
     <div class="deal-grid">
       <article class="alert"><div class="alert-label">🔶 DEAL MACHINE · EQUIPMENT</div><h3>Turbo Air 48″ Prep Table</h3><div class="ask">Listed at $625 · Pompano Beach · “closing restaurant”</div><div class="comp"><div><small>COMPARABLE SOLD</small><b>$1,250–$1,575</b></div><div><small>EST. RESALE</small><b>$1,200</b></div><div><small>EST. SPREAD</small><b>$575</b></div></div><p class="verdict"><b>Verdict:</b> Worth inspecting today if the compressor holds temperature; the closing signal and named brand create real room.</p><div class="estimate">ESTIMATE AFTER FEES + FRICTION · NOT GUARANTEED PROFIT</div><a class="deal-link" href="#" onclick="demoOnly(event)">Open sample listing →</a></article>
@@ -157,7 +190,7 @@ body.locked{overflow:hidden}
       <div class="status">DEMO CONFIG · 8 AM + 4 PM ET</div>
     </div>
     <div class="pipeline"><div class="pipe"><div class="n">01 · FETCH</div><b>Scan Florida lots</b><p>Closing window and category filters.</p></div><div class="pipe"><div class="n">02 · FORECAST</div><b>Model bid-up</b><p>Assume popular lots rise 30–60%.</p></div><div class="pipe"><div class="n">03 · HAIRCUT</div><b>Price the risk</b><p>Fees, pickup, condition, logistics.</p></div><div class="pipe"><div class="n">04 · CEILING</div><b>Set max bid</b><p>The number where the deal stops.</p></div></div>
-    <div class="cycle"><div class="cycle-top"><div><h3>Watch one cycle work</h3><p class="cycle-copy">See how a low current bid becomes a conservative bid ceiling.</p></div><button class="run-btn" onclick="runCycle('gov',this)">Run demo cycle →</button></div><div class="progress" role="progressbar" aria-label="Government surplus demo cycle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-gov"></i></div><div class="run-log" id="log-gov" role="status" aria-live="polite">Ready — sample Florida lots are queued.</div></div>
+    <div class="cycle"><div class="cycle-top"><div><h3>Run the live surplus agent</h3><p class="cycle-copy">Queues one isolated Hermes cycle and returns the real result above.</p></div><button class="run-btn" onclick="triggerOne('gov-surplus-sniper')">Run live cycle →</button></div><div class="run-log" role="status">Research and bid-ceiling estimates only. The agent never bids.</div></div>
     <div class="feed-title"><h2>Decision-ready output</h2><span>SAMPLE DATA · BID-UP + PICKUP INCLUDED</span></div>
     <div class="deal-grid">
       <article class="alert"><div class="alert-label">🔶 DEAL MACHINE · GOV SURPLUS</div><h3>Generac 22kW Standby Generator</h3><div class="ask">Current bid $1,150 · closes Friday · Fort Lauderdale, FL</div><div class="comp"><div><small>COMPARABLE SOLD</small><b>$3,400–$4,200</b></div><div><small>EST. ALL-IN</small><b>$1,850</b></div><div><small>BID CEILING</small><b>$1,700</b></div></div><p class="verdict"><b>Verdict:</b> Local pickup protects the spread. Stop at $1,700 unless inspection confirms low hours and transfer switch included.</p><div class="estimate">ESTIMATE AFTER FEES, BID-UP + CONDITION RISK · NOT GUARANTEED PROFIT</div><a class="deal-link" href="#" onclick="demoOnly(event)">Open sample auction →</a></article>
@@ -170,24 +203,37 @@ body.locked{overflow:hidden}
     <div class="proof-grid"><div class="proof-item"><b>Selective by design</b><p>Most listings are rejected. One defensible opportunity beats ten hopeful maybes.</p></div><div class="proof-item"><b>Honest math</b><p>Every spread is estimated after fees, friction, bid-up and condition risk.</p></div><div class="proof-item"><b>Quiet automation</b><p>The machine speaks when money may be on the table—or when it needs tuning.</p></div></div>
   </section>
   <section class="cta-band"><div><h2>What should your machine hunt?</h2><p>We configure the market, rules, cadence, comp logic and alert channel around the opportunity you know.</p></div><a class="cta-link" href="mailto:jason@meta57.xyz?subject=Private%20Deal%20Machine%20demo%20follow-up">Design my machine →</a></section>
-  <p class="legal">PRIVATE PROSPECT DEMO · SAMPLE LISTINGS AND FIGURES ARE ILLUSTRATIVE ESTIMATES, NOT PROMISES OF PROFIT.<br/>WorkDifferentAI · Alacrity One LLC · Boca Raton, FL</p>
+  <p class="legal">PRIVATE OPERATOR DEMO · LIVE RUNS USE PUBLIC DATA; EXAMPLE CARDS REMAIN ILLUSTRATIVE. ALL VALUES ARE ESTIMATES, NOT PROMISES OF PROFIT.<br/>WorkDifferentAI · Alacrity One LLC · Boca Raton, FL</p>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite">Demo only — no live listing exposed.</div>
 <script>
-var PASS_HASH='2560766fc02b427a01dd0323ffafbaff45476a727ef3cc6a3a024e7784c277a3';
-var SESSION_KEY='wdai-deal-demo-unlocked';
-function bytesToHex(buf){return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('')}
-async function digest(s){var data=new TextEncoder().encode(s);return bytesToHex(await crypto.subtle.digest('SHA-256',data))}
-function unlock(){document.body.classList.remove('locked');document.getElementById('gate').classList.add('hidden');sessionStorage.setItem(SESSION_KEY,'1');document.getElementById('demo-app').focus()}
-function lockDemo(){sessionStorage.removeItem(SESSION_KEY);document.body.classList.add('locked');document.getElementById('passcode').value='';document.getElementById('gate').classList.remove('hidden');document.getElementById('passcode').focus()}
-if(sessionStorage.getItem(SESSION_KEY)==='1')unlock();
-document.getElementById('gate-form').addEventListener('submit',async function(e){e.preventDefault();var input=document.getElementById('passcode');var err=document.getElementById('gate-error');err.textContent='Checking…';try{if(await digest(input.value.trim())===PASS_HASH){err.textContent='';unlock()}else{err.textContent='That passcode did not match.';input.select()}}catch(x){err.textContent='This browser cannot verify the passcode.'}});
+var API_BASE='https://mac-mini.tail43c2ea.ts.net/deal-machine';
+var TOKEN_KEY='wdai-deal-bridge-token';
+var token=sessionStorage.getItem(TOKEN_KEY)||'';
+var catalog=[],selected=new Set(),activeFilter='All',pollTimer=null;
+function unlock(){document.body.classList.remove('locked');document.getElementById('gate').classList.add('hidden');document.getElementById('demo-app').focus()}
+function lockDemo(){sessionStorage.removeItem(TOKEN_KEY);token='';if(pollTimer)clearInterval(pollTimer);document.body.classList.add('locked');document.getElementById('passcode').value='';document.getElementById('gate').classList.remove('hidden');document.getElementById('passcode').focus()}
+async function api(path,options){options=options||{};options.headers=Object.assign({'Content-Type':'application/json'},options.headers||{});if(token)options.headers.Authorization='Bearer '+token;var response=await fetch(API_BASE+path,options);var data=await response.json().catch(function(){return {error:'Bridge returned an unreadable response'}});if(response.status===401&&path!='/auth/login')lockDemo();if(!response.ok)throw new Error(data.error||('Request failed: '+response.status));return data}
+document.getElementById('gate-form').addEventListener('submit',async function(e){e.preventDefault();var input=document.getElementById('passcode'),err=document.getElementById('gate-error'),btn=e.currentTarget.querySelector('button');err.textContent='Connecting to Hermes…';btn.disabled=true;try{var data=await api('/auth/login',{method:'POST',body:JSON.stringify({passcode:input.value.trim()})});token=data.token;sessionStorage.setItem(TOKEN_KEY,token);unlock();await initializeControlRoom()}catch(x){err.textContent=x.message==='Failed to fetch'?'Hermes bridge is offline. Try again shortly.':x.message;input.select()}finally{btn.disabled=false}});
+async function initializeControlRoom(){try{var data=await api('/api/skills');catalog=data.skills;setBridgeState('online','HERMES BRIDGE ONLINE');renderSkills();await refreshRuns();if(pollTimer)clearInterval(pollTimer);pollTimer=setInterval(refreshRuns,5000)}catch(x){setBridgeState('','BRIDGE OFFLINE');throw x}}
+if(token){initializeControlRoom().then(unlock).catch(function(){lockDemo()})}
+function setBridgeState(cls,text){var el=document.getElementById('bridge-state');el.className='bridge-state '+cls;el.innerHTML='<i></i>'+escapeHtml(text)}
+function escapeHtml(s){return String(s==null?'':s).replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]})}
+function renderSkills(){var list=catalog.filter(function(s){return activeFilter==='All'||s.category===activeFilter});var grid=document.getElementById('skill-grid');grid.innerHTML=list.map(function(s){var checked=selected.has(s.slug),range=Array.isArray(s.per_deal)?'$'+s.per_deal[0]+'–$'+s.per_deal[1]+' EST':'';return '<article class="skill-card '+(checked?'selected':'')+'" data-slug="'+s.slug+'"><div class="skill-top"><span class="skill-family">'+escapeHtml(s.category)+' · '+escapeHtml(s.family_label)+'</span><input class="skill-check" type="checkbox" '+(checked?'checked':'')+' aria-label="Select '+escapeHtml(s.title)+'" onchange="toggleSkill(\''+s.slug+'\',this.checked)"></div><h3>'+escapeHtml(s.title)+'</h3><p>'+escapeHtml(s.description)+'</p><div class="skill-meta"><span>'+escapeHtml(s.capital||'Variable capital')+'</span>'+(range?'<span>'+range+'</span>':'')+'<span>MAX '+s.max_alerts+' ALERTS</span></div><button class="skill-run" onclick="triggerOne(\''+s.slug+'\')">Run agent →</button></article>'}).join('')||'<div class="empty-runs">No skills in this filter.</div>';updateSelected()}
+function toggleSkill(slug,checked){if(checked){if(selected.size>=5){showToast('Select at most five per batch.');renderSkills();return}selected.add(slug)}else selected.delete(slug);renderSkills()}
+function updateSelected(){document.getElementById('selected-count').textContent=selected.size+' selected';document.getElementById('run-selected').disabled=selected.size===0}
+document.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');activeFilter=btn.dataset.filter;renderSkills()})});
+document.getElementById('run-selected').addEventListener('click',function(){queueRuns({skills:Array.from(selected)})});
+document.getElementById('run-all').addEventListener('click',function(){var confirmation=prompt('This queues 25 sequential agent cycles and may take over an hour. Type RUN ALL 25 to confirm.');if(confirmation==='RUN ALL 25')queueRuns({all:true,confirm:'RUN ALL 25'});else if(confirmation!==null)showToast('Run-all confirmation did not match.')});
+function triggerOne(slug){queueRuns({skills:[slug]})}
+async function queueRuns(payload){setBridgeState('busy','QUEUEING AGENT');try{var data=await api('/api/runs',{method:'POST',body:JSON.stringify(payload)});selected.clear();renderSkills();showToast(data.queued+' agent'+(data.queued===1?'':'s')+' queued.');await refreshRuns()}catch(x){showToast(x.message)}finally{setBridgeState('online','HERMES BRIDGE ONLINE')}}
+async function refreshRuns(){if(!token)return;try{var data=await api('/api/runs');renderRuns(data.runs);var busy=data.runs.some(function(r){return r.status==='queued'||r.status==='running'});setBridgeState(busy?'busy':'online',busy?'HERMES AGENT WORKING':'HERMES BRIDGE ONLINE')}catch(x){setBridgeState('','BRIDGE OFFLINE')}}
+async function openRun(id,el){if(el.dataset.loaded==='1'){el.dataset.loaded='0';el.querySelector('.run-output').classList.add('hidden');return}try{var data=await api('/api/runs/'+id);var out=el.querySelector('.run-output');out.textContent=data.run.output||data.run.error||'No output available yet.';out.classList.remove('hidden');el.dataset.loaded='1'}catch(x){showToast(x.message)}}
+function renderRuns(runs){var box=document.getElementById('run-list');if(!runs.length){box.innerHTML='<div class="empty-runs">No runs in this session.</div>';return}box.innerHTML=runs.map(function(r){var skill=catalog.find(function(s){return s.slug===r.skill}),title=skill?skill.title:r.skill,date=new Date((r.created_at||0)*1000).toLocaleString(),expand=r.status==='completed'||r.status==='failed';return '<article class="run-item" onclick="'+(expand?'openRun(\''+r.id+'\',this)':'')+'"><div class="run-summary"><div><div class="run-name">'+escapeHtml(title)+'</div><div class="run-time">'+escapeHtml(date)+'</div></div><div class="run-status '+r.status+'">'+r.status.toUpperCase()+'</div></div><pre class="run-output hidden"></pre></article>'}).join('')}
 function showMachine(name,btn){document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false')});document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById('panel-'+name).classList.add('active')}
 document.querySelector('.machine-tabs').addEventListener('keydown',function(e){var tabs=Array.from(document.querySelectorAll('.tab')),i=tabs.indexOf(document.activeElement);if(i<0||!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();var next=e.key==='ArrowRight'?(i+1)%tabs.length:(i-1+tabs.length)%tabs.length;tabs[next].focus();showMachine(tabs[next].dataset.machine,tabs[next])});
-var cycleCopy={equipment:['Sample: fetching 5 tuned Craigslist queries…','Sample: known listing IDs removed by dedupe.','Sample: comp-checking 3 candidates against SOLD data…','Sample result: 2 rejected · 1 estimated spread survives.','Sample alert ready — the owner gets the math, not the noise.'],gov:['Sample: fetching Florida GSA lots + GovDeals first pages…','Sample: filtering closing window and pickup distance…','Sample: modeling 30–60% bid-up + buyer fees…','Sample result: 3 rejected · 1 stays below the bid ceiling.','Sample alert ready — ceiling included.']};
-function setProgress(el,value){el.style.width=value+'%';el.parentElement.setAttribute('aria-valuenow',String(value))}
-function runCycle(name,btn){if(btn.disabled)return;btn.disabled=true;btn.textContent='Cycle running…';var bar=document.getElementById('progress-'+name),log=document.getElementById('log-'+name),steps=cycleCopy[name],i=0;setProgress(bar,10);log.textContent=steps[0];var timer=setInterval(function(){i++;if(i<steps.length){setProgress(bar,10+i*22);log.textContent=steps[i]}else{clearInterval(timer);setProgress(bar,100);btn.disabled=false;btn.textContent='Run again →';setTimeout(function(){setProgress(bar,0)},1000)}},720)}
-function demoOnly(e){e.preventDefault();var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1800)}
+function showToast(text){var t=document.getElementById('toast');t.textContent=text;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2400)}
+function demoOnly(e){e.preventDefault();showToast('Example card only — live results appear in the queue above.')}
 </script>
 </body>
 </html>
