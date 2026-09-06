@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /board.html
+Disallow: /demo.html
+Disallow: /media/
+
+Sitemap: https://workdifferentai.com/sitemap.xml
