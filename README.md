@@ -6,9 +6,9 @@ A sparse consulting landing — human genius first, AI as leverage. Not a produc
 
 ## Public site
 
-- `index.html` / `styles.css` — campaign landing
+- `index.html` / `styles.css` / `script.js` — campaign landing with a cycling B&W tribute
 - `fonts/` — self-hosted EB Garamond (lockup) and Source Sans 3 (body)
-- `assets/genius/` — public-domain stills, treated as a quiet B&W strip (no captions)
+- `assets/genius/` — public-domain stills (Einstein, Picasso, Earhart, Gandhi, Edison)
 - `404.html`, `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll`
 
 Primary contact: [jason@meta57.xyz](mailto:jason@meta57.xyz) — on the page as “A conversation →”

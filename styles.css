@@ -146,31 +146,117 @@ a {
   to { opacity: 1; transform: none; }
 }
 
-.genius {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: minmax(0, 1fr);
-  gap: 2px;
-  height: clamp(120px, 20vw, 220px);
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  background: var(--paper);
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.genius img {
+.tribute {
+  display: grid;
+  grid-template-columns: minmax(200px, 18rem) minmax(16rem, 1fr);
+  gap: 28px 56px;
+  align-items: center;
+  padding: 4px var(--pad) 12px;
+}
+
+.tribute-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-width: 18rem;
+  width: 100%;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.tribute-frame img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-width: 0;
-  min-height: 0;
   object-fit: cover;
+  opacity: 0;
   filter: grayscale(1) contrast(1.06);
-  opacity: 0.84;
 }
 
-.genius img:nth-child(1) { object-position: 28% 30%; }
-.genius img:nth-child(2) { object-position: 48% 26%; }
-.genius img:nth-child(3) { object-position: 50% 36%; }
-.genius img:nth-child(4) { object-position: 50% 30%; }
-.genius img:nth-child(5) { object-position: 52% 26%; }
+.tribute-frame img.is-on {
+  opacity: 0.92;
+}
+
+.tribute-frame img:nth-child(1) { object-position: 28% 22%; }
+.tribute-frame img:nth-child(2) { object-position: 48% 18%; }
+.tribute-frame img:nth-child(3) { object-position: 50% 28%; }
+.tribute-frame img:nth-child(4) { object-position: 50% 22%; }
+.tribute-frame img:nth-child(5) { object-position: 52% 18%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .tribute-frame img {
+    transition: opacity 0.9s ease;
+  }
+}
+
+.tribute-copy {
+  max-width: 26rem;
+  padding-bottom: 6px;
+}
+
+.tribute-name {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tribute-line {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  max-width: 22rem;
+}
+
+.tribute-dots {
+  display: flex;
+  gap: 2px;
+  margin: 22px 0 28px;
+}
+
+.tribute-dots button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tribute-dots button::after {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 7px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.tribute-dots button[aria-current="true"]::after {
+  background: var(--ink);
+}
+
+.tribute-through {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
 
 .beat {
   padding: clamp(56px, 9vh, 96px) var(--pad);
@@ -310,8 +396,13 @@ a {
     padding: 28px 0;
   }
 
-  .genius {
-    height: 108px;
+  .tribute {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tribute-frame {
+    max-width: 14.5rem;
   }
 
   .top {
