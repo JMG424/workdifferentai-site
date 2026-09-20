@@ -5,7 +5,7 @@
 
   var slides = [
     { name: "Einstein", line: "Saw the invisible structure of reality." },
-    { name: "Picasso", line: "Remade how we see." },
+    { name: "Picasso", line: "Broke the world apart so we could see it new." },
     { name: "Earhart", line: "Went where the maps ended." },
     { name: "Gandhi", line: "Changed power without force." },
     { name: "Edison", line: "Turned imagination into working light." }
