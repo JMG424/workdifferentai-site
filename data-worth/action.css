@@ -1,0 +1,339 @@
+/* Page-specific styles for the "What is your data worth?" action.
+   Builds on ../styles.css: same paper, ink, serif/sans, pad. */
+
+.top-back {
+  color: var(--muted);
+}
+
+.action-hero {
+  max-width: calc(40rem + var(--pad) * 2);
+  padding-bottom: clamp(24px, 4vh, 48px);
+}
+
+.action-kicker {
+  margin: 0 0 18px;
+}
+
+.lockup-small {
+  font-size: clamp(2.6rem, 7.5vw, 5.5rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .action-kicker { animation: rise 1.15s ease both; }
+  .action-lede { animation: rise 1.15s ease 0.18s both; }
+}
+
+.action-lede {
+  margin: 28px 0 0;
+  max-width: 34rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.quiet-lede {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.section-h {
+  margin: 0 0 28px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* Estimator */
+
+.estimator {
+  display: grid;
+  grid-template-columns: minmax(0, 34rem) minmax(16rem, 24rem);
+  gap: 48px 72px;
+  align-items: start;
+  margin: 0 var(--pad);
+  padding: clamp(40px, 7vh, 72px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.estimator-form {
+  min-width: 0;
+}
+
+.field {
+  margin: 0 0 26px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+}
+
+.field label,
+.field legend {
+  display: block;
+  margin: 0 0 8px;
+  padding: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hint {
+  display: block;
+  margin-top: 4px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.field select {
+  width: 100%;
+  padding: 10px 36px 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field select:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.checks,
+.radios {
+  display: grid;
+  gap: 8px;
+}
+
+.checks label,
+.radios label {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 12px;
+  align-items: start;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.checks input,
+.radios input {
+  margin: 5px 0 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ink);
+}
+
+.form-actions {
+  margin: 34px 0 0;
+}
+
+.go {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.go:hover,
+.go:focus-visible {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.ghost {
+  display: inline-block;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.ghost:hover,
+.ghost:focus-visible {
+  border-bottom-color: transparent;
+}
+
+/* Result */
+
+.result {
+  position: sticky;
+  top: 24px;
+  padding: 28px 28px 24px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.result .label {
+  margin-bottom: 10px;
+}
+
+.range {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.range-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.drivers {
+  margin: 22px 0 0;
+  padding: 18px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.drivers li {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  gap: 10px;
+}
+
+.drivers li::before {
+  content: "↑";
+  color: var(--muted);
+}
+
+.drivers li.down::before {
+  content: "↓";
+}
+
+.drivers li.flag::before {
+  content: "!";
+}
+
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin-top: 26px;
+}
+
+.copied {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.fine {
+  margin: 22px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .result.is-in {
+    animation: rise 0.6s ease both;
+  }
+}
+
+/* How */
+
+.how {
+  max-width: calc(40rem + var(--pad) * 2);
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  gap: 22px;
+}
+
+.steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: 4px 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.steps li::before {
+  content: counter(step);
+  grid-row: 1 / span 2;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.steps strong {
+  font-weight: 400;
+  font-size: 1.125rem;
+}
+
+.steps span {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.why {
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  .estimator {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .result {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .top {
+    align-items: baseline;
+  }
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#f4f3ee" />
+  <title>What is your data worth? — Work Different AI</title>
+  <meta name="description" content="A ballpark of what an AI lab might pay to license your company’s data. Two minutes, no email required. Then a conversation if the number is interesting." />
+  <meta name="author" content="Jason Galoob" />
+  <link rel="canonical" href="https://workdifferentai.com/data-worth/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Work Different AI" />
+  <meta property="og:title" content="What is your data worth?" />
+  <meta property="og:description" content="A ballpark of what an AI lab might pay to license your company’s data. Two minutes, no email required." />
+  <meta property="og:url" content="https://workdifferentai.com/data-worth/" />
+  <meta property="og:image" content="https://workdifferentai.com/assets/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What is your data worth?" />
+  <meta name="twitter:description" content="A ballpark of what an AI lab might pay to license your company’s data. Two minutes, no email required." />
+  <meta name="twitter:image" content="https://workdifferentai.com/assets/og.png" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/eb-garamond-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="action.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "What is your data worth?",
+    "url": "https://workdifferentai.com/data-worth/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "description": "A ballpark estimate of what an AI lab might pay to license a company’s proprietary data.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "provider": { "@type": "Organization", "name": "Work Different AI", "url": "https://workdifferentai.com/" }
+  }
+  </script>
+</head>
+<body class="action-page">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <a class="wordmark" href="/">Work Different AI</a>
+    <a class="wordmark top-back" href="/">← Home</a>
+  </header>
+
+  <main id="main">
+    <section class="hero action-hero" aria-labelledby="lockup">
+      <p class="lockup-ai action-kicker">An action</p>
+      <h1 class="lockup lockup-small" id="lockup">What is your data worth?</h1>
+      <p class="action-lede">The public internet has been scraped out. AI labs now pay for what they can’t scrape: real, rights-cleared records of how work actually gets done. Your CRM. Your books. Your industry system. The notes, approvals and judgment calls inside them.</p>
+      <p class="action-lede quiet-lede">Two minutes. No email required. A ballpark, not an offer.</p>
+    </section>
+
+    <section class="estimator" aria-labelledby="estimate-heading">
+      <form id="estimator" class="estimator-form" novalidate>
+        <h2 id="estimate-heading" class="section-h">Tell me about the company.</h2>
+
+        <div class="field">
+          <label for="sector">Sector</label>
+          <select id="sector" name="sector">
+            <option value="manufacturing">Manufacturing, packaging, print</option>
+            <option value="logistics">Logistics, freight, warehousing</option>
+            <option value="construction">Construction, engineering, trades</option>
+            <option value="professional">Professional services: legal, accounting, consulting</option>
+            <option value="healthcare">Healthcare, clinical, life sciences</option>
+            <option value="finance">Finance, insurance, lending</option>
+            <option value="retail">Retail, hospitality, e‑commerce</option>
+            <option value="software">Software, SaaS, agency</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+
+        <fieldset class="field">
+          <legend>Where the data lives <span class="hint">Pick every one that applies.</span></legend>
+          <div class="checks">
+            <label><input type="checkbox" name="types" value="crm" checked /> CRM: Salesforce, HubSpot, Pipedrive. Deals, notes, lost reasons.</label>
+            <label><input type="checkbox" name="types" value="accounting" checked /> Accounting: Xero, QuickBooks, Sage. Invoices, quotes, cash.</label>
+            <label><input type="checkbox" name="types" value="email" /> Email and documents. Proposals, contracts, back-and-forth.</label>
+            <label><input type="checkbox" name="types" value="support" /> Support, tickets, call recordings or transcripts.</label>
+            <label><input type="checkbox" name="types" value="ops" /> Industry-specific system: ERP, MES, job tracking, scheduling, dispatch.</label>
+            <label><input type="checkbox" name="types" value="media" /> Images, video, drawings, CAD, scans.</label>
+            <label><input type="checkbox" name="types" value="sensor" /> Machine, sensor or telemetry logs.</label>
+          </div>
+        </fieldset>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="history">Years of history</label>
+            <select id="history" name="history">
+              <option value="short">Under 2</option>
+              <option value="mid" selected>2 to 5</option>
+              <option value="long">5 to 10</option>
+              <option value="deep">10 or more</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="volume">Rough volume <span class="hint">Records, rows, files or hours. Order of magnitude is fine.</span></label>
+            <select id="volume" name="volume">
+              <option value="small">Under 100,000</option>
+              <option value="medium" selected>100,000 to 1 million</option>
+              <option value="large">1 to 10 million</option>
+              <option value="huge">10 million or more</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="field">
+          <legend>How much of it exists anywhere else?</legend>
+          <div class="radios">
+            <label><input type="radio" name="unique" value="public" /> Mostly public or easy to find</label>
+            <label><input type="radio" name="unique" value="partial" checked /> Some of it, in pieces</label>
+            <label><input type="radio" name="unique" value="proprietary" /> Almost none. It only exists here.</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>The judgment trail <span class="hint">Do people write down what they decided, and why?</span></legend>
+          <div class="radios">
+            <label><input type="radio" name="trail" value="thin" /> Thin. Mostly fields and numbers.</label>
+            <label><input type="radio" name="trail" value="some" checked /> Some notes, some approvals.</label>
+            <label><input type="radio" name="trail" value="rich" /> Rich. Notes, checks, sign-offs, corrections.</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Rights <span class="hint">Do your contracts and privacy terms let you license it?</span></legend>
+          <div class="radios">
+            <label><input type="radio" name="rights" value="clear" /> Yes, or it’s our own operational data</label>
+            <label><input type="radio" name="rights" value="unsure" checked /> Not sure yet</label>
+            <label><input type="radio" name="rights" value="blocked" /> Probably not, or it’s heavily regulated</label>
+          </div>
+        </fieldset>
+
+        <p class="form-actions">
+          <button type="submit" class="go">See the ballpark →</button>
+        </p>
+      </form>
+
+      <aside class="result" id="result" aria-live="polite" hidden>
+        <p class="label">Ballpark annual licence value</p>
+        <p class="range" id="range">—</p>
+        <p class="range-note" id="range-note"></p>
+        <ul class="drivers" id="drivers"></ul>
+        <div class="result-actions">
+          <a class="go go-link" id="book" href="mailto:jason@meta57.xyz?subject=What%20is%20our%20data%20worth">Book a conversation →</a>
+          <button type="button" class="ghost" id="copy">Copy this summary</button>
+          <span class="copied" id="copied" aria-live="polite"></span>
+        </div>
+        <p class="fine">A ballpark from the inputs above, not an offer or a valuation opinion. Real numbers come from looking at the data, the rights, and which lab wants it. Nothing you entered leaves your browser until you choose to send it.</p>
+      </aside>
+    </section>
+
+    <section class="beat how" aria-labelledby="how-heading">
+      <p class="label">How this works</p>
+      <h2 id="how-heading" class="section-h">Four steps. You keep control at each one.</h2>
+      <ol class="steps">
+        <li>
+          <strong>Ballpark.</strong>
+          <span>The number above. If it isn’t interesting, stop here. No harm done.</span>
+        </li>
+        <li>
+          <strong>A conversation, under NDA.</strong>
+          <span>Thirty minutes. I ask questions about the data, the rights, and the history. You decide whether it’s worth going further.</span>
+        </li>
+        <li>
+          <strong>Export and package.</strong>
+          <span>You export from Salesforce, Xero and the industry system. We strip what shouldn’t travel, document the rights, and shape it into what a lab can actually use.</span>
+        </li>
+        <li>
+          <strong>Labs buy. You get paid.</strong>
+          <span>I take it to the labs. Success-based: nothing changes hands until something sells.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="beat why" aria-labelledby="why-heading">
+      <p class="label">Why now</p>
+      <p class="manifesto" id="why-heading">Half of what makes data valuable is what people did with it.</p>
+      <p class="quiet">The steps they took. The judgment calls. The checks they ran before signing off. That record already lives in the tools your team uses every day.<br /><strong>Human genius, recorded. That is what a lab is paying for.</strong></p>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>Interesting number?</h2>
+      <p>Send the summary, or just say what you’ve got. I read every one.</p>
+      <p class="whisper"><a href="mailto:jason@meta57.xyz?subject=What%20is%20our%20data%20worth">A conversation →</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Work Different AI</span>
+    <a href="/">Home</a>
+  </footer>
+  <script src="action.js"></script>
+</body>
+</html>

@@ -414,3 +414,9 @@ a {
     padding-bottom: 32px;
   }
 }
+
+.whisper-action {
+  margin-top: 16px !important;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
