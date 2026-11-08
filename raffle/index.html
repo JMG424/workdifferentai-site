@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekly Raffle — Mimi's Market</title>
+<style>
+  :root{--bg:#f7f1e6;--card:#fffdf8;--ink:#2e2418;--muted:#7a6a55;--accent:#b5652a;--accent-d:#8f4c1c;--line:#e6dccb;--ok:#3d7a4a;--err:#b23a2a}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+  main{max-width:440px;margin:0 auto;padding:28px 18px 40px}
+  .brand{font-family:Georgia,"Times New Roman",serif;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-align:center;margin:0 0 6px}
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:32px;line-height:1.1;text-align:center;margin:0 0 8px}
+  .sub{text-align:center;color:var(--muted);margin:0 0 22px;font-size:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px;box-shadow:0 2px 10px rgba(60,40,20,.06)}
+  label{display:block;font-weight:600;font-size:15px;margin:0 0 6px}
+  input[type=text],input[type=tel],input[type=email]{width:100%;font-size:17px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);margin:0 0 16px}
+  input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:4px 0 18px}
+  .consent input{margin-top:3px;width:20px;height:20px;flex:none;accent-color:var(--accent)}
+  button{width:100%;font-size:18px;font-weight:700;padding:15px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer}
+  button:hover{background:var(--accent-d)}
+  button:disabled{opacity:.6;cursor:wait}
+  .msg{margin:14px 0 0;font-size:14px;text-align:center;min-height:1em}
+  .msg.err{color:var(--err)}
+  .fine{font-size:12px;color:var(--muted);text-align:center;margin:18px 0 0}
+  .fine a{color:var(--muted)}
+  .done{text-align:center;padding:10px 0}
+  .done .check{font-size:46px;color:var(--ok);line-height:1}
+  .done h2{font-family:Georgia,serif;font-size:26px;margin:10px 0 6px}
+  .done p{color:var(--muted);margin:0 0 6px}
+  .hidden{display:none}
+  .hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<main>
+  <p class="brand" id="brand">Mimi's Market</p>
+  <h1>Enter the Weekly Raffle</h1>
+  <p class="sub">Sign up once. You're in the drawing every week. Free to enter.</p>
+
+  <div class="card">
+    <form id="f" novalidate>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required>
+
+      <label for="phone">Mobile number</label>
+      <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(561) 555-0123" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+
+      <!-- spam trap: real people never fill this -->
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <label class="consent">
+        <input id="consent" name="consent" type="checkbox" required>
+        <span>Yes, text me about the weekly raffle and offers from <span class="bn">Mimi's Market</span>. Up to 4 msgs/month. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not required to enter.</span>
+      </label>
+
+      <button id="go" type="submit">Enter me</button>
+      <p class="msg" id="msg" role="status"></p>
+    </form>
+
+    <div class="done hidden" id="done">
+      <div class="check">✓</div>
+      <h2>You're in!</h2>
+      <p id="doneText">You're entered in the weekly raffle.</p>
+      <p>Winners are drawn every week. Good luck!</p>
+    </div>
+  </div>
+
+  <p class="fine">No purchase necessary. 18+. <a href="rules.html">Official rules</a> · <a href="privacy.html">Privacy</a></p>
+</main>
+
+<script>
+/* ===== SETTINGS: paste your Apps Script web app URL here ===== */
+const SCRIPT_URL = "PASTE_APPS_SCRIPT_URL_HERE";
+/* ============================================================= */
+
+const f = document.getElementById('f');
+const msg = document.getElementById('msg');
+const go = document.getElementById('go');
+
+function digits(s){ return (s||'').replace(/\D/g,''); }
+function validPhone(s){ const d = digits(s); return d.length === 10 || (d.length === 11 && d[0] === '1'); }
+function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s||''); }
+function fail(t){ msg.textContent = t; msg.className = 'msg err'; }
+
+f.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(f).entries());
+  data.consent = document.getElementById('consent').checked ? 'yes' : 'no';
+  data.name = (data.name||'').trim();
+  data.email = (data.email||'').trim();
+
+  if (!data.name) return fail('Please add your name.');
+  if (!validPhone(data.phone)) return fail('Please enter a 10-digit US mobile number.');
+  if (!validEmail(data.email)) return fail('Please check your email address.');
+
+  go.disabled = true; go.textContent = 'Entering…'; msg.textContent = ''; msg.className = 'msg';
+
+  try {
+    const res = await fetch(SCRIPT_URL, { method: 'POST', body: new URLSearchParams(data) });
+    const out = await res.json();
+    if (!out.ok) throw new Error(out.error || 'Something went wrong.');
+    const first = data.name.split(' ')[0];
+    document.getElementById('doneText').textContent =
+      out.duplicate ? `Welcome back, ${first}! You're already entered every week.`
+      : data.consent === 'yes' ? `Thanks, ${first}! Check your phone for a welcome text.`
+      : `Thanks, ${first}! You're entered in the weekly raffle.`;
+    f.classList.add('hidden');
+    document.getElementById('done').classList.remove('hidden');
+  } catch (err) {
+    go.disabled = false; go.textContent = 'Enter me';
+    fail('Could not submit right now. Please try again in a moment.');
+  }
+});
+</script>
+</body>
+</html>
