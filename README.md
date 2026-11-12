@@ -9,6 +9,7 @@ A sparse consulting landing — human genius first, AI as leverage. Not a produc
 - `index.html` / `styles.css` / `script.js` — campaign landing with a cycling B&W tribute
 - `data-worth/` — “What is your data worth?”, the first action: a browser-only ballpark of what an AI lab might pay to license a company’s data, then a prefilled email to book a conversation. Heuristics live in `data-worth/action.js`.
 - `masterclass/` — registration page for the free live self-love masterclass with Kristiana Morell, hosted by Michelle Galoob (Nov 30, 2026). Styled after kristianamorell.com, not this site. Set `REGISTER_ENDPOINT` in `masterclass/masterclass.js` before promoting; the page is `noindex` until then.
+- `masterclass-2/` — second version of the same registration page: one self-contained `index.html` laid out after michellegaloobtraining.com/astro-reading. Fonts and photos load from Google Fonts and Kristiana’s Squarespace CDN. Replace `KIT_FORM_ID` in the form action before promoting.
 - `fonts/` — self-hosted EB Garamond (lockup) and Source Sans 3 (body); Libre Baskerville and DM Sans for the masterclass page
 - `assets/genius/` — public-domain stills (Einstein, Picasso, Earhart, Gandhi, Edison)
 - `404.html`, `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll`

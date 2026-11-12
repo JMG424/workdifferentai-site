@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#F4F1EA" />
+<title>Honesty With Love — A free live masterclass with Kristiana Morell</title>
+<meta name="description" content="A free live online masterclass with Kristiana Morell, presented by Michelle Galoob. Monday, November 30, 2026. Her story, the sacred pause, a meditation, and a love letter to yourself." />
+<!-- Draft: remove once the name, time and Kit form are final. -->
+<meta name="robots" content="noindex" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Honesty With Love — A free live masterclass" />
+<meta property="og:description" content="With Kristiana Morell, presented by Michelle Galoob. Monday, November 30, 2026. Free." />
+<meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/6ab7e64309935039bee298bd/18f47b5b-1c04-44b1-a5f5-c23003061bdc/untitled-401-2.jpg?format=1500w" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ivory: #F4F1EA;
+    --band: #EAE5DA;
+    --espresso: #2B2623;
+    --mocha: #6B5449;
+    --muted: #5E554F;
+    --line: #D8D1C4;
+    --serif: "Libre Baskerville", Baskerville, Georgia, serif;
+    --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --pad: 24px;
+    --section: 72px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--ivory); color: var(--espresso);
+    font-family: var(--sans); font-size: 16px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; width: 100%; height: auto; }
+  h1, h2, h3, p { margin: 0; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; }
+  h2 { font-size: clamp(1.6rem, 5.4vw, 2.3rem); line-height: 1.25; }
+  :focus-visible { outline: 2px solid var(--mocha); outline-offset: 3px; }
+
+  .eyebrow {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.28em;
+    color: var(--muted); line-height: 1.8; margin-bottom: 18px;
+  }
+  .btn {
+    display: inline-block; padding: 17px 34px; border: 1px solid var(--espresso); border-radius: 999px;
+    background: var(--espresso); color: var(--ivory);
+    font: 500 12px/1 var(--sans); text-transform: uppercase; letter-spacing: 0.18em;
+    text-decoration: none; cursor: pointer; text-align: center;
+  }
+  .btn:hover { background: #000; }
+  .btn-light { background: var(--ivory); color: var(--espresso); border-color: var(--ivory); }
+  .btn-light:hover { background: #fff; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--pad); }
+  section { padding: var(--section) 0; }
+
+  /* 1. Hero */
+  .hero { padding: 0; position: relative; }
+  .hero-photo img { aspect-ratio: 4 / 5; object-fit: cover; object-position: 62% 30%; }
+  .hero-copy { padding: 40px var(--pad) 56px; }
+  .hero h1 { font-size: clamp(2.2rem, 9.5vw, 3.6rem); line-height: 1.22; letter-spacing: -0.01em; }
+  .hero h1 span { display: block; }
+  .hero h1 em { display: block; }
+  .rule { width: 44px; height: 1px; background: var(--espresso); margin: 28px 0; }
+  .hero .sub { max-width: 30rem; color: var(--muted); margin-bottom: 30px; }
+  .dateline {
+    margin-top: 24px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted);
+  }
+
+  /* 2. What you'll experience */
+  .exp-grid { display: grid; gap: 48px; }
+  .exp h2 { margin-bottom: 32px; }
+  .exp ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; }
+  .exp li { display: grid; grid-template-columns: 34px 1fr; gap: 18px; }
+  .exp .n {
+    width: 34px; height: 34px; border: 1px solid var(--espresso);
+    display: grid; place-items: center; font-size: 13px;
+  }
+  .exp h3 { font-size: 1.0625rem; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+  .exp li p { color: var(--muted); font-size: 0.9375rem; }
+  .exp-photo img { aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
+
+  /* 3. Method */
+  .method { background: var(--band); text-align: center; }
+  .method .lead { color: var(--muted); max-width: 28rem; margin: 14px auto 0; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 40px; text-align: left; }
+  .card { border: 1px solid var(--espresso); padding: 24px 20px 26px; background: var(--ivory); }
+  .card .step { font-size: 11px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--muted); }
+  .card h3 { font-size: 1.375rem; margin: 12px 0 8px; }
+  .card p { font-family: var(--serif); font-style: italic; font-size: 0.9375rem; color: var(--muted); }
+  .card.dark { background: var(--espresso); color: var(--ivory); }
+  .card.dark .step, .card.dark p { color: #CFC6B8; }
+
+  /* 4. Honesty, with love */
+  .honest {
+    position: relative; text-align: center; color: var(--ivory);
+    background-color: var(--mocha);
+    background-image:
+      linear-gradient(rgba(74, 56, 48, 0.82), rgba(74, 56, 48, 0.82)),
+      url("https://images.squarespace-cdn.com/content/v1/6ab7e64309935039bee298bd/b12f4947-6100-41bd-bbd5-1465249eaa30/60b88c08a73231b53de5fa9b2fec3bc1.jpg?format=1500w");
+    background-size: cover; background-position: center;
+    padding: calc(var(--section) + 16px) 0;
+  }
+  .honest .eyebrow { color: #E0D5C8; }
+  .honest h2 { font-size: clamp(2rem, 7.5vw, 3.2rem); font-style: italic; }
+  .honest ul { list-style: none; margin: 36px 0 40px; padding: 0; display: grid; gap: 14px; }
+  .honest li { font-family: var(--serif); font-size: 1.0625rem; line-height: 1.6; }
+
+  /* 5. About */
+  .about-grid { display: grid; gap: 40px; }
+  .about-photo img { aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 25%; }
+  .about h2 { margin-bottom: 10px; }
+  .about .role { font-size: 11px; text-transform: uppercase; letter-spacing: 0.24em; color: var(--muted); margin-bottom: 22px; }
+  .about .bio p { color: var(--muted); margin-bottom: 1em; }
+  .host { display: grid; grid-template-columns: 72px 1fr; gap: 20px; align-items: center; margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--line); }
+  .host-photo {
+    width: 72px; height: 72px; background: var(--band); border: 1px dashed var(--mocha);
+    display: grid; place-items: center; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: center; line-height: 1.3;
+  }
+  .host-photo img { width: 72px; height: 72px; object-fit: cover; }
+  .host .eyebrow { margin-bottom: 4px; font-size: 11px; }
+  .host h3 { font-size: 1.125rem; }
+  .host p:not(.eyebrow) { font-size: 0.875rem; color: var(--muted); }
+
+  /* 6. Closing */
+  .seat { background: var(--espresso); color: var(--ivory); text-align: center; }
+  .seat .eyebrow { color: #BDB3A6; }
+  .seat .free { font-family: var(--serif); font-size: 2rem; margin: 6px 0 14px; }
+  .seat .dateline { color: #BDB3A6; margin: 0 0 32px; }
+  .seat form { max-width: 440px; margin: 0 auto; display: grid; gap: 12px; }
+  .seat label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .seat input {
+    width: 100%; padding: 16px; background: transparent; color: var(--ivory);
+    border: 1px solid #5A514B; border-radius: 0; font: 400 16px/1.3 var(--sans);
+  }
+  .seat input::placeholder { color: #A69C90; }
+  .seat input:focus { outline: none; border-color: var(--ivory); }
+  .seat .btn { width: 100%; margin-top: 4px; }
+  .seat .note { max-width: 440px; margin: 20px auto 0; font-size: 0.8125rem; color: #BDB3A6; }
+  .seat .msg { margin-top: 14px; font-size: 0.875rem; color: var(--ivory); }
+
+  footer { background: #211D1B; color: #A69C90; text-align: center; padding: 26px var(--pad); font-size: 12px; letter-spacing: 0.04em; }
+
+  /* Larger screens */
+  @media (min-width: 820px) {
+    :root { --pad: 48px; --section: 112px; }
+    .hero { min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    .hero-photo { position: absolute; inset: 0 0 0 auto; width: 58%; }
+    .hero-photo img { width: 100%; height: 100%; aspect-ratio: auto; object-position: 50% 35%; }
+    .hero-photo::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--ivory) 0%, rgba(244, 241, 234, 0.6) 22%, rgba(244, 241, 234, 0) 48%);
+    }
+    .hero-copy { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; padding: 96px var(--pad); }
+    .hero-copy > * { max-width: 34rem; }
+    .exp-grid { grid-template-columns: 1fr 0.85fr; gap: 80px; align-items: center; }
+    .cards { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .card { padding: 30px 26px 34px; }
+    .about-grid { grid-template-columns: 0.85fr 1fr; gap: 80px; align-items: center; }
+    .honest li { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="hero-photo">
+      <img src="https://images.squarespace-cdn.com/content/v1/6ab7e64309935039bee298bd/18f47b5b-1c04-44b1-a5f5-c23003061bdc/untitled-401-2.jpg?format=1500w" alt="Kristiana Morell laughing, hands in her hair" width="1200" height="1600" fetchpriority="high" />
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow">Michelle Galoob presents · A free live masterclass</p>
+      <h1><span>Your story.</span><span>Your pause.</span><em>Your choice.</em></h1>
+      <div class="rule"></div>
+      <!-- "Honesty With Love" is a placeholder name. Final name chosen Nov 20. -->
+      <p class="sub">Honesty With Love is a free live class with Kristiana Morell. She spent years hating herself. Then came the big wins, and she still felt empty. Come hear what changed, and what it can mean for you.</p>
+      <a class="btn" href="#seat">Save my seat</a>
+      <!-- [TIME TBD]: replace "Time TBA" here and in the closing section. -->
+      <p class="dateline">Monday, November 30, 2026 · Time TBA · Live online</p>
+    </div>
+  </section>
+
+  <!-- 2. WHAT YOU'LL EXPERIENCE -->
+  <section class="exp">
+    <div class="wrap exp-grid">
+      <div>
+        <p class="eyebrow">What you’ll experience</p>
+        <h2>A story. A pause. A letter.</h2>
+        <ol>
+          <li>
+            <span class="n">1</span>
+            <div><h3>Her real story</h3><p>From Kristiana’s hardest years to her turning point.</p></div>
+          </li>
+          <li>
+            <span class="n">2</span>
+            <div><h3>The sacred pause, practiced live</h3><p>Bring a recent trigger. Look at your usual reaction. Pause. Find a better choice.</p></div>
+          </li>
+          <li>
+            <span class="n">3</span>
+            <div><h3>A meditation and a love letter</h3><p>A guided meditation, then time to write a love letter to yourself.</p></div>
+          </li>
+        </ol>
+      </div>
+      <div class="exp-photo">
+        <img src="https://images.squarespace-cdn.com/content/v1/6ab7e64309935039bee298bd/fb089a6b-4d2c-4146-b9f8-34255d9b938b/untitled-707-Copy1.jpg?format=1500w" alt="Kristiana Morell seated, looking toward a window" width="1280" height="1600" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THE METHOD -->
+  <section class="method">
+    <div class="wrap">
+      <p class="eyebrow">The method</p>
+      <h2>Connect. Know. Trust. Choose.</h2>
+      <p class="lead">Four steps. You’ll learn them in order, and practice them in the class.</p>
+      <div class="cards">
+        <div class="card"><p class="step">01</p><h3>Connect</h3><p>“I hear myself.”</p></div>
+        <div class="card"><p class="step">02</p><h3>Know</h3><p>“I know myself.”</p></div>
+        <div class="card"><p class="step">03</p><h3>Trust</h3><p>“I trust myself.”</p></div>
+        <div class="card dark"><p class="step">04</p><h3>Choose</h3><p>“I choose myself.”</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HONESTY, WITH LOVE -->
+  <section class="honest">
+    <div class="wrap">
+      <p class="eyebrow">Self-love is</p>
+      <h2>Honesty, with love.</h2>
+      <ul>
+        <li>To feel the feeling instead of skipping it.</li>
+        <li>To see emotions as information, not identity.</li>
+        <li>To pause before the usual reaction.</li>
+        <li>To choose what fits who you really are.</li>
+      </ul>
+      <a class="btn btn-light" href="#seat">Save my seat</a>
+    </div>
+  </section>
+
+  <!-- 5. ABOUT YOUR GUIDE -->
+  <section class="about">
+    <div class="wrap about-grid">
+      <div class="about-photo">
+        <img src="https://images.squarespace-cdn.com/content/v1/6ab7e64309935039bee298bd/086ae217-e162-4c39-8dc5-9d6d4e231aba/IMG_3586.jpeg?format=1500w" alt="Kristiana Morell seated by a window" width="1200" height="1600" loading="lazy" />
+      </div>
+      <div>
+        <p class="eyebrow">About your guide</p>
+        <h2>Kristiana Morell</h2>
+        <p class="role">Pilates instructor · Studio owner · Love You to Pieces</p>
+        <div class="bio">
+          <p>Kristiana is a Pilates instructor and studio owner, and the creator of the Love You to Pieces podcast.</p>
+          <p>She teaches from her own story. She has lived through years of self-hatred, and big wins too. She shares both, honestly.</p>
+        </div>
+        <div class="host">
+          <!-- [ADD PHOTO]: replace this div's contents with <img src="..." alt="Michelle Galoob" /> -->
+          <div class="host-photo">Add<br />photo</div>
+          <div>
+            <p class="eyebrow">Your host</p>
+            <h3>Michelle Galoob</h3>
+            <p>Intuition coach and creator of the Intuition Mastery Program. Michelle chose Kristiana for this class because of how she teaches.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SAVE YOUR SEAT -->
+  <section class="seat" id="seat">
+    <div class="wrap">
+      <p class="eyebrow">Save your seat</p>
+      <p class="free">Free</p>
+      <p class="dateline">Monday, November 30, 2026 · Time TBA · About 75 minutes</p>
+
+      <!--
+        ============================================================
+        KIT FORM PLACEHOLDER
+        Replace KIT_FORM_ID in the action below with the ID of the
+        Kit (ConvertKit) form for this class. Until then the form
+        will not submit.
+        ============================================================
+      -->
+      <form id="seat-form" action="https://app.kit.com/forms/KIT_FORM_ID/subscriptions" method="post">
+        <label for="first-name">First name</label>
+        <input id="first-name" type="text" name="fields[first_name]" placeholder="First name" autocomplete="given-name" required />
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email_address" placeholder="Email" autocomplete="email" required />
+        <button class="btn btn-light" type="submit">Save my seat</button>
+        <p class="msg" id="seat-msg" role="status" hidden></p>
+      </form>
+      <p class="note">We’ll email you the link to join. At the end of class, you’ll hear about a way to go further if you want to.</p>
+    </div>
+  </section>
+</main>
+
+<footer>Michelle Galoob × Kristiana Morell · Love You to Pieces</footer>
+
+<script>
+  // Until the Kit form ID is filled in, say so instead of sending people to a dead URL.
+  document.getElementById("seat-form").addEventListener("submit", function (event) {
+    if (this.action.indexOf("KIT_FORM_ID") !== -1) {
+      event.preventDefault();
+      var msg = document.getElementById("seat-msg");
+      msg.textContent = "Registration opens soon. Please check back shortly.";
+      msg.hidden = false;
+    }
+  });
+</script>
+</body>
+</html>
